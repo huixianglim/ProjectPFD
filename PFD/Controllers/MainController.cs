@@ -8,5 +8,19 @@ namespace PFD.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        
+        public IActionResult ReturnToView(string categoryName)
+        {
+            return RedirectToAction("Index","Main");
+
+        }
+
+      
+        public IActionResult PayNow()
+        {
+            return View();
+        }
     }
 }
