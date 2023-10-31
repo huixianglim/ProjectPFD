@@ -3,11 +3,36 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - PFD</title>
+    <title>@ViewData["Title"] - OCBC Ignite</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/PFD.styles.css" asp-append-version="true" />
-    <script src="https://webgazer.cs.brown.edu/webgazer.js?" defer></script>
+    <style>
+        /* Custom styles for the animated navbar */
+        .navbar {
+            background: linear-gradient(to bottom, #FF6666, #FF3333);
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar-brand {
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .navbar-nav {
+            margin-left: auto;
+        }
+
+        .nav-link {
+            color: #fff;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+            .nav-link:hover {
+                color: #FFB0B0;
+                transform: scale(1.1);
+            }
+    </style>
 </head>
 <body>
     <header>
@@ -26,14 +51,26 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/services">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/about">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/contact">Contact</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
+            <!-- Your main content goes here -->
+            
         </main>
     </div>
 
@@ -42,6 +79,7 @@
             &copy; 2023 - PFD - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
