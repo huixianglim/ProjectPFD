@@ -1,8 +1,8 @@
 ﻿import { GestureRecognizer, FilesetResolver } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3";
 
 var ForRedirect = {
-    "Thumb_Up": "/Main/Index",
-    "Thumb_Down": "/Main/PayNow",
+    "Thumb_Up": "Index",
+    "Thumb_Down": "PayNow",
 
 
 
@@ -10,6 +10,9 @@ var ForRedirect = {
 
 let gestureRecognizer;
 const video = document.getElementById("video");
+var currentOutput;
+var previousOutput;
+var time = 1000
 
 async function setupGestureRecognizer() {
     const vision = await FilesetResolver.forVisionTasks(
@@ -42,28 +45,36 @@ function predictWebcam() {
     if (gestureRecognizer && video.readyState === video.HAVE_ENOUGH_DATA) {
         const results = gestureRecognizer.recognizeForVideo(video, Date.now());
         var check = false
+        if (results.gestures.length > 0 && results.gestures[0][0].categoryName != "None" && results.gestures[0][0].categoryName in ForRedirect) {
+            var categoryName = results.gestures[0][0].categoryName;
+            currentOutput = categoryName;
+            console.log("Current: ", currentOutput)
+            console.log("Previous: ", previousOutput)
 
-        if (results.gestures.length > 0) {
-            const categoryName = results.gestures[0][0].categoryName;
+            if (currentOutput == previousOutput) {
+                time -= 8
+                console.log("minusing")
+            }
+            else {
+                time = 1000
+                console.log("resetting")
 
-            if (categoryName != "None" && categoryName in ForRedirect) {
-                console.log(categoryName)
-                setTimeout(() => {
-                    window.location.href = ForRedirect[categoryName];
-
-                },3000)
-                return
+            }
+            $(".overlay").text("Going to " + ForRedirect[categoryName])
+            previousOutput = categoryName
+            if (time == 0) {
+                window.location.href = "/Main/"+ ForRedirect[categoryName];
             }
         } else {
-            console.log("No gesture detected.");
+            $(".overlay").text("Nothing")
         }
+      
     }
 
     // Call this function again to keep predicting when the browser is ready.
-    if (!check) {
-        window.requestAnimationFrame(predictWebcam);
+    window.requestAnimationFrame(predictWebcam);
 
-    }
+    
   
 }
 
