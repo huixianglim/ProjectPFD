@@ -3,7 +3,21 @@
 $(document).ready(() => {
     const recognition = new webkitSpeechRecognition();
     recognition.continuous = true;
-    recognition.interimResults = true
+    recognition.interimResults = true;
+
+    numbers = {
+        "one": 1,
+        "two": 2,
+        "three": 3,
+        "four": 4,
+        "five": 5,
+        "six": 6,
+        "seven": 7,
+        "eight": 8,
+        "nine": 9,
+        "ten": 10,
+
+    }
 
     recognition.lang = 'en-US'
 
@@ -33,7 +47,15 @@ $(document).ready(() => {
     recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript;
         console.log(`Transcript: ${transcript}`);
-        $(".testing").text(transcript)
+        if (transcript.includes("$")) {
+            let amountWithoutDollarSign = transcript.replace(/\$/g, '');
+            $(".testing").text(amountWithoutDollarSign)
+
+        }
+        else {
+            $(".testing").text("Invalid Amount")
+
+        }
     };
 
 })
