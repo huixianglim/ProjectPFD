@@ -3,14 +3,19 @@
 *@
 @model IEnumerable<PFD.Models.Contacts>
 @section style{
+
     <style>
+        p{
+            font-family: 'Roboto', sans-serif;
+        }
         .searchBar {
             width: 100%;
             display: flex;
-            justify-content: center;
+            justify-content: flex-end   ;
             flex-direction: row;
             align-items: center;
             margin-right: auto;
+            padding-left:1rem;
         }
 
         #searchQueryInput {
@@ -22,6 +27,7 @@
             border-radius: 1.625rem;
             padding: 0 3.5rem 0 1.5rem;
             font-size: 2rem;
+   
         }
 
         #searchQuerySubmit {
@@ -43,21 +49,98 @@
             left: 0;
             color: red;
             z-index: 1;
+            font-size:1.5rem;
         }
 
         video {
-            position: absolute;
+    /*        position: fixed;
             top: 0;
-            left: 0;
+            left: 0;*/
             display: inline-block;
             width: 300px;
             z-index: -1;
         }
 
         .container-vid {
-       
+            position:fixed;
+            padding-left:0;
+            top:10%;
+            left:0;
             margin-bottom: 50px; /* Adjust the margin-bottom value as needed to create space between the text and the button */
         }
+
+        .icon {
+            width: 50px; /* Set the width and height to the desired value */
+            height: 50px; /* Set the width and height to the desired value */
+            border-radius: 50%; /* Use border-radius property to create a circular shape */
+            background-color: #007bff; /* Set the background color of the circular icon */
+            color: #ffffff; /* Set the text color */
+            text-align: center; /* Center the text inside the circular icon */
+            line-height: 50px; /* Center the text vertically inside the circular icon */
+            background-color: #0F387D;
+        }
+
+  
+
+        a.contacts{
+            text-decoration: none;
+            min-height:20vh;
+            border-radius:1.65rem;
+            padding:1rem;
+
+        }
+
+        a.contacts:hover{
+            background-color:grey;
+                color: black;
+                transform:scale(1.03);
+        }
+   
+
+        .contacts{
+            color:black;
+        }
+        
+        a.contacts:hover{
+            background-color: #EDEDED;
+        }
+
+        .button{
+            background-color: black;
+            border-radius: 20%;
+            z-index: 100000;
+            position: fixed;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            bottom: 10%;
+            right: 5%;
+            width: 90px;
+            height: 90px;
+            transition: all 0.2s ease-out;
+            color:white;
+        }
+
+        .button:hover{
+            cursor:pointer;
+        }
+        .button > i {
+            color:inherit;
+            font-size:2.3vw;
+        }
+
+        .button.active{
+
+            transform:scale(1.05);
+            color:greenyellow;
+
+        }
+      
+        .contact-name{
+            font-family: 'Roboto', sans-serif;
+        }
+  
     </style>
 }
 
@@ -65,11 +148,11 @@
     </div>
     <div class="text-center">
 
-        <div class="d-flex justify-content-center justify-content-center position-relative container-fluid mb-5">
-            <div>
+        <div class="d-flex justify-content-center justify-content-center container-fluid mb-5">
+            <div class="container-vid">
                 <video id="video" autoplay></video>
 
-                <h1 class="overlay">test</h1>
+                <p class="overlay">test</p>
             </div>
             <div class="searchBar">
 
@@ -81,9 +164,12 @@
                 </button>
             </div>
         </div>
-        <button class="button" data-record="false">Test Audio Play</button>
+        <div class="button" data-type = "search">
+            <i class="fa fa-microphone"></i>
+        </div>
 
-        <p class="testing"></p>
+        <p class="testing">
+        </p>
 
     </div>
 
@@ -94,6 +180,8 @@
 
 
 @section Scripts{
-    <script type="module" src="~/js/recog.js"></script>
-    <script src="~/js/audio.js"></script>
+    <script type="module" src="~/js/recog.js" asp-append-version="true"></script>
+    <script src="~/js/audio.js" asp-append-version="true"></script>
+    <script src="~/js/script.js" asp-append-version="true"></script>
+
 }
