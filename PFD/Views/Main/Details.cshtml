@@ -11,9 +11,9 @@
             position: absolute;
             top: 0;
             left: 0;
-            color: red;
+            color: blue;
             z-index: 1;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
         }
 
         video {
@@ -74,7 +74,27 @@
 
         .main {
         }
+        .error{
+            display:none;
+        }
 
+        .lottie {
+            pointer-events: none;
+            display: none;
+            position: fixed;
+            top:0;
+            z-index: 100;
+            width: 100%;
+            height: 100%;
+        }
+        #Money{
+            font-size:3rem;
+            border:none;
+        }
+
+        .money-symbol{
+            font-size:3rem;
+        }
     </style>
 }
 
@@ -94,63 +114,86 @@
         <i class="fa fa-microphone"></i>
     </div>
 
-    <section class="">
-        <div class="container py-5 ">
-            <div class="row d-flex justify-content-center align-items-center ">
-                <div class="col-lg-8 col-xl-6">
-                    <div class="card rounded-3">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img3.webp"
-                         class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;"
-                         alt="Sample photo">
-                        <div class="card-body p-4 p-md-5">
-                            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Paying to @{
-                                if (Model != null){
-                                    <i>@Model.Name</i>
-                                }
-                            } </h3>
 
-                            <form class="px-md-2">
 
-                                <div class="form-outline mb-4">
-                                    <label class="form-label" for="Money">Amount</label>
-                                    <input type="text" id="Money" class="form-control" />
-                                </div>
 
-                                <button type="submit" class="btn btn-success btn-lg mb-1">Next</button>
 
-                            </form>
+<lottie-player class="lottie" src="https://assets5.lottiefiles.com/packages/lf20_CBIe0e1jwK.json" background="transparent" speed="1" loop autoplay></lottie-player>
 
+<section class="vh-100">
+    <div class="container py-5 h-100">
+        <div class="row d-flex align-items-center justify-content-center h-100">
+            <div class="col-md-8 col-lg-7 col-xl-6">
+                <img src="/Images/business-agreement.svg"
+                     class="img-fluid" alt="Phone image">
+            </div>
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">
+                    Paying to @{
+                        if (Model != null)
+                        {
+                                                    <span>@Model.Name</span>
+                        }
+                    }
+                </h3>
+                <form id="form">
+                    <!-- Amount Input  -->
+                    
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="form1Example13">Amount</label>
+                        <div class="input-group">
+                            <span class="d-flex align-items-center money-symbol">$</span>
+                            <input id="Money" type="tel" class="form-control form-control-lg" value="0.00" />
                         </div>
                     </div>
-                </div>
+                    <p class="text-danger error">Invaid Input!</p>
+
+                    <div class="row mb-4">
+                        <div class="col">
+                            <label>Click Next to start confirmation of payment or signal an open hand for a few seconds</label>
+                        </div>
+                    </div>
+   
+                    <!-- Submit button -->
+                    <button id="form-sub" type="submit" class="btn btn-primary btn-lg btn-block">Confirm</button>
+
+                </form>
+
+                <form asp-action="passTemp" id="Success" asp-controller = "Main">
+                    <input type="hidden" id="tempData" name="tempData" value="true" />
+                </form>
+
             </div>
         </div>
-    </section>
-
-    <div>
-
     </div>
-
-    <div class="toast" id="confirm" role="alert" aria-live="assertive" aria-atomic="true" data-type = "confirm">
-        <div class="toast-header">
-            <img src="..." class="rounded mr-2" alt="...">
-            <strong class="mr-auto">Bootstrap</strong>
-            <small>11 mins ago</small>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="toast-body">
-            Signal an open hand to Confirm Payment
-        </div>
-    </div>
-
-
-
+</section>
 
 @section Scripts{
+    <script src="https://unpkg.com/@@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
     <script type="module" src="~/js/recog.js" asp-append-version="true"></script>
     <script src="~/js/audio.js" asp-append-version="true"></script>
     <script src="~/js/script.js" asp-append-version="true"></script>
+    <script>
+  
+        $("#form-sub").click((e)=>{
+            e.preventDefault();
+            var parsedValue = parseInt($("#Money").val());
+            if (!isNaN(parsedValue)){
+                $(".lottie").show();
+                $(".error").hide();
+
+                setTimeout(() => {
+                    $(".lottie").hide();
+                    $("#Success").submit()
+                }, 1000)
+            }
+            else{
+                $(".error").show();
+                $("#Money").val("0.00")
+            }
+
+        })
+    </script>
 }
     
