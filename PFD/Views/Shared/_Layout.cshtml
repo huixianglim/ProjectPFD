@@ -4,15 +4,50 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - OCBC Ignite</title>
-
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,600&family=Poppins:wght@200;300;400;500;600&family=Ubuntu:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    
+
+    @await RenderSectionAsync("style", required: false)
+
+    <style>
+        /* Custom styles for the animated navbar */
+        .navbar {
+            background: linear-gradient(to bottom, #FF6666, #FF3333);
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar-brand {
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .navbar-nav {
+            margin-left: auto;
+        }
+
+        .nav-link {
+            color: #fff;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+            .nav-link:hover {
+                color: #FFB0B0;
+                transform: scale(1.1);
+            }
+
+        
+    </style>
 </head>
 <body>
     <header>
@@ -37,9 +72,29 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" href="/about">About Us</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="/contact">Contact</a>
-                        </li>
+
+                        <a href="@Url.Action("Login", "Home")" class="btn btn-primary" style="
+                            background: linear-gradient(to bottom, #ff9999, #ff6666);
+                            color: #fff;
+                            border: none;
+                            border-radius: 15px;
+                            padding: 10px 20px;
+                            text-align: center;
+                            text-decoration: none;
+                            display: inline-block;
+                            font-size: 16px;
+                            transition: background 0.3s, transform 0.1s;
+                            cursor: pointer;
+                            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+                            outline: none;
+
+                            ">
+                            Login
+                        </a>
+
+                       
+                        
+                        
                     </ul>
                 </div>
             </div>
@@ -94,6 +149,8 @@
     
     
     <script src="~/js/site.js" asp-append-version="true"></script>
+     <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
     
     @await RenderSectionAsync("Scripts", required: false)
 </body>
