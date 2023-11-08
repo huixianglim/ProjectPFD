@@ -30,7 +30,24 @@ namespace PFD.Controllers
             return View();
 
         }
-        
+        public IActionResult Index2()
+        {
+
+
+            // Create an instance of the model and set the property
+
+
+            return View();
+
+        }
+        public IActionResult Logout()
+        {
+            // Perform logout logic here
+            // For example, clear session variables, sign out the user, etc.
+
+            // Redirect to the login page or any other desired page
+            return RedirectToAction("Index", "Home");
+        }
 
         public IActionResult Login()
         {
@@ -51,7 +68,7 @@ namespace PFD.Controllers
             if (loginID == "huixiang@gmail.com" && password == "12345")
             {
                 // Redirect user to the "StaffMain" view through an action
-                return RedirectToAction("Index");
+                return RedirectToAction("Index2");
             }
             else
             {
@@ -59,6 +76,7 @@ namespace PFD.Controllers
                 return RedirectToAction("Login");
             }
         }
+
 
         public IActionResult Privacy()
         {
