@@ -34,5 +34,10 @@ namespace PFD.Controllers
             return View(contact);
         
         }
+
+        public IActionResult Dashboard()
+        {
+            return View();
+        }
     }
 }
