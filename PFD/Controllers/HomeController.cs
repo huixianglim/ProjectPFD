@@ -22,7 +22,6 @@ namespace PFD.Controllers
 
         public IActionResult Index()
         {
-
             
             // Create an instance of the model and set the property
             
@@ -30,7 +29,8 @@ namespace PFD.Controllers
             return View();
 
         }
-        
+
+  
 
         public IActionResult Login()
         {
