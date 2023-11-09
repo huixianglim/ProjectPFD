@@ -73,6 +73,7 @@
             right:10%;
       
         }
+
     </style>
 }
 
@@ -117,8 +118,8 @@
 
 
 @section Scripts{
-    <script type="module" src="~/js/recog.js"></script>
-    <script src="~/js/audio.js"></script>
+    <script type="module" src="~/js/recog.js" asp-append-version="true"></script>
+    <script src="~/js/audio.js" asp-append-version="true"></script>
     <script>
         var dataValue = @Json.Serialize(data);
         console.log(dataValue);

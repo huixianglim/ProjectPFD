@@ -56,17 +56,16 @@ function predictWebcam() {
     if (gestureRecognizer && video.readyState === video.HAVE_ENOUGH_DATA) {
         const results = gestureRecognizer.recognizeForVideo(video, Date.now());
         var check = false
-        if (results.gestures.length > 0 && results.gestures[0][0].categoryName != "None" && results.gestures[0][0].categoryName in ForRedirect) {
+        if (results.gestures.length > 0 && results.gestures[0][0].categoryName in ForRedirect) {
             var categoryName = results.gestures[0][0].categoryName;
             currentOutput = categoryName;
-  
+            console.log(currentOutput)
+            console.log(previousOutput)
             if (currentOutput == previousOutput) {
                 time -= 10
-                console.log("minusing")
             }
             else {
                 time = 1000
-                console.log("resetting")
 
             }
             $(".overlay").text("Going to " + ForRedirect[categoryName])
@@ -101,8 +100,8 @@ function predictWebcam() {
 
         } else {
             $(".overlay").text("Nothing")
+            time = 1000;
         }
-      
     }
 
     // Call this function again to keep predicting when the browser is ready.
