@@ -8,12 +8,23 @@ var ForRedirect = {
 
 }
 
+
+
 let gestureRecognizer;
 const video = document.getElementById("video");
 var currentOutput;
 var previousOutput;
 var time = 1000
 
+if (video.dataset.type == "confirmation") {
+    ForRedirect = {
+        "Thumb_Up": "Index",
+        "Thumb_Down": "PayNow",
+        "Open_Palm": "Confirm"
+
+
+    }
+}
 async function setupGestureRecognizer() {
     const vision = await FilesetResolver.forVisionTasks(
         "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/wasm"
@@ -48,11 +59,9 @@ function predictWebcam() {
         if (results.gestures.length > 0 && results.gestures[0][0].categoryName != "None" && results.gestures[0][0].categoryName in ForRedirect) {
             var categoryName = results.gestures[0][0].categoryName;
             currentOutput = categoryName;
-            console.log("Current: ", currentOutput)
-            console.log("Previous: ", previousOutput)
-
+  
             if (currentOutput == previousOutput) {
-                time -= 8
+                time -= 10
                 console.log("minusing")
             }
             else {
@@ -63,8 +72,33 @@ function predictWebcam() {
             $(".overlay").text("Going to " + ForRedirect[categoryName])
             previousOutput = categoryName
             if (time == 0) {
-                window.location.href = "/Main/"+ ForRedirect[categoryName];
+                if (categoryName != "Open_Palm") {
+                    window.location.href = "/Main/" + ForRedirect[categoryName];
+                }
+                else {
+                    console.log("lol")
+                    var parsedValue = parseInt($("#Money").val());
+
+                    if (isNaN(parsedValue)) {
+                        $(".error").show();
+
+                    }
+                    else {
+                        console.log(parsedValue)
+                        $(".lottie").show();
+                        $(".error").hide();
+
+                        setTimeout(() => {
+                            $("#Success").submit()
+                            $(".lottie").hide();
+                        }, 1000)
+
+                    }
+                    time = 1000
+
+                }
             }
+
         } else {
             $(".overlay").text("Nothing")
         }

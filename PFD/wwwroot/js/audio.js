@@ -22,9 +22,6 @@ $(document).ready(() => {
     recognition.lang = 'en-US'
 
     const DOWN_CUTOFF = window.innerWidth / 4
-    const RIGHT_CUTOFF = window.innerWidth - window.innerWidth / 4
-
-    const video = document.getElementById("video");
     var audioChunks = [];
     var audioRecorder;
 
@@ -39,7 +36,7 @@ $(document).ready(() => {
     )
     $(".button").on("mouseup", () => {
         recognition.stop()
-        $(".button").removeClass("active")
+       $(".button").removeClass("active")
 
         $(".button").data("record", false)
 
@@ -47,15 +44,31 @@ $(document).ready(() => {
     recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript;
         console.log(`Transcript: ${transcript}`);
-        if (transcript.includes("$")) {
-            let amountWithoutDollarSign = transcript.replace(/\$/g, '');
-            $(".testing").text(amountWithoutDollarSign)
+        if ($(".button").data("type") == "money") {
+            if (transcript.includes("$")) {
+                let amountWithoutDollarSign = transcript.replace(/\$/g, '');
+                $("#Money").val(amountWithoutDollarSign)
+
+            }
+            else {
+                $(".testing").text("Invalid Amount")
+
+            }
 
         }
-        else {
-            $(".testing").text("Invalid Amount")
+        else if ($(".button").data("type") == "search") {
+            const transcript = event.results[0][0].transcript;
+            if (transcript == "empty") {
+                $("#searchQueryInput").val("");
+
+            }
+            else {
+                $("#searchQueryInput").val(transcript);
+            }
+            $("#searchQueryInput").trigger("input");
 
         }
+       
     };
 
 })

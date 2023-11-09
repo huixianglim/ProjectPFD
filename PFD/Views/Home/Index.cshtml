@@ -2,91 +2,372 @@
     ViewData["Title"] = "Home Page";
 }
 
+<style>
+    
+    html, body {
+        position: relative;
+        height: 100%;
+    }
 
-@section style{
-    <style>
-        .searchBar {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            flex-direction: row;
-            align-items: center;
-            margin-right: auto;
+    body {
+        background: #eee;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+    }
+
+    .swiper-container {
+        width: 100%;
+        height: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        overflow:hidden;
+    }
+
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+
+    .swiper-pagination-bullet-active {
+        background-color: #fff;
+    }
+
+    .color-1 {
+        background: url("../images/ocbc_cover2.png");
+        background-size:cover;
+        background-position: center;
+        background-repeat:no-repeat;
+    }
+
+    .color-2 {
+        background-color: #4CAF50;
+    }
+
+    .color-3 {
+        background-color: #FFEB3B;
+    }
+
+    .color-4 {
+        background-color: #FF5722;
+    }
+
+    .color-5 {
+        background-color: #607D8B;
+    }
+
+    .about-container {
+        width: 100%;
+        padding-left: 100px;
+        padding-right: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 85px;
+        padding-bottom: 85px;
+        background: #f5f5f5;
+    }
+
+    .about-img-container {
+        height: 50vh;
+        background: url("../images/ocbc_img1.png");
+        background-position: calc(50% - 100px) center;
+        background-repeat: no-repeat;
+        background-size:cover;
+    }
+
+    /*--------------------------------------------------------------
+    # Stats Counter Section
+    --------------------------------------------------------------*/
+    .stats-counter {
+        padding: 40px 0;
+    }
+
+        .stats-counter .stats-item {
+            padding: 20px 0;
+            border-bottom: 1px solid #e4e4e4;
         }
 
-        #searchQueryInput {
-            width: 60%;
-            height: 6vh;
-            background: #f5f5f5;
-            outline: none;
-            border: none;
-            border-radius: 1.625rem;
-            padding: 0 3.5rem 0 1.5rem;
-            font-size: 2rem;
-        }
-
-        #searchQuerySubmit {
-            width: 3.5rem;
-            height: 2.8rem;
-            margin-left: -3.5rem;
-            background: none;
-            border: none;
-            outline: none;
-        }
-
-            #searchQuerySubmit:hover {
-                cursor: pointer;
+            .stats-counter .stats-item .purecounter {
+                min-width: 90px;
+                padding-right: 15px;
             }
 
-        .overlay {
+            .stats-counter .stats-item i {
+                font-size: 44px;
+                line-height: 0;
+                margin-right: 15px;
+            }
+
+            .stats-counter .stats-item span {
+                font-size: 40px;
+                display: block;
+                font-weight: 700;
+                color: var(--color-primary);
+                line-height: 40px;
+            }
+
+            .stats-counter .stats-item p {
+                margin: 0;
+                font-family: var(--font-primary);
+                font-size: 14px;
+            }
+
+    /*--------------------------------------------------------------
+    # Frequently Asked Questions Section
+    --------------------------------------------------------------*/
+    .faq .content h3 {
+        font-weight: 400;
+        font-size: 34px;
+    }
+
+    .faq .content h4 {
+        font-size: 20px;
+        font-weight: 700;
+        margin-top: 5px;
+    }
+
+    .faq .content p {
+        font-size: 15px;
+        color: #6c757d;
+    }
+
+    .faq .accordion-item {
+        border: 0;
+        margin-bottom: 20px;
+        box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.06);
+        border-radius: 10px;
+    }
+
+        .faq .accordion-item:last-child {
+            margin-bottom: 0;
+        }
+
+    .faq .accordion-collapse {
+        border: 0;
+    }
+
+    .faq .accordion-button {
+        padding: 20px 50px 20px 20px;
+        font-weight: 600;
+        border: 0;
+        font-size: 18px;
+        line-height: 24px;
+        color: var(--color-default);
+        text-align: left;
+        background: #fff;
+        box-shadow: none;
+        border-radius: 10px;
+    }
+
+        .faq .accordion-button .num {
+            padding-right: 10px;
+            font-size: 20px;
+            line-height: 0;
+            color: var(--color-primary);
+        }
+
+        .faq .accordion-button:not(.collapsed) {
+            color: var(--color-primary);
+            border-bottom: 0;
+            box-shadow: none;
+        }
+
+        .faq .accordion-button:after {
             position: absolute;
-            top: 0;
-            left: 0;
-            color: red;
-            z-index: 1;
+            right: 20px;
+            top: 20px;
         }
 
-        video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            display: inline-block;
-            width: 300px;
-            z-index: -1;
-        }
+    .faq .accordion-body {
+        padding: 0 40px 30px 45px;
+        border: 0;
+        border-radius: 10px;
+        background: #fff;
+        box-shadow: none;
+    }
+    
+</style>
 
-        .container-vid {
-            width: 20vw;
-            height: 20vw;
-            margin-bottom: 50px; /* Adjust the margin-bottom value as needed to create space between the text and the button */
-        }
-    </style>
-}
-
-<div class="container-fluid d-flex align-items-center">
-        <div class="searchBar">
-
-            <input id="searchQueryInput" type="text" name="searchQueryInput" placeholder="Search" value="" />
-            <button id="searchQuerySubmit" type="submit" name="searchQuerySubmit">
-                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                    <path fill="#666666" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
-                </svg>
-            </button>
+<div class="main-hero" style="height:550px;"> 
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide color-1"></div>
+            <div class="swiper-slide color-1"></div>
+            <div class="swiper-slide color-1"></div>
         </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
 </div>
-<div class="text-center">
 
-        <div class="d-flex justify-content-center align-items-center position-relative container-vid">
-            <div>
-                <video id="video" autoplay></video>
-
-                <h1 class="overlay">test</h1>
+<div class="container-fluid about-container">
+    <div class="row d-flex justify-content-center align-items-center gx-5">
+        <div class="col-md-6">
+            <div class="about-img-container">
             </div>
         </div>
-        <button class="button" data-record="false">Test Audio Play</button>
 
-        <p class="testing"></p>
+        <div class="col-md-6">
+            <h2 style="font-weight:bold; margin-bottom:20px; font-size:40px; color:#464646;">DRIVING YOUR GROWTH.</h2>
+            <p style="color:#464646; font-size:17px;">
+                Driving your growth, all across ASEAN and Greater China. For all your aspiratoins. We'll deliver solutions as One Group, all across ASEAN and Greater China.
+            </p>
 
+        </div>
+    </div>
+</div>
+
+<!-- ======= Stats Counter Section ======= -->
+<section id="stats-counter" class="stats-counter">
+    <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4 align-items-center">
+
+            <div class="col-lg-6">
+                <img src="assets/img/stats-img.svg" alt="" class="img-fluid">
+            </div>
+
+            <div class="col-lg-6">
+
+                <div class="stats-item d-flex align-items-center">
+                    <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
+                    <p><strong>Happy Clients</strong> consequuntur quae diredo para mesta</p>
+                </div><!-- End Stats Item -->
+
+                <div class="stats-item d-flex align-items-center">
+                    <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
+                    <p><strong>Projects</strong> adipisci atque cum quia aut</p>
+                </div><!-- End Stats Item -->
+
+                <div class="stats-item d-flex align-items-center">
+                    <span data-purecounter-start="0" data-purecounter-end="453" data-purecounter-duration="1" class="purecounter"></span>
+                    <p><strong>Hours Of Support</strong> aut commodi quaerat</p>
+                </div><!-- End Stats Item -->
+
+            </div>
+
+        </div>
+
+    </div>
+</section><!-- End Stats Counter Section -->
+<!-- ======= Frequently Asked Questions Section ======= -->
+<section id="faq" class="faq">
+    <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4">
+
+            <div class="col-lg-4">
+                <div class="content px-xl-5">
+                    <h3>Frequently Asked <strong>Questions</strong></h3>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+
+                <div class="accordion accordion-flush" id="faqlist" data-aos="fade-up" data-aos-delay="100">
+
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
+                                <span class="num">1.</span>
+                                Non consectetur a erat nam at lectus urna duis?
+                            </button>
+                        </h3>
+                        <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                            <div class="accordion-body">
+                                Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
+                            </div>
+                        </div>
+                    </div><!-- # Faq item-->
+
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-2">
+                                <span class="num">2.</span>
+                                Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque?
+                            </button>
+                        </h3>
+                        <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                            <div class="accordion-body">
+                                Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                            </div>
+                        </div>
+                    </div><!-- # Faq item-->
+
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-3">
+                                <span class="num">3.</span>
+                                Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi?
+                            </button>
+                        </h3>
+                        <div id="faq-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                            <div class="accordion-body">
+                                Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
+                            </div>
+                        </div>
+                    </div><!-- # Faq item-->
+
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-4">
+                                <span class="num">4.</span>
+                                Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla?
+                            </button>
+                        </h3>
+                        <div id="faq-content-4" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                            <div class="accordion-body">
+                                Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                            </div>
+                        </div>
+                    </div><!-- # Faq item-->
+
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-5">
+                                <span class="num">5.</span>
+                                Tempus quam pellentesque nec nam aliquam sem et tortor consequat?
+                            </button>
+                        </h3>
+                        <div id="faq-content-5" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                            <div class="accordion-body">
+                                Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in
+                            </div>
+                        </div>
+                    </div><!-- # Faq item-->
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body" style="background: linear-gradient(to bottom, #FF9999, #FF6666); color: #333;">
+                    <h5 class="card-title">Online Banking</h5>
+                    <p class="card-text">Manage your accounts online with ease.</p>
+                    <a href="/online-banking" class="btn btn-primary">Sign In</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @section Scripts{
     <script type="module" src="~/js/recog.js"></script>

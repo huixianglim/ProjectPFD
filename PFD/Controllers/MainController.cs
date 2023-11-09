@@ -21,7 +21,15 @@ namespace PFD.Controllers
 
         }
 
-      
+        [HttpPost]
+        public IActionResult passTemp(IFormCollection? form)
+        {
+            if (form != null)
+            {
+                TempData["Success"] = form["tempData"].ToString();
+            }
+            return RedirectToAction("Index", "Main");
+        }
 
         public IActionResult PayNow()
         {
