@@ -23,3 +23,5 @@ $("#searchQueryInput").on("input",(e) => {
 
 
 })
+
+
