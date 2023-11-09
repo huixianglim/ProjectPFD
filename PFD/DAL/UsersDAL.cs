@@ -50,6 +50,32 @@ namespace PFD.DAL
 
             return user;
         }
+        public bool Logger(string Email, string Password)
+        {
+            bool authenticated = false;
+            //Create a SqlCommand object from connection object
+            SqlCommand cmd = conn.CreateCommand();
+            //Specify the SELECT SQL statement 
+            cmd.CommandText = @"SELECT * FROM Users WHERE Email = @Email";
+            cmd.Parameters.AddWithValue("@Email", Email);
+            conn.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+            //Read all records until the end
+            while (reader.Read())
+            {
+                // Convert email address to lowercase for comparison
+                // Password comparison is case-sensitive
+                if ((reader.GetString(0).ToLower() == Email) &&
+                   (reader.GetString(2) == Password))
+                {
+                    authenticated = true;
+                    break; // Exit the while loop
+                }
+            }
+            return authenticated;
+            
+        }
+
 
 
 

@@ -3,13 +3,17 @@ using Microsoft.AspNetCore.Mvc;
 using PFD.Models;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Http;
+using PFD.DAL;
+using System.Data.SqlClient;
+using System.Data.SqlTypes;
 
 namespace PFD.Controllers
 {
     public class HomeController : Controller
     {
+        private UsersDAL userContext = new UsersDAL();
         private readonly ILogger<HomeController> _logger;
-
+        
 
 
         public HomeController(ILogger<HomeController> logger)
@@ -30,8 +34,7 @@ namespace PFD.Controllers
 
         }
 
-  
-
+        [HttpGet]
         public IActionResult Login()
         {
             
@@ -41,15 +44,22 @@ namespace PFD.Controllers
             return View();
 
         }
-        [HttpPost]
-        public ActionResult Login(IFormCollection formData)
+        
+
+        //[HttpPost]
+        /*public ActionResult Login(IFormCollection formData)
         {
             // Read inputs from textboxes
             // Email address converted to lowercase
-            string loginID = formData["memberlogin"].ToString().ToLower();
+            string UserID = formData["memberlogin"].ToString().ToLower();
             string password = formData["memberpassword"].ToString();
-            if (loginID == "huixiang@gmail.com" && password == "12345")
+   
+
+            if (userContext.Logger(UserID, password))
+
             {
+                
+               
                 // Redirect user to the "StaffMain" view through an action
                 return RedirectToAction("Index");
             }
@@ -59,7 +69,7 @@ namespace PFD.Controllers
                 return RedirectToAction("Login");
             }
         }
-
+*/
         public IActionResult Privacy()
         {
             return View();

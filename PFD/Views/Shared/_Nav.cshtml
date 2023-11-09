@@ -38,6 +38,8 @@
         position: fixed;
         width: 100%;
         transition: ease-in-out 0.3s;
+        top: 0;
+        left: 0;
     }
 
         .navbar.sticky {
@@ -52,6 +54,7 @@
         max-width: 1200px;
         z-index: 1;
         transition: ease-in-out 0.3s;
+        
     }
 
     .navbar-menu {
@@ -279,7 +282,7 @@
             </li>
 
             <li class="navbar-button" id="login-btn">
-                <a href="store.html" class="navbar-links2">
+                <a asp-controller="Home" asp-action="Login" class="navbar-links2">
                     
                     <p class="nav-login">Login</p>
                     <div class="signin-img"></div>
