@@ -106,8 +106,17 @@
                 </div>
             </div>
         </nav>*@
+        @{
+            var AccountString = Context.Session.GetString("AccountObject");
+            if (AccountString == null){
+                @await Html.PartialAsync("_Nav.cshtml")
 
-        @await Html.PartialAsync("_Nav.cshtml")
+            }
+            else{
+                @await Html.PartialAsync("_UserNavbar.cshtml")
+
+            }
+        }
     </header>
 
 

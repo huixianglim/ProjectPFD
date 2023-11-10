@@ -153,6 +153,11 @@ input[type="Password"] {
     letter-spacing: .5px;
 }
 
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
+    transition: background-color 5000s;
+    -webkit-text-fill-color: #fff !important;
+}
+
 .input-group {
     /* margin-bottom: 25px; */
     padding: 0px 0px;

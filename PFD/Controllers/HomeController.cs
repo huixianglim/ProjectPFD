@@ -31,7 +31,10 @@ namespace PFD.Controllers
         {
             
             // Create an instance of the model and set the property
-            
+            if (HttpContext.Session.GetString("AccountObject") != null)
+            {
+                return RedirectToAction("Main", "Index");
+            }
 
             return View();
 
@@ -40,7 +43,11 @@ namespace PFD.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            
+
+            if (HttpContext.Session.GetString("AccountObject") != null)
+            {
+                return RedirectToAction("Main", "Index");
+            }
 
             // Set the session variable
 
@@ -94,5 +101,13 @@ namespace PFD.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public ActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
+
+
     }
 }
