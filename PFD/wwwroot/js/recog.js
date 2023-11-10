@@ -15,6 +15,7 @@ const video = document.getElementById("video");
 var currentOutput;
 var previousOutput;
 var time = 1000
+var cooldown = 0;
 
 if (video.dataset.type == "confirmation") {
     ForRedirect = {
@@ -59,8 +60,6 @@ function predictWebcam() {
         if (results.gestures.length > 0 && results.gestures[0][0].categoryName in ForRedirect) {
             var categoryName = results.gestures[0][0].categoryName;
             currentOutput = categoryName;
-            console.log(currentOutput)
-            console.log(previousOutput)
             if (currentOutput == previousOutput) {
                 time -= 10
             }
@@ -77,9 +76,10 @@ function predictWebcam() {
                 else {
                     console.log("lol")
                     var parsedValue = parseInt($("#Money").val());
-
-                    if (isNaN(parsedValue)) {
+                    console.log(parsedValue <= 0);
+                    if (isNaN(parsedValue) || parsedValue <= 0 ) {
                         $(".error").show();
+                     
 
                     }
                     else {
@@ -100,7 +100,11 @@ function predictWebcam() {
 
         } else {
             $(".overlay").text("Nothing")
-            time = 1000;
+            cooldown += 8;
+            if (cooldown == 1000) {
+                time = 1000;
+
+            }
         }
     }
 

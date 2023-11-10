@@ -2,107 +2,129 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewData["Title"] = "Dashboard";
+
     string? data = null;
-    if (TempData["Success"] != null){
+    if (TempData["Success"] != null)
+    {
         data = TempData["Success"].ToString();
         Console.WriteLine(data);
 
     }
 }
-@section style{
+
+
+
+ @section head{
+    <link rel="stylesheet" href="~/css/Dashboard.css" type="text/css">
+
+ }
+
+ @section style{
     <style>
-        .searchBar {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            flex-direction: row;
-            align-items: center;
-            margin-right: auto;
-        }
-
-        #searchQueryInput {
-            width: 60%;
-            height: 6vh;
-            background: #f5f5f5;
-            outline: none;
-            border: none;
-            border-radius: 1.625rem;
-            padding: 0 3.5rem 0 1.5rem;
-            font-size: 2rem;
-        }
-
-        #searchQuerySubmit {
-            width: 3.5rem;
-            height: 2.8rem;
-            margin-left: -3.5rem;
-            background: none;
-            border: none;
-            outline: none;
-        }
-
-            #searchQuerySubmit:hover {
-                cursor: pointer;
-            }
-
         .overlay {
             position: absolute;
             top: 0;
             left: 0;
             color: red;
             z-index: 1;
+            font-size: 1.5rem;
         }
 
         video {
-            position: absolute;
-            top: 0;
-            left: 0;
+            /*        position: fixed;
+                    top: 0;
+                    left: 0;*/
             display: inline-block;
             width: 300px;
             z-index: -1;
         }
 
         .container-vid {
-            width: 20vw;
-            height: 20vw;
+            position: fixed;
+            padding-left: 0;
+            top: 10%;
+            left: 0;
             margin-bottom: 50px; /* Adjust the margin-bottom value as needed to create space between the text and the button */
         }
 
-        #successIndicator{
-            position:fixed;
-            top:16%;
-            right:10%;
-      
+        #successIndicator {
+            position: fixed;
+            top: 16%;
+            right: 10%;
         }
 
     </style>
-}
+ }
 
-    <div class="container-fluid d-flex align-items-center">
-        <div class="searchBar">
-
-            <input id="searchQueryInput" type="text" name="searchQueryInput" placeholder="Search" value="" />
-            <button id="searchQuerySubmit" type="submit" name="searchQuerySubmit">
-                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                    <path fill="#666666" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
-                </svg>
-            </button>
-        </div>
-    </div>
-    <div class="text-center">
-
-        <div class="d-flex justify-content-center align-items-center position-relative container-vid">
-            <div>
-                <video id="video" autoplay></video>
-
-                <h1 class="overlay">test</h1>
+    <section id="top" class="row">
+        <div class="col-md-7 card" id="main">
+            <div class="row">
+                <div class="col-md-6">
+                    Main Account
+                    <h3>NevBank Savings Account</h3>
+                    <p>88 1240 7793 3667 0002 9448 <i class="fa fa-angle-double-right"></i></p>
+                    <br>
+                    <br>
+                    <a href="" class="btn btn-success">Transfer Money</a>
+                    <a href="" class="btn btn-light">Transfer Money</a>
+                </div>
+                <div class="col-md-6">
+                    Available funds
+                    <h1>68.789,56 $</h1>
+                </div>
             </div>
+
         </div>
-        <button class="button" data-record="false">Test Audio Play</button>
-
-        <p class="testing"></p>
-
-    </div>
-
+        <div class="gap"></div>
+        <div class="col-md-4 card " id="define">
+            <h3>Define standing orders</h3>
+            <br>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum sed rerum tenetur natus vero aperiam sunt, laborum in quibusdam! Nemo, dolorem atque modi sint adipisci eius eligendi molestiae pariatur rem? <i class="fa fa-angle-double-right"></i></p>
+            <br>
+            <a href="" class="btn btn-light">Define standing orders</a>
+        </div>
+    </section>
+    <br>
+    <section class="row" id="bottomm">
+        <div class="col-md-7 card" id="right">
+            <h2>Latest Transaction</h2>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>mdo</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>fat</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td colspan="2">Larry the Bird</td>
+                        <td>twitter</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="gap"></div>
+        <div class="col-md-4 card " id="left">
+            <h2>Expenses</h2>
+            <canvas id="chart-pie"></canvas>
+        </div>
+    </section>
 
     <div class="toast" id="successIndicator" role="alert" aria-live="assertive" aria-atomic="true" data-bs-animation="true">
         <div class="toast-header">
@@ -116,19 +138,42 @@
         </div>
     </div>
 
+    <div class="container-vid">
+        <video id="video" autoplay></video>
 
-@section Scripts{
-    <script type="module" src="~/js/recog.js" asp-append-version="true"></script>
-    <script src="~/js/audio.js" asp-append-version="true"></script>
+        <p class="overlay"></p>
+    </div>
+
+    @section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
-        var dataValue = @Json.Serialize(data);
-        console.log(dataValue);
-        if (dataValue == "true"){
-            $("#successIndicator").show();
-            setTimeout(()=>{
-                $("#successIndicator").fadeOut();
+        const dataPie = {
+            type: "pie",
+            data: {
+                labels: ["Monday", "Tuesday", "Wednesday", "Thursday"],
+                datasets: [{
+                    data: [1234, 2234, 3234, 4234],
+                    backgroundColor: ["rgba(117,169,255,0.6)", "rgba(148,223,215,0.6)",
+                        "rgba(208,129,222,0.6)", "rgba(247,127,167,0.6)"
+                    ],
+                }, ],
+            },
+        };
 
-            },2000)
-        }
+        new mdb.Chart(document.getElementById("chart-pie"), dataPie);
     </script>
-}
+ 
+        <script type="module" src="~/js/recog.js" asp-append-version="true"></script>
+        <script src="~/js/audio.js" asp-append-version="true"></script>
+        <script>
+            var dataValue = @Json.Serialize(data);
+            console.log(dataValue);
+            if (dataValue == "true") {
+                $("#successIndicator").show();
+                setTimeout(() => {
+                    $("#successIndicator").fadeOut();
+
+                }, 2000)
+            }
+        </script>
+    }

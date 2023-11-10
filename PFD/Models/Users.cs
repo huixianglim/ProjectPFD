@@ -17,7 +17,7 @@ namespace PFD.Models
         public string Password { get; set; }
 
         [Display(Name = "Monetary Amount")]
-        public float Money { get; set; }
+        public Decimal Money { get; set; }
 
         public string Email { get; set; }
 

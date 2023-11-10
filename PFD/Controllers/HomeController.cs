@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Http;
 using PFD.DAL;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
+using System.Diagnostics.Metrics;
+using System.Text.Json;
+
 
 namespace PFD.Controllers
 {
@@ -44,32 +47,43 @@ namespace PFD.Controllers
             return View();
 
         }
-        
 
-        //[HttpPost]
-        /*public ActionResult Login(IFormCollection formData)
+
+        [HttpPost]
+        public ActionResult Login(IFormCollection formData)
         {
-            // Read inputs from textboxes
-            // Email address converted to lowercase
-            string UserID = formData["memberlogin"].ToString().ToLower();
-            string password = formData["memberpassword"].ToString();
-   
+            
+            //Read inputs from textboxes
+            //Email address converted to lowercase
+            string? UserID = formData["memberlogin"].ToString().ToLower();
+            string? password = formData["memberpassword"].ToString();
+            Console.WriteLine(UserID);
+            Console.WriteLine(password);
+            if (UserID != null && password != null){
+                Users? user = userContext.Login(UserID, password);
+                if (user == null)
 
-            if (userContext.Logger(UserID, password))
+                {
 
-            {
-                
-               
-                // Redirect user to the "StaffMain" view through an action
-                return RedirectToAction("Index");
+
+                    TempData["Error"] = true;
+                    return View();
+                }
+                else
+                {
+                    var jsonString = JsonSerializer.Serialize(user);
+                    HttpContext.Session.SetString("AccountObject", jsonString);
+                    //Redirect user back to the index view through an action
+                    return RedirectToAction("Index", "Main");
+                }
             }
             else
             {
-                // Redirect user back to the index view through an action
-                return RedirectToAction("Login");
+                return View();
             }
+    
         }
-*/
+
         public IActionResult Privacy()
         {
             return View();
