@@ -169,7 +169,7 @@
     }
 
     .alien-img {
-        background: url("../Images/alien.png");
+        background: url("/Images/alien.png");
         background-size: cover;
         width: 25px;
         height: 25px;
@@ -186,7 +186,7 @@
     }
 
         #acc-dropdown:hover {
-            background-color: #131313;
+            background-color: white;
         }
 
             #acc-dropdown:hover > ul {
@@ -195,7 +195,7 @@
 
         #acc-dropdown ul {
             width: 100%;
-            background-color: #131313;
+            background-color: white;
             box-shadow: 0 1px 6px 0 rgba(22, 22, 23, 0.2);
             transform: scaleY(0);
             transform-origin: top;
@@ -213,7 +213,8 @@
             }
 
         #acc-dropdown a {
-            color: #fff;
+            color: #E30613;
+            font-weight: 700;
             text-transform: uppercase;
             text-decoration: none;
             letter-spacing: 0.15em;
@@ -225,6 +226,7 @@
         }
 
             #acc-dropdown a p {
+                color: #000;
                 padding: 10px;
             }
 
@@ -249,6 +251,16 @@
     .nav-login {
         color: #E30613;
         font-weight: 700;
+    }
+
+    .login-img {
+        background: url("/Images/icon-img.png");
+        width: 25px;
+        height: 25px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        image-rendering: pixelated;
     }
 
 </style>
@@ -284,23 +296,22 @@
             </li>
 
 
-            <li class="navbar-button">
+            <li class="navbar-button" id="acc-dropdown">
 
                 <a href="" class="navbar-links" style="pointer-events:none;" >
-                    @*<div class="store-img"></div>*@
+                    <div class="login-img"></div>
                     <p>@AccountObject.Name</p>
                 </a>
+                <ul>
+                    <li>
+                        <a asp-controller="Home" asp-action="LogOut"  class="navbar-links" id="logout-btn" style="padding-top:0">LOG OUT</a>
+
+                    </li>
+                </ul>
             </li>
 
-            <li class="navbar-button" id="login-btn">
-                <a asp-controller="Home" asp-action="LogOut" class="navbar-links2">
-
-                    <p class="nav-login">Signout</p>
-                    @*<div class="signin-img"></div>*@
-                </a>
-            </li>
-
-            @*<li class="navbar-button" id="acc-dropdown">
+     
+           @*<li class="navbar-button" id="acc-dropdown">
 
             </li>*@
 
