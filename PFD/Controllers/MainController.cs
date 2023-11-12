@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PFD.DAL;
+using Microsoft.AspNetCore.Http;
+
 using PFD.Models;
 
 namespace PFD.Controllers
@@ -10,6 +12,7 @@ namespace PFD.Controllers
 
         public IActionResult Index()
         {
+
             return View();
         }
 
@@ -46,6 +49,17 @@ namespace PFD.Controllers
         public IActionResult Dashboard()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult setTutorial(IFormCollection data)
+        {
+
+                Console.WriteLine("test");
+                HttpContext.Session.SetString("Completed", "true");
+                return RedirectToAction("Index", "Main");
+
+
         }
     }
 }

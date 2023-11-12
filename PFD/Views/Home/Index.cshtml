@@ -388,6 +388,75 @@
                     
 
 @section Scripts{
+    <script>
+        const swiper = new Swiper('.swiper-container', {
+            autoplay: {
+                delay: 3000,
+            },
+
+            direction: 'horizontal',
+            loop: true,
+            freeMode: false,
+            slidesPerView: 1,
+            centeredSlides: true,
+
+
+            // pagination: {
+            //        el: '.swiper-pagination',
+            //        clickable: true
+            // },
+            //paginationClickable: true,
+            parallax: true,
+            speed: 900,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            }
+
+        });
+
+        /*scrolling animation*/
+        window.addEventListener("scroll", reveal);
+        function reveal() {
+            var reveals = document.querySelectorAll('.reveal')
+            var background = document.querySelectorAll('.background')
+
+            for (var i = 0; i < reveals.length; i++) {
+                var windowheight = window.innerHeight;
+                var revealtop = reveals[i].getBoundingClientRect().top;
+                var revealpoint = 100;
+                if (revealtop < windowheight - revealpoint) {
+                    reveals[i].classList.add("active");
+                    background[i].setAttribute("background", "true")
+
+                }
+                else {
+                    reveals[i].classList.remove('active');
+                    background[i].setAttribute("background", "false")
+
+
+                }
+
+            }
+        }
+
+        /**
+        * Animation on scroll function and init
+        */
+        function aos_init() {
+            AOS.init({
+                duration: 1000,
+                easing: 'ease-in-out',
+                once: true,
+                mirror: false
+            });
+        }
+        window.addEventListener('load', () => {
+            aos_init();
+        });
+
+
+    </script>
 
     <script type="module" src="~/js/recog.js"></script>
     <script src="~/js/audio.js"></script>

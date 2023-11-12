@@ -3,6 +3,7 @@
 var ForRedirect = {
     "Thumb_Up": "Index",
     "Thumb_Down": "PayNow",
+    "Open_Palm": "Closing Tutorial"
 
 
 
@@ -74,26 +75,36 @@ function predictWebcam() {
                     window.location.href = "/Main/" + ForRedirect[categoryName];
                 }
                 else {
-                    console.log("lol")
-                    var parsedValue = parseInt($("#Money").val());
-                    console.log(parsedValue <= 0);
-                    if (isNaN(parsedValue) || parsedValue <= 0 ) {
-                        $(".error").show();
-                     
+                    if (video.dataset.type == "confirmation") {
+                        var parsedValue = parseInt($("#Money").val());
+                        console.log(parsedValue <= 0);
+                        if (isNaN(parsedValue) || parsedValue <= 0) {
+                            $(".error").show();
 
+
+                        }
+                        else {
+                            console.log(parsedValue)
+                            $(".lottie").show();
+                            $(".error").hide();
+
+                            setTimeout(() => {
+                                $("#Success").submit()
+                                $(".lottie").hide();
+                            }, 1000)
+
+                        }
+                        time = 1000
                     }
                     else {
-                        console.log(parsedValue)
-                        $(".lottie").show();
-                        $(".error").hide();
 
-                        setTimeout(() => {
-                            $("#Success").submit()
-                            $(".lottie").hide();
-                        }, 1000)
+                        if ($("#tutorial").css('display') != 'none !important') {
+                            $("#end-slideshow").trigger('click')
+                            delete ForRedirect["Open_Palm"]; 
+                        }
+                        
 
                     }
-                    time = 1000
 
                 }
             }
