@@ -42,7 +42,7 @@ namespace PFD.DAL
                     user.Email = reader.GetString(1);
                     user.UserID = reader.GetInt32(2);
                     user.Password = reader.GetString(3);
-                    user.Money = reader.GetFloat(4);
+                    user.Money = reader.GetDecimal(4);
 
                 }
             }

@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Http;
 using PFD.DAL;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
+using System.Diagnostics.Metrics;
+using System.Text.Json;
+
 
 namespace PFD.Controllers
 {
@@ -28,7 +31,10 @@ namespace PFD.Controllers
         {
             
             // Create an instance of the model and set the property
-            
+            if (HttpContext.Session.GetString("AccountObject") != null)
+            {
+                return RedirectToAction("Main", "Index");
+            }
 
             return View();
 
@@ -37,39 +43,54 @@ namespace PFD.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            
+
+            if (HttpContext.Session.GetString("AccountObject") != null)
+            {
+                return RedirectToAction("Main", "Index");
+            }
 
             // Set the session variable
 
             return View();
 
         }
-        
 
-        //[HttpPost]
-        /*public ActionResult Login(IFormCollection formData)
+
+        [HttpPost]
+        public ActionResult Login(IFormCollection formData)
         {
-            // Read inputs from textboxes
-            // Email address converted to lowercase
-            string UserID = formData["memberlogin"].ToString().ToLower();
-            string password = formData["memberpassword"].ToString();
-   
+            
+            //Read inputs from textboxes
+            //Email address converted to lowercase
+            string? UserID = formData["memberlogin"].ToString().ToLower();
+            string? password = formData["memberpassword"].ToString();
+            Console.WriteLine(UserID);
+            Console.WriteLine(password);
+            if (UserID != null && password != null){
+                Users? user = userContext.Login(UserID, password);
+                if (user == null)
 
-            if (userContext.Logger(UserID, password))
+                {
 
-            {
-                
-               
-                // Redirect user to the "StaffMain" view through an action
-                return RedirectToAction("Index");
+
+                    TempData["Error"] = true;
+                    return View();
+                }
+                else
+                {
+                    var jsonString = JsonSerializer.Serialize(user);
+                    HttpContext.Session.SetString("AccountObject", jsonString);
+                    //Redirect user back to the index view through an action
+                    return RedirectToAction("Index", "Main");
+                }
             }
             else
             {
-                // Redirect user back to the index view through an action
-                return RedirectToAction("Login");
+                return View();
             }
+    
         }
-*/
+
         public IActionResult Privacy()
         {
             return View();
@@ -80,5 +101,13 @@ namespace PFD.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public ActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
+
+
     }
 }

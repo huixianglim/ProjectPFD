@@ -1,9 +1,14 @@
-﻿
-@*
+﻿@*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
+
+@{
+    var AccountString = Context.Session.GetString("AccountObject");
+    var AccountObject = JsonSerializer.Deserialize<Users>(AccountString);
+
+}
 <style>
-    
+
 
     * {
         margin: 0;
@@ -12,24 +17,25 @@
     }
 
     body {
-/*        background-color: #000;
-*/    }
+        /*        background-color: #000;
+    */
+    }
 
     ul {
-        margin-bottom:0;
+        margin-bottom: 0;
     }
 
     /* NAVBAR global */
-    
+
     p {
         margin-bottom: 0;
         font-weight: 400;
-        text-decoration:none;
+        text-decoration: none;
     }
 
     .navbar1 {
         /*background-color: rgba(0,0,0,0);*/
-        background-color:white;
+        background-color: white;
         font-size: 15px;
         height: 70px;
         z-index: 1000;
@@ -42,9 +48,9 @@
         left: 0;
     }
 
-        .navbar.sticky {
-            background: #131313;
-        }
+    .navbar.sticky {
+        background: #131313;
+    }
 
     .navbar-container1 {
         display: flex;
@@ -54,7 +60,6 @@
         max-width: 1200px;
         z-index: 1;
         transition: ease-in-out 0.3s;
-        
     }
 
     .navbar-menu {
@@ -139,7 +144,6 @@
         .navbar-links:hover:after, .navbar-links2:hover:after {
             width: 80%;
             left: 10%;
-
         }
 
 
@@ -165,7 +169,7 @@
     }
 
     .alien-img {
-        background: url("../Images/alien.png");
+        background: url("/Images/alien.png");
         background-size: cover;
         width: 25px;
         height: 25px;
@@ -182,7 +186,7 @@
     }
 
         #acc-dropdown:hover {
-            background-color: #131313;
+            background-color: white;
         }
 
             #acc-dropdown:hover > ul {
@@ -191,7 +195,7 @@
 
         #acc-dropdown ul {
             width: 100%;
-            background-color: #131313;
+            background-color: white;
             box-shadow: 0 1px 6px 0 rgba(22, 22, 23, 0.2);
             transform: scaleY(0);
             transform-origin: top;
@@ -209,7 +213,8 @@
             }
 
         #acc-dropdown a {
-            color: #fff;
+            color: #E30613;
+            font-weight: 700;
             text-transform: uppercase;
             text-decoration: none;
             letter-spacing: 0.15em;
@@ -221,6 +226,7 @@
         }
 
             #acc-dropdown a p {
+                color: #000;
                 padding: 10px;
             }
 
@@ -234,7 +240,7 @@
         background-color: white;
     }
 
-    .navbar-black-text .navbar-links{
+    .navbar-black-text .navbar-links {
         color: #474747;
     }
 
@@ -247,15 +253,23 @@
         font-weight: 700;
     }
 
-    
+    .login-img {
+        background: url("/Images/icon-img.png");
+        width: 25px;
+        height: 25px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        image-rendering: pixelated;
+    }
 
 </style>
 
 <nav class="navbar1">
     <div class="navbar-container1">
 
-        <a href="~/Home/Index" id="navbar-logo">
-            
+        <a href="~/Main/Index" id="navbar-logo">
+
         </a>
 
         <div class="navbar-toggle" id="mobile-menu">
@@ -267,29 +281,37 @@
         <ul class="navbar-menu">
             <li class="navbar-button">
 
-                <a href="selectclass.html" class="navbar-links">
+                <a asp-action="PayNow" class="navbar-links">
                     @*<div class="alien-img"></div>*@
-                    <p>Banking for Individuals</p>
+                    <p>PayNow</p>
                 </a>
             </li>
 
             <li class="navbar-button">
 
-                <a href="store.html" class="navbar-links">
+                <a href="" class="navbar-links">
                     @*<div class="store-img"></div>*@
-                    <p>OCBC Group</p>
+                    <p>Savings Goals</p>
                 </a>
             </li>
 
-            <li class="navbar-button" id="login-btn">
-                <a asp-controller="Home" asp-action="Login" class="navbar-links2">
-                    
-                    <p class="nav-login">Login</p>
-                    <div class="signin-img"></div>
+
+            <li class="navbar-button" id="acc-dropdown">
+
+                <a href="" class="navbar-links" style="pointer-events:none;" >
+                    <div class="login-img"></div>
+                    <p>@AccountObject.Name</p>
                 </a>
+                <ul>
+                    <li>
+                        <a asp-controller="Home" asp-action="LogOut"  class="navbar-links" id="logout-btn" style="padding-top:0">LOG OUT</a>
+
+                    </li>
+                </ul>
             </li>
 
-            @*<li class="navbar-button" id="acc-dropdown">
+     
+           @*<li class="navbar-button" id="acc-dropdown">
 
             </li>*@
 

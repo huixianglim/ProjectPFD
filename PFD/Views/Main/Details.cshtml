@@ -125,14 +125,14 @@
         <div class="row d-flex align-items-center justify-content-center h-100">
             <div class="col-md-8 col-lg-7 col-xl-6">
                 <img src="/Images/business-agreement.svg"
-                     class="img-fluid" alt="Phone image">
+                     class="img-fluid" alt="Phone image" asp-append-version = "true">
             </div>
             <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
                 <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">
                     Paying to @{
                         if (Model != null)
                         {
-                                                    <span>@Model.Name</span>
+                            <span>@Model.Name</span>
                         }
                     }
                 </h3>
@@ -146,16 +146,16 @@
                             <input id="Money" type="tel" class="form-control form-control-lg" value="0.00" />
                         </div>
                     </div>
-                    <p class="text-danger error">Invaid Input!</p>
+                    <p class="text-danger error mb-5">Invaid Input!</p>
 
                     <div class="row mb-4">
                         <div class="col">
-                            <label>Click Next to start confirmation of payment or signal an open hand for a few seconds</label>
+                            <label>Click Confirm to move on with payment or signal an open hand for a few seconds to do so</label>
                         </div>
                     </div>
    
                     <!-- Submit button -->
-                    <button id="form-sub" type="submit" class="btn btn-primary btn-lg btn-block">Confirm</button>
+                    <button id="form-sub" type="submit" class="btn btn-danger btn-lg btn-block">Confirm</button>
 
                 </form>
 
