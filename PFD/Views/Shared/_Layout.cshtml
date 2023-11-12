@@ -52,6 +52,7 @@
                 transform: scale(1.1);
             }
 
+
         
     </style>
 </head>
@@ -108,11 +109,11 @@
         @{
             var AccountString = Context.Session.GetString("AccountObject");
             if (AccountString == null){
-                @await Html.PartialAsync("_Nav.cshtml")
+                            @await Html.PartialAsync("_Nav.cshtml")
 
             }
             else{
-                @await Html.PartialAsync("_UserNavbar.cshtml")
+                            @await Html.PartialAsync("_UserNavbar.cshtml")
 
             }
         }
@@ -125,54 +126,52 @@
             
         </main>
 
+    <div class="container" style="background-color:white;">
+        <footer class="row row-cols-5 py-5 my-5 border-top">
+            <div class="col">
+                <a href="/" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap" /></svg>
+                </a>
+                <p class="text-muted">&copy; 2021</p>
+            </div>
 
+            <div class="col">
+            </div>
 
-    <footer class="container py-5" style="background:white;">
-        <div class="row">
-            <div class="col-12 col-md">
+            <div class="col">
+                <h5>Section</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                </ul>
+            </div>
 
-                <small class="d-block mb-3 text-muted">&copy; 2017-2019</small>
-            </div>
-            <div class="col-6 col-md">
-                <h5>Features</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Cool stuff</a></li>
-                    <li><a class="text-muted" href="#">Random feature</a></li>
-                    <li><a class="text-muted" href="#">Team feature</a></li>
-                    <li><a class="text-muted" href="#">Stuff for developers</a></li>
-                    <li><a class="text-muted" href="#">Another one</a></li>
-                    <li><a class="text-muted" href="#">Last time</a></li>
+            <div class="col">
+                <h5>Section</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
                 </ul>
             </div>
-            <div class="col-6 col-md">
-                <h5>Resources</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Resource</a></li>
-                    <li><a class="text-muted" href="#">Resource name</a></li>
-                    <li><a class="text-muted" href="#">Another resource</a></li>
-                    <li><a class="text-muted" href="#">Final resource</a></li>
+
+            <div class="col">
+                <h5>Section</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
                 </ul>
             </div>
-            <div class="col-6 col-md">
-                <h5>Resources</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Business</a></li>
-                    <li><a class="text-muted" href="#">Education</a></li>
-                    <li><a class="text-muted" href="#">Government</a></li>
-                    <li><a class="text-muted" href="#">Gaming</a></li>
-                </ul>
-            </div>
-            <div class="col-6 col-md">
-                <h5>About</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Team</a></li>
-                    <li><a class="text-muted" href="#">Locations</a></li>
-                    <li><a class="text-muted" href="#">Privacy</a></li>
-                    <li><a class="text-muted" href="#">Terms</a></li>
-                </ul>
-            </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
 
     
 

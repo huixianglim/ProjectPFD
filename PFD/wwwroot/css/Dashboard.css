@@ -1,6 +1,6 @@
 ﻿body {
-    padding: 1% 5% 1% 5%;
-    background: #F2F3F7;
+    padding: 2% 0% 1% 6%;
+    background: #f7f7f7;
 }
 
 nav {
@@ -8,11 +8,11 @@ nav {
 }
 
 #top {
-    margin-bottom: 2%;
+    margin-bottom: 0;
 }
 
     #top div {
-        padding-top: 20px;
+        padding-top: 15px;
         padding-left: 20px;
         height: 300px;
     }
@@ -32,13 +32,14 @@ nav {
 
 #define {
     color: white;
-    padding-top: 20px;
-    padding-left: 20px;
+    padding-top: 20px !important;
+    padding-left: 20px !important;
+    padding-right: 20px;
     background: #068374;
 }
 
     #define a {
-        width: 50%;
+        width: 40%;
     }
 
 #middle {
