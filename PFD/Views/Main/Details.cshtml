@@ -179,7 +179,7 @@
         $("#form-sub").click((e)=>{
             e.preventDefault();
             var parsedValue = parseInt($("#Money").val());
-            if (!isNaN(parsedValue)){
+            if (!isNaN(parsedValue) && parsedValue >=0){
                 $(".lottie").show();
                 $(".error").hide();
 
