@@ -23,7 +23,7 @@ namespace PFD.DAL
             conn = new SqlConnection(strConn);
         }
 
-        public List<Transaction>? GetContacts(int UserID)
+        public List<Transaction>? GetTransactions(int UserID)
         {
             SqlCommand cmd = conn.CreateCommand();
 

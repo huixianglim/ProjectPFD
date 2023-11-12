@@ -11,6 +11,10 @@
         Console.WriteLine(data);
 
     }
+
+    var AccountString = Context.Session.GetString("AccountObject");
+    var AccountObject = JsonSerializer.Deserialize<Users>(AccountString);
+
 }
 
 
@@ -43,7 +47,7 @@
         .container-vid {
             position: fixed;
             padding-left: 0;
-            top: 10%;
+            top: 100px;
             left: 0;
             margin-bottom: 50px; /* Adjust the margin-bottom value as needed to create space between the text and the button */
         }
@@ -54,77 +58,76 @@
             right: 10%;
         }
 
+        .row {
+            margin-right:0px;
+        }
+
     </style>
  }
 
-    <section id="top" class="row">
-        <div class="col-md-7 card" id="main">
-            <div class="row">
-                <div class="col-md-6">
-                    Main Account
-                    <h3>NevBank Savings Account</h3>
-                    <p>88 1240 7793 3667 0002 9448 <i class="fa fa-angle-double-right"></i></p>
-                    <br>
-                    <br>
-                    <a href="" class="btn btn-success">Transfer Money</a>
-                    <a href="" class="btn btn-light">Transfer Money</a>
-                </div>
-                <div class="col-md-6">
-                    Available funds
-                    <h1>68.789,56 $</h1>
+    <div class="dashboard-container" style="padding-left: 255px; overflow:hiden;">
+        <section id="top" class="row no-wraps">
+            <div class="col-md-7 card" id="main">
+                <div class="row no-gutters">
+                    <div class="col-md-6">
+                        Main Account
+                        <h3>OCBC Savings Account</h3>
+                        <p>4524 1920 8888 8888 <i class="fa fa-angle-double-right"></i></p>
+                        <br>
+                        <br>
+                        <a href="" class="btn btn-success" style="background-color:#E30613; border:0px;">Transfer Money</a>
+@*                        <a href="" class="btn btn-light">Transfer Money</a>*@
+                    </div>
+                    <div class="col-md-6">
+                        Available funds
+                        <h1>$@AccountObject.Money.ToString("#,###.00")</h1>
+                    </div>
                 </div>
             </div>
 
-        </div>
-        <div class="gap"></div>
-        <div class="col-md-4 card " id="define">
-            <h3>Define standing orders</h3>
-            <br>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum sed rerum tenetur natus vero aperiam sunt, laborum in quibusdam! Nemo, dolorem atque modi sint adipisci eius eligendi molestiae pariatur rem? <i class="fa fa-angle-double-right"></i></p>
-            <br>
-            <a href="" class="btn btn-light">Define standing orders</a>
-        </div>
-    </section>
-    <br>
-    <section class="row" id="bottomm">
-        <div class="col-md-7 card" id="right">
-            <h2>Latest Transaction</h2>
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2">Larry the Bird</td>
-                        <td>twitter</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="gap"></div>
-        <div class="col-md-4 card " id="left">
-            <h2>Expenses</h2>
-            <canvas id="chart-pie"></canvas>
-        </div>
-    </section>
+            <div class="gap"></div>
+            <div class="col-md-4 card " id="define" style="background-color:#545454;">
+                <h3>Set your goals!</h3>
+                <br>
+                <p>Voluptatum sed rerum tenetur natus vero aperiam sunt, laborum in quibusdam! Nemo, dolorem atque modi sint adipisci eius eligendi molestiae pariatur rem? <i class="fa fa-angle-double-right"></i></p>
+                <br>
+                <a href="" class="btn btn-light">Click here</a>
+            </div>
+        </section>
+        <br>
+        <section class="row" id="bottomm">
+            <div class="col-md-7 card" id="right">
+                <h2>Your recent transactions</h2>
+                <table class="table table-borderless table-hover" style="margin-top: 20px;">
+                    <thead>
+                        <tr>
+                            <th scope="col">TransactionID</th>
+                            <th scope="col">Transaction Type</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Date of Transaction</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var transaction in Model)
+                        {
+
+                            <tr>
+                                <td>@transaction.TransactionID.ToString()</td>
+                                <td>@transaction.Type</td>
+                            <td>$@transaction.Amount.ToString("#,###.00")</td>
+                            <td>@transaction.DateOfTransaction.ToString("MM/dd/yyyy")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="gap"></div>
+            <div class="col-md-4 card " id="left">
+                <h2>Notifications</h2>
+                <canvas id="chart-pie"></canvas>
+            </div>
+        </section>
+    </div>
 
     <div class="toast" id="successIndicator" role="alert" aria-live="assertive" aria-atomic="true" data-bs-animation="true">
         <div class="toast-header">
