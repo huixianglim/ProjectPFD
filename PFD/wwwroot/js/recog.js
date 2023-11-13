@@ -1,11 +1,8 @@
 ﻿import { GestureRecognizer, FilesetResolver } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3";
 
 var ForRedirect = {
-    "Thumb_Up": "Index",
-    "Thumb_Down": "PayNow",
-    "Open_Palm": "Closing Tutorial"
-
-
+    "Thumb_Up": ["Home", "Index"],
+    "Thumb_Down": ["PayNow", "Paynow"]
 
 }
 
@@ -20,11 +17,22 @@ var cooldown = 0;
 
 if (video.dataset.type == "confirmation") {
     ForRedirect = {
-        "Thumb_Up": "Index",
-        "Thumb_Down": "PayNow",
-        "Open_Palm": "Confirm"
+        "Thumb_Up": ["Home","Index"],
+        "Thumb_Down": ["PayNow","Paynow"],
+        "Open_Palm": ["Confirm"]
 
 
+    }
+}
+else if (video.dataset.type == "home") {
+    if ($("#tutorial").css('display') != 'none') {
+        ForRedirect = {
+            "Thumb_Up": ["Home", "Index"],
+            "Thumb_Down": ["PayNow", "Paynow"],
+            "Open_Palm": ["Closing Tutorial"]
+
+
+        }
     }
 }
 async function setupGestureRecognizer() {
@@ -68,11 +76,11 @@ function predictWebcam() {
                 time = 1000
 
             }
-            $(".overlay").text("Going to " + ForRedirect[categoryName])
+            $(".overlay").text("Going to " + ForRedirect[categoryName][0])
             previousOutput = categoryName
             if (time == 0) {
                 if (categoryName != "Open_Palm") {
-                    window.location.href = "/Main/" + ForRedirect[categoryName];
+                    window.location.href = "/Main/" + ForRedirect[categoryName][1];
                 }
                 else {
                     if (video.dataset.type == "confirmation") {
@@ -84,21 +92,14 @@ function predictWebcam() {
 
                         }
                         else {
-                            console.log(parsedValue)
-                            $(".lottie").show();
-                            $(".error").hide();
-
-                            setTimeout(() => {
-                                $("#Success").submit()
-                                $(".lottie").hide();
-                            }, 1000)
+                            $("#form-sub").trigger("click");
 
                         }
                         time = 1000
                     }
                     else {
 
-                        if ($("#tutorial").css('display') != 'none !important') {
+                        if ($("#tutorial").css('display') != 'none') {
                             $("#end-slideshow").trigger('click')
                             delete ForRedirect["Open_Palm"]; 
                         }
