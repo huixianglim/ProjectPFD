@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/3.0.0-beta.3/aos.js" integrity="sha512-g+Et9AnYbWPRrEbyTHTiCJNNdvCKudRpd8a5fmPMuJhNj5gzVjMSw6qGoNU09EJdv0DlSeiSFAwmtcAhT1QvsA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="/css//navbar.css" />
 
     @await RenderSectionAsync("head", required: false)
 
@@ -84,11 +85,11 @@
         @{
             var AccountString = Context.Session.GetString("AccountObject");
             if (AccountString == null){
-                                @await Html.PartialAsync("_Nav.cshtml")
+                                    @await Html.PartialAsync("_Nav.cshtml")
 
             }
             else{
-                                @await Html.PartialAsync("_UserNavbar.cshtml")
+                                    @await Html.PartialAsync("_UserNavbar.cshtml")
 
             }
         }
@@ -99,51 +100,9 @@
             @RenderBody()
             <!-- Your main content goes here -->
             
-        </main>
-
-    <div class="container" style="background-color:white;">
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="footer-col">
-                        <h4>about us</h4>
-                        <ul>
-                            <li><a href="#">We are the longest established Singapore bank, formed in 1932 from the merger of three local banks, the oldest of which was founded in 1912.</a></li>
-                            
-                        </ul>
-                    </div>
-                    <div class="footer-col">
-                        <h4>get help</h4>
-                        <ul>
-                            <li><a href="#">FAQ</a></li>
-                            <li><a href="#">shipping</a></li>
-                            <li><a href="#">returns</a></li>
-                            <li><a href="#">order status</a></li>
-                            <li><a href="#">payment options</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-col">
-                        <h4>contact us</h4>
-                        <ul>
-                            <li><a href="#">huixiang@gmail.com</a></li>
-                            <li><a href="#">1800 363 3333</a></li>
-                            <li><a href="https://www.google.com/maps/dir//65+Chulia+St,+OCBC+Centre,+049513/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x31da19a625a054d9:0xf0c56c3c9875e6d?sa=X&ved=2ahUKEwjsmJilnsKCAxWsxzgGHd-MCxoQ48ADegQICRAA">65 Chulia St, OCBC Centre, Singapore 049513</a></li>
-                            
-                        </ul>
-                    </div>
-                    <div class="footer-col">
-                        <h4>follow us</h4>
-                        <div class="social-links">
-                            <a href="https://www.facebook.com/OCBC.Singapore/" class="fa fa-facebook"></a>
-                            <a href="https://twitter.com/OCBCBank?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" class="fa fa-twitter"></a>
-                            <a href="https://www.instagram.com/ocbcbank/?hl=en" class="fa fa-instagram"></a>
-                            <a href="https://www.linkedin.com/company/ocbc-bank/?originalSubdomain=sg" class="fa fa-linkedin"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
+    </main>
+    
+    @await Html.PartialAsync("_Footer.cshtml");
 
     
 
@@ -154,5 +113,18 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
+
+    <script asp-append-version="true">
+        window.addEventListener("scroll", function () {
+            var nav = document.querySelector(".navbar1");
+            var shouldAddWhiteClass = window.scrollY > 0;
+
+            nav.classList.toggle("sticky", shouldAddWhiteClass);
+            //nav.classList.toggle("navbar-white", shouldAddWhiteClass);
+            //nav.classList.toggle("navbar-black-text", shouldAddWhiteClass);
+
+        });
+
+    </script>
 </body>
 </html>
