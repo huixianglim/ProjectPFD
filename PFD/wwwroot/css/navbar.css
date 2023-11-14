@@ -1,9 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-* {
+﻿* {
     margin: 0;
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
@@ -17,9 +12,7 @@ body {
 ul {
     margin-bottom: 0;
 }
-
 /* NAVBAR global */
-
 p {
     margin-bottom: 0;
     font-weight: 400;
@@ -66,8 +59,6 @@ p {
         padding: 10px;
     }
 
-
-
 .navbar-button {
     display: flex;
     justify-content: center;
@@ -90,7 +81,6 @@ a {
     /*image-rendering: pixelated;*/
 }
 
-
 .navbar-links, .navbar-links2 {
     /*color: #fff;*/
     color: #474747;
@@ -106,7 +96,6 @@ a {
     .navbar-links p, .navbar-links2 p {
         padding: 10px;
     }
-
 
     .navbar-links:after {
         background: none repeat scroll 0 0 transparent;
@@ -139,8 +128,6 @@ a {
         left: 10%;
     }
 
-
-
 .signin-img {
     background: url("/Images/caret2.png");
     width: 20px;
@@ -171,15 +158,13 @@ a {
     image-rendering: pixelated;
 }
 
-
-
 #acc-dropdown {
     display: inline-block;
     position: relative;
 }
 
     #acc-dropdown:hover {
-        background-color: white;
+        /*       background-color: white;*/
     }
 
         #acc-dropdown:hover > ul {
@@ -189,13 +174,13 @@ a {
     #acc-dropdown ul {
         width: 100%;
         background-color: white;
-        box-shadow: 0 1px 6px 0 rgba(22, 22, 23, 0.2);
+        /*            box-shadow: 0 1px 6px 0 rgba(22, 22, 23, 0.2);*/
         transform: scaleY(0);
         transform-origin: top;
         transition-duration: 0.25s;
         position: absolute;
         left: 0;
-        top: 100%;
+        top: 85%;
         list-style-type: none;
         margin-left: 0;
         padding-left: 0;
