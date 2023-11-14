@@ -142,7 +142,7 @@ footer {
 
 .footer .aboutus a:hover, .footer .service a:hover {
 	padding-left: 12px;
-	color: white;
+	color: black;
 }
 
 .footer a {
@@ -155,7 +155,7 @@ footer {
 
 .footer a:hover {
 	text-decoration: none;
-	color: white;
+	color: black;
 }
 
 .row{
@@ -167,7 +167,7 @@ footer {
 
 	.footer .aboutus a:hover, .footer .service a:hover {
 		padding-left: 12px;
-		color: white;
+		color: black;
 	}
 
 .social-icons ul {
