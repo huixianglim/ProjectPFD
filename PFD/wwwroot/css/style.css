@@ -366,24 +366,6 @@ h5 {
     font-weight: 600;
     color: #000;
 }
-.footer {
-    padding-top: 3em;
-}
-.footer p {
-    text-align: center;
-    font-size: 17px;
-    line-height: 28px;
-    color: #fff;
-    opacity:0.9;
-}
-
-.footer p a {
-    color: #ffd900;
-}
-
-.footer p a:hover {
-    text-decoration: underline;
-}
 
 p.continue {
     margin-top: 25px;
