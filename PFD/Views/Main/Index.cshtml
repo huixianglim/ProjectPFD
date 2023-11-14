@@ -28,7 +28,7 @@
 
 
  @section head{
-    <link rel="stylesheet" href="~/css/Dashboard.css" type="text/css">
+    <link rel="stylesheet" href="~/css/Dashboard.css" type="text/css" asp-append-version="true">
 
  }
 
@@ -38,9 +38,12 @@
             position: absolute;
             top: 0;
             left: 0;
-            color: red;
+            color: black;
+            background-color: white;
+            padding: 5px 20px;
             z-index: 1;
-            font-size: 1.5rem;
+            font-size: 1rem;
+            font-weight: 700;
         }
 
         video {
@@ -52,13 +55,32 @@
             z-index: -1;
         }
 
+        .video-placeholder {
+            display: inline-block;
+            width: 300px;
+            height: 225px;
+            background-color:#fff;
+        }
+
         .container-vid {
             position: fixed;
             padding-left: 0;
             top: 100px;
             left: 0;
             margin-bottom: 50px; /* Adjust the margin-bottom value as needed to create space between the text and the button */
+            z-index:2;
+     
         }
+
+        .container-vid2 {
+            position: fixed;
+            padding-left: 0;
+            top: 100px;
+            left: 0;
+            margin-bottom: 50px; /* Adjust the margin-bottom value as needed to create space between the text and the button */
+            z-index:1;
+        }
+
 
         #successIndicator {
             position: fixed;
@@ -126,6 +148,25 @@
         .row {
             margin-right:0px;
         }
+
+        .placeholder-text {
+            margin: 0;
+            line-height: 225px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #131313;
+        }
+
+        .new-card {
+            margin:0;
+            padding:0;
+            height: 50px;
+            width: 350px;
+            height:90px;
+            border: none;
+            border-radius: 20px;
+            background-color: #f5f5f5;
+        }
     </style>
  }
 
@@ -160,7 +201,7 @@
         </section>
         <br>
         <section class="row" id="bottomm">
-            <div class="col-md-7 card" id="right">
+            <div class="col-md-7 card divv" id="right">
                 <h2>Your recent transactions</h2>
                 <table class="table table-borderless table-hover" style="margin-top: 20px;">
                     <thead>
@@ -185,10 +226,36 @@
                     </tbody>
                 </table>
             </div>
-            <div class="gap"></div>
-            <div class="col-md-4 card " id="left">
+
+            <div class="gap divv"></div>
+
+            <div class="col-md-4 card divv" id="left" style="padding-right:20px;">
                 <h2>Notifications</h2>
-                <canvas id="chart-pie"></canvas>
+                <div class="container d-flex justify-content-center" style="padding:0; margin:0;">
+                    <div class="card mt-3 p-3 new-card">
+                        <div class="media d-flex flex-nowrap">
+                            <img src="/images/money-icon.png" class="mr-3" style="margin-right:15px; height:59px; width:59px;">
+
+                            <div class="media-body ">
+                                <h6 class="mt-2 mb-0" style="color: #000;">You have received &dollar;860</h6>
+                            <small class="text" style="color: #3b3b3b;">Mar 20, 2020</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <div class="container d-flex justify-content-center" style="padding:0; margin:0;">
+                <div class="card mt-3 p-3 new-card">
+                    <div class="media d-flex flex-nowrap">
+                        <img src="/images/money-icon.png" class="mr-3" style="margin-right:15px; height:59px; width:59px;">
+
+                        <div class="media-body ">
+                            <h6 class="mt-2 mb-0" style="color: #000;">You have received &dollar;860</h6>
+                            <small class="text" style="color: #3b3b3b;">Mar 20, 2020</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
             </div>
         </section>
     </div>
@@ -209,6 +276,13 @@
         <video id="video" autoplay data-type = "home"></video>
 
         <p class="overlay"></p>
+    </div>
+
+    <div class="container-vid2">
+    <div class="video-placeholder d-flex align-content-center justify-content-center">
+        <p class="placeholder-text d-flex align-content-center justify-content-center">VIDEO</p>
+        </div>
+
     </div>
 
     <div class="d-flex justify-content-center" id="tutorial">
