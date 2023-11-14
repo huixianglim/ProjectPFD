@@ -107,7 +107,19 @@
 
     
 
-    
+    <script type="text/javascript" asp-append-version="true">
+        (function (d, t) {
+            var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            v.onload = function () {
+                window.voiceflow.chat.load({
+                    verify: { projectID: '65522d375605a20007a63f9c' },
+                    url: 'https://general-runtime.voiceflow.com',
+                    versionID: '655322448b57010008df7837'
+                });
+            }
+            v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+        })(document, 'script');
+    </script>
     
     <script src="~/js/site.js" asp-append-version="true"></script>
      <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
