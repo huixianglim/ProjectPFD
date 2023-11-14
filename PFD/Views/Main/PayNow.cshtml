@@ -45,28 +45,58 @@
 
         .overlay {
             position: absolute;
-            top: 0;
+            bottom: 0;
             left: 0;
-            color: red;
+            color: black;
+            background-color: white;
+            padding: 5px 20px;
             z-index: 1;
-            font-size:1.5rem;
+            font-size: 1rem;
+            font-weight: 700;
         }
 
         video {
-    /*        position: fixed;
-            top: 0;
-            left: 0;*/
+            /*        position: fixed;
+                            top: 0;
+                            left: 0;*/
             display: inline-block;
             width: 300px;
             z-index: -1;
         }
 
+        .video-placeholder {
+            display: inline-block;
+            width: 300px;
+            height: 225px;
+            background-color: #fff;
+        }
+
         .container-vid {
-            position:fixed;
-            padding-left:0;
-            top:10%;
-            left:0;
+            position: fixed;
+            padding-left: 0;
+            top: 100px;
+            left: 0;
             margin-bottom: 50px; /* Adjust the margin-bottom value as needed to create space between the text and the button */
+            z-index: 2;
+            width: 300px;
+            height: 225px;
+        }
+
+        .container-vid2 {
+            position: fixed;
+            padding-left: 0;
+            top: 100px;
+            left: 0;
+            margin-bottom: 50px; /* Adjust the margin-bottom value as needed to create space between the text and the button */
+            z-index: 1;
+        }
+
+        .placeholder-text {
+            margin: 0;
+            line-height: 225px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #131313;
         }
 
         .icon {
@@ -150,9 +180,16 @@
 
         <div class="d-flex justify-content-center justify-content-center container-fluid mb-5">
             <div class="container-vid">
-                <video id="video" autoplay></video>
+                <video id="video" autoplay data-type="home"></video>
 
                 <p class="overlay"></p>
+            </div>
+
+            <div class="container-vid2">
+                <div class="video-placeholder d-flex align-content-center justify-content-center">
+                    <p class="placeholder-text d-flex align-content-center justify-content-center"></p>
+                </div>
+
             </div>
             <div class="searchBar">
 

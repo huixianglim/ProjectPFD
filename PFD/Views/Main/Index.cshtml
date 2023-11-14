@@ -34,9 +34,12 @@
 
  @section style{
     <style>
+        * {
+            font-family: 'Open Sans', sans-serif;
+        }
         .overlay {
             position: absolute;
-            top: 0;
+            bottom: 0;
             left: 0;
             color: black;
             background-color: white;
@@ -69,6 +72,8 @@
             left: 0;
             margin-bottom: 50px; /* Adjust the margin-bottom value as needed to create space between the text and the button */
             z-index:2;
+            width:300px;
+            height:225px;
      
         }
 
@@ -89,6 +94,7 @@
         }
 
         #tutorial{
+            z-index:3;
             position:fixed;
             top: 0;
             left: 0;
@@ -170,17 +176,17 @@
     </style>
  }
 
-    <div class="dashboard-container" style="padding-left: 255px; overflow:hiden;">
+    <div class="dashboard-container" style="padding-left: 255px; overflow:hidden;">
         <section id="top" class="row no-wraps">
             <div class="col-md-7 card" id="main">
                 <div class="row no-gutters">
                     <div class="col-md-6">
                         Main Account
                         <h3>OCBC Savings Account</h3>
-                        <p>4524 1920 8888 8888 <i class="fa fa-angle-double-right"></i></p>
+                        <p>4524 1920 8888 8888@*<i class="fa fa-angle-double-right"></i>*@</p>
                         <br>
                         <br>
-                        <a href="" class="btn btn-success" style="background-color:#E30613; border:0px;">Transfer Money</a>
+                        <a href="" class="btn btn-success" style="background-color:#E30613; border:0px; padding: 7px 15px;">Transfer Money</a>
 @*                        <a href="" class="btn btn-light">Transfer Money</a>*@
                     </div>
                     <div class="col-md-6">
@@ -192,11 +198,11 @@
 
             <div class="gap"></div>
             <div class="col-md-4 card " id="define" style="background-color:#545454;">
-                <h3>Set your goals!</h3>
+                <h3 style="margin:0;">Set your goals!</h3>
                 <br>
-                <p>Voluptatum sed rerum tenetur natus vero aperiam sunt, laborum in quibusdam! Nemo, dolorem atque modi sint adipisci eius eligendi molestiae pariatur rem? <i class="fa fa-angle-double-right"></i></p>
+                <p style="line-height:30px;">Trying to save for that perfect vacation, latest gadget or shiny new car? Set up one or more savings goals now to stay on track and make all your dreams a reality!</p>
                 <br>
-                <a href="" class="btn btn-light">Click here</a>
+                <a href="" class="btn btn-light">Set goals</a>
             </div>
         </section>
         <br>
@@ -206,10 +212,10 @@
                 <table class="table table-borderless table-hover" style="margin-top: 20px;">
                     <thead>
                         <tr>
-                            <th scope="col">TransactionID</th>
-                            <th scope="col">Transaction Type</th>
+@*                            <th scope="col">TransactionID</th>*@
+                            <th scope="col">Type</th>
+                            <th scope="col">Date</th>
                             <th scope="col">Amount</th>
-                            <th scope="col">Date of Transaction</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -217,10 +223,10 @@
                         {
 
                             <tr>
-                                <td>@transaction.TransactionID.ToString()</td>
+@*                                <td>@transaction.TransactionID.ToString()</td>*@
                                 <td>@transaction.Type</td>
-                            <td>$@transaction.Amount.ToString("#,###.00")</td>
-                            <td>@transaction.DateOfTransaction.ToString("MM/dd/yyyy")</td>
+                                <td>@transaction.DateOfTransaction.ToString("MM/dd/yyyy")</td>
+                                <td>$@transaction.Amount.ToString("#,###.00")</td>
                             </tr>
                         }
                     </tbody>
@@ -237,8 +243,8 @@
                             <img src="/images/money-icon.png" class="mr-3" style="margin-right:15px; height:59px; width:59px;">
 
                             <div class="media-body ">
-                                <h6 class="mt-2 mb-0" style="color: #000;">You have received &dollar;860</h6>
-                            <small class="text" style="color: #3b3b3b;">Mar 20, 2020</small>
+                            <h6 class="mt-2 mb-0" style="color: #000;">You have received $20</h6>
+                            <small class="text" style="color: #3b3b3b;">Nov 13, 2023</small>
                             </div>
                         </div>
                     </div>
@@ -247,11 +253,11 @@
             <div class="container d-flex justify-content-center" style="padding:0; margin:0;">
                 <div class="card mt-3 p-3 new-card">
                     <div class="media d-flex flex-nowrap">
-                        <img src="/images/money-icon.png" class="mr-3" style="margin-right:15px; height:59px; width:59px;">
+                        <img src="/images/email-icon.png" class="mr-3" style="margin-right:15px; height:59px; width:59px;">
 
                         <div class="media-body ">
-                            <h6 class="mt-2 mb-0" style="color: #000;">You have received &dollar;860</h6>
-                            <small class="text" style="color: #3b3b3b;">Mar 20, 2020</small>
+                            <h6 class="mt-2 mb-0" style="color: #000;">Update your email address</h6>
+                            <small class="text" style="color: #3b3b3b;">Nov 10, 2023</small>
                         </div>
                     </div>
                 </div>
@@ -280,7 +286,7 @@
 
     <div class="container-vid2">
     <div class="video-placeholder d-flex align-content-center justify-content-center">
-        <p class="placeholder-text d-flex align-content-center justify-content-center">VIDEO</p>
+        <p class="placeholder-text d-flex align-content-center justify-content-center"></p>
         </div>
 
     </div>
