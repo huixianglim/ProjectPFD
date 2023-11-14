@@ -1,6 +1,9 @@
 ﻿body {
-    padding: 2% 0% 1% 6%;
     background: #f7f7f7;
+}
+
+main {
+    padding: 2% 0% 1% 6%;
 }
 
 nav {
