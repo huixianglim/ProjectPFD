@@ -1,9 +1,10 @@
 ﻿body {
     background: #f7f7f7;
+    padding-top:2%;
 }
 
 main {
-    padding: 2% 0% 1% 6%;
+    padding: 0% 0% 1% 6%;
 }
 
 nav {
@@ -26,7 +27,6 @@ nav {
 }
 
 .card {
-    @import url('file:///C:\Users\Kenan Chia\Downloads\footer1\css\footer.css');
     border-color: transparent;
     border-radius: 20px;
 }

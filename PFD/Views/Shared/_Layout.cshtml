@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - OCBC Ignite</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/css/site.css" />
+    <link rel="stylesheet" href="/css/site.css" asp-append-version="true" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,14 +13,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="/css/footer.css" asp-append-version="true" />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,600&family=Poppins:wght@200;300;400;500;600&family=Ubuntu:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/3.0.0-beta.3/aos.css" integrity="sha512-hoGlO+71fSG6lgS60I4bKvsFVB+bAnrVFDYlwSXoyNLppDcoupwJB7KbWq/63iACKn3gcgK9jMXd+T+YDeVrGQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Poppins" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/3.0.0-beta.3/aos.js" integrity="sha512-g+Et9AnYbWPRrEbyTHTiCJNNdvCKudRpd8a5fmPMuJhNj5gzVjMSw6qGoNU09EJdv0DlSeiSFAwmtcAhT1QvsA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="/css//navbar.css" />
+    <link rel="stylesheet" href="/css/navbar.css" asp-append-version="true" />
 
     @await RenderSectionAsync("head", required: false)
 
@@ -85,11 +85,11 @@
         @{
             var AccountString = Context.Session.GetString("AccountObject");
             if (AccountString == null){
-                                    @await Html.PartialAsync("_Nav.cshtml")
+                   @await Html.PartialAsync("_Nav.cshtml")
 
             }
             else{
-                                    @await Html.PartialAsync("_UserNavbar.cshtml")
+                    @await Html.PartialAsync("_UserNavbar.cshtml")
 
             }
         }
@@ -97,6 +97,7 @@
 
 
     <main role="main" class="pb-3" style="padding-top: 70px;">
+
             @RenderBody()
             <!-- Your main content goes here -->
             

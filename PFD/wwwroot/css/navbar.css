@@ -1,8 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿
 * {
     margin: 0;
     box-sizing: border-box;
@@ -148,8 +144,8 @@ a {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    image-rendering: pixelated;
-}
+/*    image-rendering: pixelated;
+*/}
 
 .store-img {
     background: url("/Images/shoppingbag2.png");
