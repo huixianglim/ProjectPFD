@@ -27,7 +27,7 @@ namespace PFD.DAL
         {
             SqlCommand cmd = conn.CreateCommand();
 
-            cmd.CommandText = @"SELECT * FROM Transactions WHERE UserID = @UserID";
+            cmd.CommandText = @"SELECT * FROM Transactions WHERE UserID = @UserID ORDER BY DateOfTransaction DESC";
             cmd.Parameters.AddWithValue("@UserID", UserID);
             conn.Open();
             SqlDataReader reader = cmd.ExecuteReader();
