@@ -47,7 +47,12 @@ $(document).ready(() => {
         if ($(".button").data("type") == "money") {
             if (transcript.includes("$")) {
                 let amountWithoutDollarSign = transcript.replace(/\$/g, '');
-                $("#Money").val(amountWithoutDollarSign)
+                let value = parseFloat(amountWithoutDollarSign)
+                if (!isNaN(value)) {
+                    $("#Money").val(value.toFixed(2))
+                } else {
+                    $(".testing").text("Invalid Amount")
+                }
 
             }
             else {

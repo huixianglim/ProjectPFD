@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - OCBC Ignite</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/css/site.css" />
+    <link rel="stylesheet" href="/css/site.css" asp-append-version="true" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,48 +13,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/css/footer.css" asp-append-version="true" />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,600&family=Poppins:wght@200;300;400;500;600&family=Ubuntu:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/3.0.0-beta.3/aos.css" integrity="sha512-hoGlO+71fSG6lgS60I4bKvsFVB+bAnrVFDYlwSXoyNLppDcoupwJB7KbWq/63iACKn3gcgK9jMXd+T+YDeVrGQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Poppins" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/3.0.0-beta.3/aos.js" integrity="sha512-g+Et9AnYbWPRrEbyTHTiCJNNdvCKudRpd8a5fmPMuJhNj5gzVjMSw6qGoNU09EJdv0DlSeiSFAwmtcAhT1QvsA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="/css/navbar.css" asp-append-version="true" />
 
     @await RenderSectionAsync("head", required: false)
 
     @await RenderSectionAsync("style", required: false)
 
-    <style>
-        /* Custom styles for the animated navbar */
-        .navbar {
-            background: linear-gradient(to bottom, #FF6666, #FF3333);
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .navbar-brand {
-            color: #fff;
-            font-size: 24px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .navbar-nav {
-            margin-left: auto;
-        }
-
-        .nav-link {
-            color: #fff;
-            transition: color 0.3s, transform 0.3s;
-        }
-
-            .nav-link:hover {
-                color: #FFB0B0;
-                transform: scale(1.1);
-            }
 
         
-    </style>
+<style>
+
+</style> 
 </head>
 <body>
     <header>
@@ -109,150 +85,59 @@
         @{
             var AccountString = Context.Session.GetString("AccountObject");
             if (AccountString == null){
-                @await Html.PartialAsync("_Nav.cshtml")
+                   @await Html.PartialAsync("_Nav.cshtml")
 
             }
             else{
-                @await Html.PartialAsync("_UserNavbar.cshtml")
+                    @await Html.PartialAsync("_UserNavbar.cshtml")
 
             }
         }
     </header>
 
 
-    <main role="main" class="pb-3" style="padding-top: 70px;">
+    <main role="main" style="padding-top: 70px;">
+
             @RenderBody()
             <!-- Your main content goes here -->
             
-        </main>
-
-
-
-    <footer class="container py-5" style="background:white;">
-        <div class="row">
-            <div class="col-12 col-md">
-
-                <small class="d-block mb-3 text-muted">&copy; 2017-2019</small>
-            </div>
-            <div class="col-6 col-md">
-                <h5>Features</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Cool stuff</a></li>
-                    <li><a class="text-muted" href="#">Random feature</a></li>
-                    <li><a class="text-muted" href="#">Team feature</a></li>
-                    <li><a class="text-muted" href="#">Stuff for developers</a></li>
-                    <li><a class="text-muted" href="#">Another one</a></li>
-                    <li><a class="text-muted" href="#">Last time</a></li>
-                </ul>
-            </div>
-            <div class="col-6 col-md">
-                <h5>Resources</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Resource</a></li>
-                    <li><a class="text-muted" href="#">Resource name</a></li>
-                    <li><a class="text-muted" href="#">Another resource</a></li>
-                    <li><a class="text-muted" href="#">Final resource</a></li>
-                </ul>
-            </div>
-            <div class="col-6 col-md">
-                <h5>Resources</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Business</a></li>
-                    <li><a class="text-muted" href="#">Education</a></li>
-                    <li><a class="text-muted" href="#">Government</a></li>
-                    <li><a class="text-muted" href="#">Gaming</a></li>
-                </ul>
-            </div>
-            <div class="col-6 col-md">
-                <h5>About</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Team</a></li>
-                    <li><a class="text-muted" href="#">Locations</a></li>
-                    <li><a class="text-muted" href="#">Privacy</a></li>
-                    <li><a class="text-muted" href="#">Terms</a></li>
-                </ul>
-            </div>
-        </div>
-    </footer>
+    </main>
+    
+    @await Html.PartialAsync("_Footer.cshtml")
 
     
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-     const swiper = new Swiper('.swiper-container', {
-        autoplay: {
-            delay:3000,
-        },
-         
-        direction: 'horizontal',
-        loop:true,
-        freeMode:false,
-        slidesPerView:1,
-        centeredSlides:true,
 
-
-        // pagination: {
-        //        el: '.swiper-pagination',
-        //        clickable: true
-        // },
-        //paginationClickable: true,
-        parallax: true,
-        speed: 900,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
+    <script type="text/javascript" asp-append-version="true">
+        (function (d, t) {
+            var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            v.onload = function () {
+                window.voiceflow.chat.load({
+                    verify: { projectID: '65522d375605a20007a63f9c' },
+                    url: 'https://general-runtime.voiceflow.com',
+                    versionID: '655322448b57010008df7837'
+                });
             }
-
-    });
-
-        /*scrolling animation*/
-        window.addEventListener("scroll", reveal);
-        function reveal() {
-            var reveals = document.querySelectorAll('.reveal')
-            var background = document.querySelectorAll('.background')
-
-            for (var i = 0; i < reveals.length; i++) {
-                var windowheight = window.innerHeight;
-                var revealtop = reveals[i].getBoundingClientRect().top;
-                var revealpoint = 100;
-                if (revealtop < windowheight - revealpoint) {
-                    reveals[i].classList.add("active");
-                    background[i].setAttribute("background", "true")
-
-                }
-                else {
-                    reveals[i].classList.remove('active');
-                    background[i].setAttribute("background", "false")
-
-
-                }
-
-            }
-        }
-
-        /**
-        * Animation on scroll function and init
-        */
-        function aos_init() {
-            AOS.init({
-                duration: 1000,
-                easing: 'ease-in-out',
-                once: true,
-                mirror: false
-            });
-        }
-        window.addEventListener('load', () => {
-            aos_init();
-        });
-
-            
+            v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+        })(document, 'script');
     </script>
-    
     
     <script src="~/js/site.js" asp-append-version="true"></script>
      <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
+
+    <script asp-append-version="true">
+        window.addEventListener("scroll", function () {
+            var nav = document.querySelector(".navbar1");
+            var shouldAddWhiteClass = window.scrollY > 0;
+
+            nav.classList.toggle("sticky", shouldAddWhiteClass);
+            //nav.classList.toggle("navbar-white", shouldAddWhiteClass);
+            //nav.classList.toggle("navbar-black-text", shouldAddWhiteClass);
+
+        });
+
+    </script>
 </body>
 </html>

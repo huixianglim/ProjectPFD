@@ -23,11 +23,11 @@ namespace PFD.DAL
             conn = new SqlConnection(strConn);
         }
 
-        public List<Transaction>? GetContacts(int UserID)
+        public List<Transaction>? GetTransactions(int UserID)
         {
             SqlCommand cmd = conn.CreateCommand();
 
-            cmd.CommandText = @"SELECT * FROM Transactions WHERE UserID = @UserID";
+            cmd.CommandText = @"SELECT * FROM Transactions WHERE UserID = @UserID ORDER BY DateOfTransaction DESC";
             cmd.Parameters.AddWithValue("@UserID", UserID);
             conn.Open();
             SqlDataReader reader = cmd.ExecuteReader();

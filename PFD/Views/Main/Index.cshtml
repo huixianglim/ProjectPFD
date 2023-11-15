@@ -11,24 +11,42 @@
         Console.WriteLine(data);
 
     }
+
+    var AccountString = Context.Session.GetString("AccountObject");
+    var AccountObject = JsonSerializer.Deserialize<Users>(AccountString);
+
+    string? complete = null;
+    if (Context.Session.GetString("Completed") != null)
+    {
+        complete = Context.Session.GetString("Completed");
+        Console.WriteLine(complete);
+
+    }
+
 }
 
 
 
  @section head{
-    <link rel="stylesheet" href="~/css/Dashboard.css" type="text/css">
+    <link rel="stylesheet" href="~/css/Dashboard.css" type="text/css" asp-append-version="true">
 
  }
 
  @section style{
     <style>
+        * {
+            font-family: 'Open Sans', sans-serif;
+        }
         .overlay {
             position: absolute;
-            top: 0;
+            bottom: 0;
             left: 0;
-            color: red;
+            color: black;
+            background-color: white;
+            padding: 5px 20px;
             z-index: 1;
-            font-size: 1.5rem;
+            font-size: 1rem;
+            font-weight: 700;
         }
 
         video {
@@ -40,13 +58,34 @@
             z-index: -1;
         }
 
+        .video-placeholder {
+            display: inline-block;
+            width: 300px;
+            height: 225px;
+            background-color:#fff;
+        }
+
         .container-vid {
             position: fixed;
             padding-left: 0;
-            top: 10%;
+            top: 100px;
             left: 0;
             margin-bottom: 50px; /* Adjust the margin-bottom value as needed to create space between the text and the button */
+            z-index:2;
+            width:300px;
+            height:225px;
+     
         }
+
+        .container-vid2 {
+            position: fixed;
+            padding-left: 0;
+            top: 100px;
+            left: 0;
+            margin-bottom: 50px; /* Adjust the margin-bottom value as needed to create space between the text and the button */
+            z-index:1;
+        }
+
 
         #successIndicator {
             position: fixed;
@@ -54,77 +93,178 @@
             right: 10%;
         }
 
+        #tutorial{
+            z-index:3;
+            position:fixed;
+            top: 0;
+            left: 0;
+            width:100%;
+            height: 100%;
+            background: rgba(0,0,0,0.2);
+            align-items:center;
+            z-index: 100000;
+        }
+
+        .swiper-container{
+            height:100%;
+        }
+        #tutorial > .card{
+            width:50rem;
+            height:550px;
+            overflow-x:hidden;
+        }
+     /*   .swiper{
+            width:80%;
+            height:80%;
+            margin-top:1rem;
+        }*/
+
+        .hand-gesture{
+            background: url("/Images/boy-and-girl-giving-high-five-to-each-other.svg") no-repeat center;
+            height:300px;
+            margin-top: 3rem;
+        }
+
+        .voice-recognition {
+            background: url("/Images/testimonial.svg") no-repeat center;
+            height:300px;
+            margin-top: 3rem;
+        }
+
+        .understood {
+            background: url("/Images/business-agreement.svg") no-repeat center;
+            height: 300px;
+            margin-top: 3rem;
+        }
+
+        .text-slideshow{
+        width: 100%;
+        height: 20%;
+        display: flex;
+        justify-content: center;
+
+        }
+        .text{
+        
+            width:80%;
+        
+        
+        }
+
+        .row {
+            margin-right:0px;
+        }
+
+        .placeholder-text {
+            margin: 0;
+            line-height: 225px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #131313;
+        }
+
+        .new-card {
+            margin:0;
+            padding:0;
+            height: 50px;
+            width: 350px;
+            height:90px;
+            border: none;
+            border-radius: 20px;
+            background-color: #f5f5f5;
+        }
     </style>
  }
 
-    <section id="top" class="row">
-        <div class="col-md-7 card" id="main">
-            <div class="row">
-                <div class="col-md-6">
-                    Main Account
-                    <h3>NevBank Savings Account</h3>
-                    <p>88 1240 7793 3667 0002 9448 <i class="fa fa-angle-double-right"></i></p>
-                    <br>
-                    <br>
-                    <a href="" class="btn btn-success">Transfer Money</a>
-                    <a href="" class="btn btn-light">Transfer Money</a>
-                </div>
-                <div class="col-md-6">
-                    Available funds
-                    <h1>68.789,56 $</h1>
+    <div class="dashboard-container" style="padding-left: 255px; overflow:hidden; margin-bottom:17px;">
+        <section id="top" class="row no-wraps">
+            <div class="col-md-7 card" id="main">
+                <div class="row no-gutters">
+                    <div class="col-md-6">
+                        Main Account
+                        <h3>OCBC Savings Account</h3>
+                        <p>4524 1920 8888 8888@*<i class="fa fa-angle-double-right"></i>*@</p>
+                        <br>
+                        <br>
+                        <a href="" class="btn btn-success" style="background-color:#E30613; border:0px; padding: 7px 15px;">Transfer Money</a>
+@*                        <a href="" class="btn btn-light">Transfer Money</a>*@
+                    </div>
+                    <div class="col-md-6">
+                        Available funds
+                        <h1>$@AccountObject.Money.ToString("#,###.00")</h1>
+                    </div>
                 </div>
             </div>
 
-        </div>
-        <div class="gap"></div>
-        <div class="col-md-4 card " id="define">
-            <h3>Define standing orders</h3>
-            <br>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum sed rerum tenetur natus vero aperiam sunt, laborum in quibusdam! Nemo, dolorem atque modi sint adipisci eius eligendi molestiae pariatur rem? <i class="fa fa-angle-double-right"></i></p>
-            <br>
-            <a href="" class="btn btn-light">Define standing orders</a>
-        </div>
-    </section>
-    <br>
-    <section class="row" id="bottomm">
-        <div class="col-md-7 card" id="right">
-            <h2>Latest Transaction</h2>
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2">Larry the Bird</td>
-                        <td>twitter</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="gap"></div>
-        <div class="col-md-4 card " id="left">
-            <h2>Expenses</h2>
-            <canvas id="chart-pie"></canvas>
-        </div>
-    </section>
+            <div class="gap"></div>
+            <div class="col-md-4 card " id="define" style="background-color:#545454;">
+                <h3 style="margin:0;">Set your goals!</h3>
+                <br>
+                <p style="line-height:30px;">Trying to save for that perfect vacation, latest gadget or shiny new car? Set up one or more savings goals now to stay on track and make all your dreams a reality!</p>
+                <br>
+                <a href="" class="btn btn-light">Set goals</a>
+            </div>
+        </section>
+        <br>
+        <section class="row" id="bottomm">
+            <div class="col-md-7 card divv" id="right">
+                <h2>Your recent transactions</h2>
+                <table class="table table-borderless table-hover" style="margin-top: 20px;">
+                    <thead>
+                        <tr>
+@*                            <th scope="col">TransactionID</th>*@
+                            <th scope="col">Type</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var transaction in Model)
+                        {
+
+                            <tr>
+@*                                <td>@transaction.TransactionID.ToString()</td>*@
+                                <td>@transaction.Type</td>
+                                <td>@transaction.DateOfTransaction.ToString("MM/dd/yyyy")</td>
+                                <td>$@transaction.Amount.ToString("#,###.00")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="gap divv"></div>
+
+            <div class="col-md-4 card divv" id="left" style="padding-right:20px;">
+                <h2>Notifications</h2>
+                <div class="container d-flex justify-content-center" style="padding:0; margin:0;">
+                    <div class="card mt-3 p-3 new-card">
+                        <div class="media d-flex flex-nowrap">
+                            <img src="/images/money-icon.png" class="mr-3" style="margin-right:15px; height:59px; width:59px;">
+
+                            <div class="media-body ">
+                            <h6 class="mt-2 mb-0" style="color: #000;">You have received $20</h6>
+                            <small class="text" style="color: #3b3b3b;">Nov 12, 2022</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <div class="container d-flex justify-content-center" style="padding:0; margin:0;">
+                <div class="card mt-3 p-3 new-card">
+                    <div class="media d-flex flex-nowrap">
+                        <img src="/images/email-icon.png" class="mr-3" style="margin-right:15px; height:59px; width:59px;">
+
+                        <div class="media-body ">
+                            <h6 class="mt-2 mb-0" style="color: #000;">Update your email address</h6>
+                            <small class="text" style="color: #3b3b3b;">Nov 10, 2022</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+    </div>
 
     <div class="toast" id="successIndicator" role="alert" aria-live="assertive" aria-atomic="true" data-bs-animation="true">
         <div class="toast-header">
@@ -139,14 +279,79 @@
     </div>
 
     <div class="container-vid">
-        <video id="video" autoplay></video>
+        <video id="video" autoplay data-type = "home"></video>
 
         <p class="overlay"></p>
     </div>
 
+    <div class="container-vid2">
+    <div class="video-placeholder d-flex align-content-center justify-content-center">
+        <p class="placeholder-text d-flex align-content-center justify-content-center"></p>
+        </div>
+
+    </div>
+
+    <div class="d-flex justify-content-center" id="tutorial">
+        <div class="card">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class = "hand-gesture"></div>
+                        <div class="text-slideshow text-center mt-3">
+                            
+                            <div class="text">
+                                <b>We have made new Changes!!</b>
+                                <p class = "mt-1">Gesture Recognition have been incorporated! </p>
+                                <p class = "mt-1">Show Thumbs up: Go main page</p>
+
+                                <p class="mt-1">Show Thumbs Down: Go paynow page.</p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="voice-recognition"></div>
+                        <div class="text-slideshow text-center mt-3">
+
+                            <div class="text">
+                                <br />
+                                <b>There are now speech to text on certain pages!</b>
+                                <br />
+
+                                <p class = "mt-1">For the contacts page, use it to search for contacts.</p>
+
+                                <p class="mt-1">For the paynow page, use it to key in monetary amount.</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                    <div class="swiper-slide">
+                        <div class="understood"></div>
+                        <div class="text-slideshow flex-column align-items-center">
+                            <p class="mt-1">Press the button below or signal an open palm to end tutorial</p>
+                            <form id = "completeForm" asp-action="setTutorial" asp-controller="Main">
+                                <input type="hidden" value="true" name="complete" id="complete"/>
+                                <button type = "submit" class="btn btn-danger mt-3" id="end-slideshow" style="height:3rem;">
+                                    Understood
+                                </button>
+                            </form>
+                          
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+     
+    </div>
+
     @section Scripts{
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script>
+    <script asp-append-version="true">
         const dataPie = {
             type: "pie",
             data: {
@@ -160,13 +365,40 @@
             },
         };
 
-        new mdb.Chart(document.getElementById("chart-pie"), dataPie);
+        //new mdb.Chart(document.getElementById("chart-pie"), dataPie);
+
+
+        const swiper = new Swiper('.swiper-container', {
+            autoplay: {delay: 3000},
+
+            direction: 'horizontal',
+            loop: true,
+            freeMode: false,
+            slidesPerView: 1,
+            centeredSlides: true,
+
+
+             pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true
+             },
+            paginationClickable: true,
+            parallax: true,
+            speed: 900,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            }
+
+        });
+
     </script>
  
         <script type="module" src="~/js/recog.js" asp-append-version="true"></script>
         <script src="~/js/audio.js" asp-append-version="true"></script>
-        <script>
+        <script asp-append-version="true">
             var dataValue = @Json.Serialize(data);
+            var completed = @Json.Serialize(complete);
             console.log(dataValue);
             if (dataValue == "true") {
                 $("#successIndicator").show();
@@ -175,5 +407,17 @@
 
                 }, 2000)
             }
+
+            if (completed == "true") {
+                var button = document.querySelector("#tutorial");
+                button.setAttribute('style', 'display:none !important');
+            }
+
+            $("#end-slideshow").on('click',()=>{
+               var button =  document.querySelector("#tutorial");
+               button.setAttribute('style', 'display:none !important');
+               $("completeForm").submit();
+
+            })
         </script>
     }

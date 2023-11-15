@@ -1,16 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PFD.DAL;
+using Microsoft.AspNetCore.Http;
+
 using PFD.Models;
+using System.Text.Json;
 
 namespace PFD.Controllers
 {
     public class MainController : Controller
     {
         private ContactsDAL contactsDAL = new ContactsDAL();
+        private TransactionDAL transactionDAL = new TransactionDAL();
+
 
         public IActionResult Index()
         {
-            return View();
+            var AccountString = HttpContext.Session.GetString("AccountObject");
+            var AccountObject = JsonSerializer.Deserialize<Users>(AccountString);
+            int userID = AccountObject.UserID;
+
+            List<Transaction> transactions = transactionDAL.GetTransactions(userID);
+
+
+            return View(transactions);
         }
 
         [HttpPost]
@@ -43,9 +55,17 @@ namespace PFD.Controllers
         
         }
 
-        public IActionResult Dashboard()
+        
+
+        [HttpPost]
+        public IActionResult setTutorial(IFormCollection data)
         {
-            return View();
+
+                Console.WriteLine("test");
+                HttpContext.Session.SetString("Completed", "true");
+                return RedirectToAction("Index", "Main");
+
+
         }
 
         public IActionResult feedback()

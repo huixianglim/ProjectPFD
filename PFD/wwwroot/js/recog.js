@@ -1,10 +1,8 @@
 ﻿import { GestureRecognizer, FilesetResolver } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3";
 
 var ForRedirect = {
-    "Thumb_Up": "Index",
-    "Thumb_Down": "PayNow",
-
-
+    "Thumb_Up": ["Home", "Index"],
+    "Thumb_Down": ["PayNow", "Paynow"]
 
 }
 
@@ -19,11 +17,22 @@ var cooldown = 0;
 
 if (video.dataset.type == "confirmation") {
     ForRedirect = {
-        "Thumb_Up": "Index",
-        "Thumb_Down": "PayNow",
-        "Open_Palm": "Confirm"
+        "Thumb_Up": ["Home","Index"],
+        "Thumb_Down": ["PayNow","Paynow"],
+        "Open_Palm": ["Confirm"]
 
 
+    }
+}
+else if (video.dataset.type == "home") {
+    if ($("#tutorial").css('display') != 'none') {
+        ForRedirect = {
+            "Thumb_Up": ["Home", "Index"],
+            "Thumb_Down": ["PayNow", "Paynow"],
+            "Open_Palm": ["Closing Tutorial"]
+
+
+        }
     }
 }
 async function setupGestureRecognizer() {
@@ -67,33 +76,36 @@ function predictWebcam() {
                 time = 1000
 
             }
-            $(".overlay").text("Going to " + ForRedirect[categoryName])
+            $(".overlay").text("Going to " + ForRedirect[categoryName][0])
             previousOutput = categoryName
             if (time == 0) {
                 if (categoryName != "Open_Palm") {
-                    window.location.href = "/Main/" + ForRedirect[categoryName];
+                    window.location.href = "/Main/" + ForRedirect[categoryName][1];
                 }
                 else {
-                    console.log("lol")
-                    var parsedValue = parseInt($("#Money").val());
-                    console.log(parsedValue <= 0);
-                    if (isNaN(parsedValue) || parsedValue <= 0 ) {
-                        $(".error").show();
-                     
+                    if (video.dataset.type == "confirmation") {
+                        var parsedValue = parseInt($("#Money").val());
+                        console.log(parsedValue <= 0);
+                        if (isNaN(parsedValue) || parsedValue <= 0) {
+                            $(".error").show();
 
+
+                        }
+                        else {
+                            $("#form-sub").trigger("click");
+
+                        }
+                        time = 1000
                     }
                     else {
-                        console.log(parsedValue)
-                        $(".lottie").show();
-                        $(".error").hide();
 
-                        setTimeout(() => {
-                            $("#Success").submit()
-                            $(".lottie").hide();
-                        }, 1000)
+                        if ($("#tutorial").css('display') != 'none') {
+                            $("#end-slideshow").trigger('click')
+                            delete ForRedirect["Open_Palm"]; 
+                        }
+                        
 
                     }
-                    time = 1000
 
                 }
             }

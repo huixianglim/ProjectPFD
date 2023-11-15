@@ -4,7 +4,7 @@
 }
 
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
@@ -14,12 +14,22 @@ html {
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+/*    box-sizing: content-box;
+*/    /*height:auto;*/
 }
 
-body {
-  margin-bottom: 60px;
+/*body {
+    box-sizing: content-box;
+    height: 100%;
+    height: auto;
 }
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}*/
+
+/*body {
+  margin-bottom: 60px;
+}*/
 
 

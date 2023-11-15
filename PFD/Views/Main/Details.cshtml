@@ -5,32 +5,62 @@
 }
 
 @section style{
-    <style>
+    <style >
 
         .overlay {
             position: absolute;
-            top: 0;
+            bottom: 0;
             left: 0;
-            color: blue;
+            color: black;
+            background-color: white;
+            padding: 5px 20px;
             z-index: 1;
-            font-size: 1.2rem;
+            font-size: 1rem;
+            font-weight: 700;
         }
 
         video {
             /*        position: fixed;
-                    top: 0;
-                    left: 0;*/
+                                    top: 0;
+                                    left: 0;*/
             display: inline-block;
             width: 300px;
             z-index: -1;
         }
 
+        .video-placeholder {
+            display: inline-block;
+            width: 300px;
+            height: 225px;
+            background-color: #fff;
+        }
+
         .container-vid {
             position: fixed;
             padding-left: 0;
-            top: 10%;
+            top: 100px;
             left: 0;
             margin-bottom: 50px; /* Adjust the margin-bottom value as needed to create space between the text and the button */
+            z-index: 2;
+            width: 300px;
+            height: 225px;
+        }
+
+        .container-vid2 {
+            position: fixed;
+            padding-left: 0;
+            top: 100px;
+            left: 0;
+            margin-bottom: 50px; /* Adjust the margin-bottom value as needed to create space between the text and the button */
+            z-index: 1;
+        }
+
+        .placeholder-text {
+            margin: 0;
+            line-height: 225px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #131313;
         }
 
         .button {
@@ -43,7 +73,7 @@
             align-items: center;
             justify-content: center;
             bottom: 10%;
-            right: 5%;
+            left: 5%;
             width: 90px;
             height: 90px;
             transition: all 0.2s ease-out;
@@ -98,15 +128,17 @@
     </style>
 }
 
-    <div class="text-center">
-        <div class="d-flex justify-content-start container-vid container-fluid mb-5">
+    <div class="container-vid">
+        <video id="video" autoplay data-type="confirmation"></video>
 
-            <div>
-                <video id="video" data-type = "confirmation" autoplay></video>
+        <p class="overlay"></p>
+    </div>
 
-                <h1 class="overlay"></h1>
-            </div>
+    <div class="container-vid2">
+        <div class="video-placeholder d-flex align-content-center justify-content-center">
+            <p class="placeholder-text d-flex align-content-center justify-content-center"></p>
         </div>
+
     </div>
 
 
@@ -179,7 +211,7 @@
         $("#form-sub").click((e)=>{
             e.preventDefault();
             var parsedValue = parseInt($("#Money").val());
-            if (!isNaN(parsedValue)){
+            if (!isNaN(parsedValue) && parsedValue >=0){
                 $(".lottie").show();
                 $(".error").hide();
 
