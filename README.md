@@ -28,6 +28,9 @@
 ### AdobeXD
 > Created a wireframe with simple voice commands to mimic that of our coded out prototype
 
+## Miscellaneous (Credits/Sources)
+
+
 ### Home/Landing page
 ![image](https://github.com/huixianglim/ProjectPFD/assets/116724250/12966a0e-2bd3-4c6c-a634-541ec4d67d3d)
 
