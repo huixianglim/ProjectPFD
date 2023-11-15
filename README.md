@@ -48,9 +48,8 @@
 ### Class Diagram
 ![image](https://github.com/huixianglim/ProjectPFD/assets/116724250/813641cf-5ca9-49f7-9fd5-2e661b14b0de)
 
-## Miscellaneous 
-<details><summary>Citations</summary>
-<p>
-- test 
-</p>
+## Misc
+<details>
+  <summary>Miscellaneous Citations</summary>
+  - test
 </details>
