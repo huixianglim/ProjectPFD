@@ -4,7 +4,7 @@
 
 ## Problem Statement and Focus Area
 > How to make the OCBC app more accessible to users with neurodegenerative disorders
-> Specifically people with parkinson's 
+ > Specifically people with parkinson's 
 
 
 ## Challenges
