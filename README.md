@@ -9,11 +9,11 @@
 
 ## Ideas/Solution
 1. Utilize Gesture Recognitions -> Minimize the need for specific mouse movements
-> - Display hand gestures for navigating to different pages
-> - Display hand gestures to carry out functions like confirmation of paynow payment
+ - Display hand gestures for navigating to different pages
+ - Display hand gestures to carry out functions like confirmation of paynow payment
 2. Utilize Voice to Text -> Minimize the need for specific handmovements for typing
-> - Voice to text for searching of contacts name in the paynow page 
-> - Voice to text for filling in monetary amount in the details page
+ - Voice to text for searching of contacts name in the paynow page 
+ - Voice to text for filling in monetary amount in the details page
 
 ## Dependencies 
 > - Mediapipe
