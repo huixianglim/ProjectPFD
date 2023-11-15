@@ -54,6 +54,6 @@
 
 ## Misc
 <details>
-  <summary>Miscellaneous Citations</summary>
-  - test
+  <summary>Citations for Images</summary>
+  - https://www.singsaver.com.sg/blog/ocbc-frank-credit-card-the-perfect-card-for-gen-z
 </details>
