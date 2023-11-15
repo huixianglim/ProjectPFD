@@ -1,11 +1,15 @@
 # ProjectPFD
 
+
+
 ## Problem Statement and Focus Area
 > How to make the OCBC app more accessible to users with neurodegenerative disorders
 > Specifically people with parkinson's 
 
+
 ## Challenges
 > Tremors make it hard for users to facilitate specific movements to carry out functions
+
 
 ## Ideas/Solution
 1. Utilize Gesture Recognitions -> Minimize the need for specific mouse movements
@@ -15,10 +19,12 @@
  - Voice to text for searching of contacts name in the paynow page 
  - Voice to text for filling in monetary amount in the details page
 
+
 ## Dependencies 
 > - Mediapipe
 
 ## WireFrame
+
 ### AdobeXD
 > Created a wireframe with simple voice commands to mimic that of our coded out prototype
 
