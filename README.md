@@ -18,8 +18,6 @@
 ## Dependencies 
 > - Mediapipe
 
-
-## Prototype
 ## WireFrame
 ### AdobeXD
 > Created a wireframe with simple voice commands to mimic that of our coded out prototype
