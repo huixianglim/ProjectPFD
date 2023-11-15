@@ -19,8 +19,11 @@
 2. Utilize Voice to Text -> Minimize the need for specific handmovements for typing
  - Voice to text for searching of contacts name in the paynow page 
  - Voice to text for filling in monetary amount in the details page
-
-
+3. Utilize ChatBot -> Answer Enquiries related to the app
+ - Chatbot to answer questions related to the newly added functions
+ - Provide OCBC hotline contact details
+4. Slideshow -> Inform newly logged in users of the new functions added
+ - Animation to inform recently logged in users of the newly added functions
 ## Dependencies 
 > - Mediapipe
 
