@@ -36,3 +36,10 @@
 
 ### (Member) Details Page
 ![image](https://github.com/huixianglim/ProjectPFD/assets/116724250/38f353eb-3f5f-4a54-b486-d143356c40b4)
+
+## Diagrams
+
+### Class Diagram
+![image](https://github.com/huixianglim/ProjectPFD/assets/116724250/813641cf-5ca9-49f7-9fd5-2e661b14b0de)
+
+
