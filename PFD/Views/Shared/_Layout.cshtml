@@ -106,7 +106,7 @@
     @await Html.PartialAsync("_Footer.cshtml")
 
     
-
+    <script src="https://unpkg.com/@@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
     <script type="text/javascript" asp-append-version="true">
         (function (d, t) {
             var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
@@ -124,6 +124,7 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
      <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
+
 
     @await RenderSectionAsync("Scripts", required: false)
 

@@ -43,7 +43,8 @@ namespace PFD.DAL
                         Type = reader.GetString(1),
                         Amount = reader.GetDecimal(2),
                         UserID = reader.GetInt32(3),
-                        DateOfTransaction = reader.GetDateTime(4)
+                        DateOfTransaction = reader.GetDateTime(4),
+                        Location = reader.GetString(5)
 
 
                     });

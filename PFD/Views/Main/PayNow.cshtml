@@ -8,26 +8,32 @@
        
         body{
             background: #f7f7f7;
+            
+        }
+        
+        main {
+            min-height: 100vh;
         }
         .searchBar {
             width: 100%;
             display: flex;
-            justify-content: flex-end   ;
+            justify-content: center   ;
             flex-direction: row;
             align-items: center;
             margin-right: auto;
-            padding-left:1rem;
+            padding: 0px 36px;
         }
 
         #searchQueryInput {
-            width: 60%;
-            height: 6vh;
+            width: 45%;
+            height: 7vh;
             background: white;
             outline: none;
             border: none;
             border-radius: 1.625rem;
             padding: 0 3.5rem 0 1.5rem;
-            font-size: 2rem;
+            font-size: 1.5rem;
+            margin-top:27px;
    
         }
 
@@ -38,6 +44,7 @@
             background: none;
             border: none;
             outline: none;
+            margin-top: 27px;
         }
 
             #searchQuerySubmit:hover {
@@ -109,13 +116,15 @@
             text-align: center; /* Center the text inside the circular icon */
             line-height: 50px; /* Center the text vertically inside the circular icon */
             background-color: #0F387D;
+            margin-left: 18px;
+            margin-right: 60px;
         }
 
   
 
         a.contacts{
             text-decoration: none;
-            min-height:20vh;
+            min-height:19vh;
             border-radius:1.65rem;
             padding:1rem;
 
@@ -124,12 +133,15 @@
         a.contacts:hover{
             background-color:grey;
                 color: black;
-                transform:scale(1.03);
+                transform:scale(1.01);
         }
    
 
         .contacts{
+            background-color:white;
             color:black;
+            margin-bottom:20px;
+            transition: all 0.15s;
         }
         
         a.contacts:hover{
@@ -146,7 +158,7 @@
             align-items: center;
             justify-content: center;
             bottom: 10%;
-            left: 5%;
+            right: 5%;
             width: 90px;
             height: 90px;
             transition: all 0.2s ease-out;
@@ -169,8 +181,26 @@
         }
       
         .contact-name{
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Open Sans', sans-serif;
+            padding-left: 12px;
+            padding-right: 12px;
+            font-weight: 600;
+            margin-bottom: 20px;
         }
+
+        #card-button {
+            border-radius: 50%;
+            height: 50px;
+            width: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.25s;
+        }
+
+            #card-button:hover {
+                font-size: 20px;
+            }
   
     </style>
 }
@@ -179,7 +209,7 @@
     </div>
     <div class="text-center">
 
-        <div class="d-flex justify-content-center justify-content-center container-fluid mb-5">
+        <div class="d-flex justify-content-center justify-content-center container-fluid mb-4">
             <div class="container-vid">
                 <video id="video" autoplay data-type="null"></video>
 
@@ -188,10 +218,11 @@
 
             <div class="container-vid2">
                 <div class="video-placeholder d-flex align-content-center justify-content-center">
-                    <p class="placeholder-text d-flex align-content-center justify-content-center"></p>
+                    <div class="placeholder-text d-flex align-content-center justify-content-center"> <dotlottie-player src="https://lottie.host/99563d16-720f-484d-8140-e2a05fddb155/XURw73cbCQ.json" background="transparent" speed="1" style="width: 150px; height: 225px;" loop autoplay></dotlottie-player></div>
                 </div>
 
             </div>
+
             <div class="searchBar">
 
                 <input id="searchQueryInput" type="text" name="searchQueryInput" placeholder="Search" value="" />

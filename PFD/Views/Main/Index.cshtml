@@ -25,7 +25,20 @@
 
 }
 
+@{
+    string GetInitials(string fullName)
+    {
+        string[] words = fullName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        string initials = "";
 
+        foreach (string word in words)
+        {
+            initials += word[0];
+        }
+
+        return initials.ToUpper(); // Convert initials to uppercase if needed
+    }
+}
 
  @section head{
     <link rel="stylesheet" href="~/css/Dashboard.css" type="text/css" asp-append-version="true">
@@ -173,6 +186,17 @@
             border-radius: 20px;
             background-color: #f5f5f5;
         }
+
+        .icon {
+            width: 30px; /* Set the width and height to the desired value */
+            height: 30px; /* Set the width and height to the desired value */
+            border-radius: 50%; /* Use border-radius property to create a circular shape */
+            color: #ffffff; /* Set the text color */
+            text-align: center; /* Center the text inside the circular icon */
+            line-height: 30px; /* Center the text vertically inside the circular icon */
+            background-color: #0F387D;
+            font-size: 13px;
+        }
     </style>
  }
 
@@ -197,7 +221,7 @@
             </div>
 
             <div class="gap"></div>
-            <div class="col-md-4 card " id="define" style="background-color:#545454;">
+            <div class="col-md-4 card " id="define" style="background-color:#2F4858;">
                 <h3 style="margin:0;">Set your goals!</h3>
                 <br>
                 <p style="line-height:30px;">Trying to save for that perfect vacation, latest gadget or shiny new car? Set up one or more savings goals now to stay on track and make all your dreams a reality!</p>
@@ -207,26 +231,36 @@
         </section>
         <br>
         <section class="row" id="bottomm">
-            <div class="col-md-7 card divv" id="right">
+            <div class="col-md-7 card divv" id="right" style="overflow-y:auto;">
                 <h2>Your recent transactions</h2>
-                <table class="table table-borderless table-hover" style="margin-top: 20px;">
-                    <thead>
+                <table class="table table-borderless table-hover" style="margin-top: 16px;">
+ @*                   <thead>
                         <tr>
-@*                            <th scope="col">TransactionID</th>*@
+                            <th scope="col">Location</th>
                             <th scope="col">Type</th>
                             <th scope="col">Date</th>
                             <th scope="col">Amount</th>
                         </tr>
-                    </thead>
+                    </thead>*@
                     <tbody>
+
+                        <tr style="vertical-align:middle; margin-bottom:7px;">
+                            <td><p class="icon">@GetInitials("Jaden")</p></td>
+                            <td>Jaden</td>
+                            <td>PayNow Transfer</td>
+                            <td>11/12/2022</td>
+                            <td style="font-weight:600; color:#028000;">$20.00</td>
+                        </tr>
+
                         @foreach (var transaction in Model)
                         {
 
-                            <tr>
-@*                                <td>@transaction.TransactionID.ToString()</td>*@
+                            <tr style="vertical-align:middle; margin-bottom:7px;">
+                                <td><p class="icon">@GetInitials(@transaction.Location)</p></td>
+                                <td>@transaction.Location</td>
                                 <td>@transaction.Type</td>
-                                <td>@transaction.DateOfTransaction.ToString("MM/dd/yyyy")</td>
-                                <td>$@transaction.Amount.ToString("#,###.00")</td>
+                                <td>@transaction.DateOfTransaction.ToString("dd/MM/yyyy")</td>
+                            <td style="font-weight:600; color:#b30c00;">$@transaction.Amount.ToString("#,###.00")</td>
                             </tr>
                         }
                     </tbody>
@@ -244,7 +278,7 @@
 
                             <div class="media-body ">
                             <h6 class="mt-2 mb-0" style="color: #000;">You have received $20</h6>
-                            <small class="text" style="color: #3b3b3b;">Nov 12, 2022</small>
+                            <small class="text" style="color: #3b3b3b;">Dec 11, 2022</small>
                             </div>
                         </div>
                     </div>
@@ -286,7 +320,8 @@
 
     <div class="container-vid2">
     <div class="video-placeholder d-flex align-content-center justify-content-center">
-        <p class="placeholder-text d-flex align-content-center justify-content-center"></p>
+        <div class="placeholder-text d-flex align-content-center justify-content-center"> <dotlottie-player src="https://lottie.host/99563d16-720f-484d-8140-e2a05fddb155/XURw73cbCQ.json" background="transparent" speed="1" style="width: 150px; height: 225px;" loop autoplay></dotlottie-player></div>
+        
         </div>
 
     </div>
@@ -351,6 +386,7 @@
 
     @section Scripts{
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+   
     <script asp-append-version="true">
         const dataPie = {
             type: "pie",

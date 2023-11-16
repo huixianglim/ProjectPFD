@@ -29,6 +29,8 @@ public class Transaction
         public DateTime DateOfTransaction { get; set; }
 
 
+        [Display(Name = "Location")]
 
-   
+        public string Location { get; set; }
+
 }
