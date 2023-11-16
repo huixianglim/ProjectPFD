@@ -67,5 +67,10 @@ namespace PFD.Controllers
 
 
         }
+
+        public IActionResult feedback()
+        {
+            return View();
+        }
     }
 }

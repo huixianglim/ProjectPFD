@@ -1,0 +1,385 @@
+﻿@{
+    ViewData["Title"] = "feedback";
+}
+
+@section Scripts{
+
+    <script>
+        var currentTab = 0;
+        document.addEventListener("DOMContentLoaded", function (event) {
+
+
+            showTab(currentTab);
+
+        });
+
+        function showTab(n) {
+            var x = document.getElementsByClassName("tab");
+            x[n].style.display = "block";
+            if (n == 0) {
+                document.getElementById("prevBtn").style.display = "none";
+            } else {
+                document.getElementById("prevBtn").style.display = "inline";
+            }
+            if (n == (x.length - 1)) {
+                console.log("Hi");
+                document.getElementById("nextBtn").classList.add("btn");
+                document.getElementById("nextBtn").classList.add("btn-success");
+
+                document.getElementById("nextBtn").innerHTML = "Submit";
+
+
+            } else {
+                if (document.getElementById("nextBtn").classList.contains("btn") && document.getElementById("nextBtn").classList.contains("btn-success")) {
+                    document.getElementById("nextBtn").classList.remove("btn");
+                    document.getElementById("nextBtn").classList.remove("btn-success");
+                }
+
+                document.getElementById("nextBtn").innerHTML = '<i class="fa fa-angle-double-right"></i>';
+            }
+            fixStepIndicator(n)
+        }
+
+        function nextPrev(n) {
+            var tabClass = document.getElementsByClassName("tab");
+            if (n == 1 && !validateForm()) return false;
+            tabClass[currentTab].style.display = "none";
+            currentTab = currentTab + n;
+            if (currentTab >= tabClass.length) {
+
+                document.getElementById("nextprevious").style.display = "none";
+                document.getElementById("all-steps").style.display = "none";
+                document.getElementById("register").style.display = "none";
+                document.getElementById("text-message").style.display = "block";
+
+            }
+            showTab(currentTab);
+        }
+
+        function validateForm() {
+            var x, y, i, valid = true;
+            x = document.getElementsByClassName("tab");
+            y = x[currentTab].getElementsByTagName("input");
+            for (i = 0; i < y.length; i++) {
+                if (y[i].value == "") {
+                    y[i].className += " invalid";
+                    valid = false;
+                }
+
+
+            }
+            if (valid) {
+                document.getElementsByClassName("step")[currentTab].className += " finish";
+            }
+            return valid;
+        }
+
+        function fixStepIndicator(n) {
+            var i, x = document.getElementsByClassName("step");
+            for (i = 0; i < x.length; i++) {
+
+                x[i].className = x[i].className.replace(" active", "");
+            }
+            x[n].className += " active";
+        }
+        // Select all elements with the "i" tag and store them in a NodeList called "stars"
+
+
+
+        $(".stars").on("click", (e) => {
+            var stars = $(".stars");
+            e.target.clssList.add("clicked");
+
+
+
+        })
+
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+
+}
+@section style{
+    <style>
+        main {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        body {
+            background: #eee
+        }
+
+        #regForm {
+            background-color: #ffffff;
+            margin: 0px auto;
+            font-family: Raleway;
+            padding: 40px;
+            border-radius: 10px;
+        }
+
+        #register {
+            color: #6A1B9A;
+        }
+
+        h1 {
+            text-align: center
+        }
+
+        input {
+            padding: 10px;
+            width: 100%;
+            font-size: 17px;
+            font-family: Raleway;
+            border: 1px solid #aaaaaa;
+            border-radius: 10px;
+            -webkit-appearance: none;
+            margin-bottom: 1rem;
+        }
+
+
+
+        .tab input:focus {
+            border: 1px solid #6a1b9a !important;
+            outline: none;
+        }
+
+        input.invalid {
+            border: 1px solid #e03a0666;
+        }
+
+        .tab {
+            display: none
+        }
+
+        button {
+            background-color: #6a1b9a;
+            color: #ffffff;
+            border: none;
+            border-radius: 50%;
+            padding: 10px 20px;
+            font-size: 17px;
+            font-family: Raleway;
+            cursor: pointer;
+            text-align: center;
+        }
+
+            button:hover {
+                opacity: 0.8
+            }
+
+            button:focus {
+                outline: none !important;
+            }
+
+        #prevBtn {
+            background-color: #bbbbbb
+        }
+
+        #submit {
+        }
+
+        .all-steps {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            width: 100%;
+            display: inline-flex;
+            justify-content: center;
+        }
+
+        .step {
+            height: 40px;
+            width: 40px;
+            margin: 0 2px;
+            background-color: #ff0000;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 15px;
+            color: #6a1b9a;
+            opacity: 0.5;
+        }
+
+            .step.active {
+                opacity: 1
+            }
+
+
+            .step.finish {
+                color: #fff;
+                background: #6a1b9a;
+                opacity: 1;
+            }
+
+
+
+        .all-steps {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 30px
+        }
+
+        .thanks-message {
+            display: none
+        }
+
+        .rate {
+            float: left;
+            height: 46px;
+            padding: 0 10px;
+            align-content: center;
+        }
+
+            .rate:not(:checked) > input {
+                position: absolute;
+                top: -9999px;
+            }
+
+            .rate:not(:checked) > label {
+                float: right;
+                width: 1em;
+                overflow: hidden;
+                white-space: nowrap;
+                cursor: pointer;
+                font-size: 30px;
+                color: #ccc;
+            }
+
+                .rate:not(:checked) > label:before {
+                    content: '★ ';
+                }
+
+            .rate > input:checked ~ label {
+                color: #ffc700;
+            }
+
+            .rate:not(:checked) > label:hover,
+            .rate:not(:checked) > label:hover ~ label {
+                color: #deb217;
+            }
+
+            .rate > input:checked + label:hover,
+            .rate > input:checked + label:hover ~ label,
+            .rate > input:checked ~ label:hover,
+            .rate > input:checked ~ label:hover ~ label,
+            .rate > label:hover ~ input:checked ~ label {
+                color: #c59b08;
+            }
+
+        .rate2 {
+            float: left;
+            height: 46px;
+            padding: 0 10px;
+            align-content: center;
+        }
+
+            .rate2:not(:checked) > input {
+                position: absolute;
+                top: -9999px;
+            }
+
+            .rate2:not(:checked) > label {
+                float: right;
+                width: 1em;
+                overflow: hidden;
+                white-space: nowrap;
+                cursor: pointer;
+                font-size: 30px;
+                color: #ccc;
+            }
+
+                .rate2:not(:checked) > label:before {
+                    content: '★ ';
+                }
+
+            .rate2 > input:checked ~ label {
+                color: #ffc700;
+            }
+
+            .rate2:not(:checked) > label:hover,
+            .rate2:not(:checked) > label:hover ~ label {
+                color: #deb217;
+            }
+
+            .rate2 > input:checked + label:hover,
+            .rate2 > input:checked + label:hover ~ label,
+            .rate2 > input:checked ~ label:hover,
+            .rate2 > input:checked ~ label:hover ~ label,
+            .rate2 > label:hover ~ input:checked ~ label {
+                color: #c59b08;
+            }
+    </style>
+}
+<!-- Fontawesome CDN Link -->
+
+<div class="container mt-5">
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-md-8">
+            <form id="regForm">
+                <h1 id="register">Survey Form</h1>
+                <div class="all-steps" id="all-steps">
+                    <span class="step"><a class="fa-solid fa-person"></a></span>
+                    <span class="step"><a class="fa fa-map-marker"></a></span>
+                    <span class="step"><a class="fa fa-shopping-bag"></a></span>
+                </div>
+
+                <div class="tab">
+                    <h6>What's your name?</h6>
+                    <p>
+                        <input placeholder="Name..." oninput="this.className = ''" name="fname">
+                    </p>
+
+                </div>
+
+                <div class="tab">
+                    <h6>Do you like the Gesture Recognition Feature?</h6>
+                    <div class="rate">
+                        <input type="radio" id="star5.1" name="rate" value="5" />
+                        <label for="star5.1" title="text">5 stars</label>
+                        <input type="radio" id="star4.1" name="rate" value="4" />
+                        <label for="star4.1" title="text">4 stars</label>
+                        <input type="radio" id="star3.1" name="rate" value="3" />
+                        <label for="star3.1" title="text">3 stars</label>
+                        <input type="radio" id="star2.1" name="rate" value="2" />
+                        <label for="star2.1" title="text">2 stars</label>
+                        <input type="radio" id="star1.1" name="rate" value="1" />
+                        <label for="star1.1" title="text">1 star</label>
+                    </div>
+                    <p><input placeholder="What improvements can be made?" oninput="this.className = ''" name="uname"></p>
+                </div>
+
+                <div class="tab">
+                    <h6>Do you like the Voice Control Feature?</h6>
+                    <div class="rate2">
+                        <input type="radio" id="star5" name="rate2" value="5" />
+                        <label for="star5" title="text">5 stars</label>
+                        <input type="radio" id="star4" name="rate2" value="4" />
+                        <label for="star4" title="text">4 stars</label>
+                        <input type="radio" id="star3" name="rate2" value="3" />
+                        <label for="star3" title="text">3 stars</label>
+                        <input type="radio" id="star2" name="rate2" value="2" />
+                        <label for="star2" title="text">2 stars</label>
+                        <input type="radio" id="star1" name="rate2" value="1" />
+                        <label for="star1" title="text">1 star</label>
+                    </div>
+                    <p><input placeholder="What improvements can be made?" oninput="this.className = ''" name="uname"></p>
+
+                </div>
+                <div class="thanks-message text-center" id="text-message">
+                    <img src="https://i.imgur.com/O18mJ1K.png" width="100" class="mb-4">
+                    <h3>Thankyou for your feedback!</h3> <span>Thanks for your valuable information. It helps us to improve our services!</span>
+                </div>
+                <div style="overflow:auto;" id="nextprevious">
+                    <div style="float:right;">
+                        <button type="button" id="prevBtn" onclick="nextPrev(-1)"><a class="fa fa-angle-double-left"></a></button>
+                        <button type="button" id="nextBtn" onclick="nextPrev(1)"><a class="fa fa-angle-double-right"></a></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
