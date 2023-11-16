@@ -125,6 +125,11 @@
         .money-symbol{
             font-size:3rem;
         }
+
+        .message{
+            padding: 0;
+            margin-bottom: 1rem;
+        }
     </style>
 }
 
@@ -164,7 +169,7 @@
                     Transfer to @{
                         if (Model != null)
                         {
-                            <span>@Model.Name</span>
+                                <span>@Model.Name</span>
                         }
                     }
                 </h3>
@@ -181,7 +186,7 @@
                     <p class="text-danger error mb-5">Invaid Input!</p>
 
                     <div class="row mb-4">
-                        <div class="col">
+                        <div class="col message">
                             <label>Click Confirm to move on with payment or signal an open hand for a few seconds to do so</label>
                         </div>
                     </div>
@@ -211,7 +216,7 @@
         $("#form-sub").click((e)=>{
             e.preventDefault();
             var parsedValue = parseInt($("#Money").val());
-            if (!isNaN(parsedValue) && parsedValue >=0){
+            if (!isNaN(parsedValue) && parsedValue >= 0 && parsedValue < 1000) {
                 $(".lottie").show();
                 $(".error").hide();
 
