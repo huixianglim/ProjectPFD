@@ -102,8 +102,10 @@
 
         #successIndicator {
             position: fixed;
-            top: 16%;
-            right: 10%;
+            top: 46%;
+            left: 0%;
+            width: 300px;
+            
         }
 
         #tutorial{
@@ -221,7 +223,7 @@
             </div>
 
             <div class="gap"></div>
-            <div class="col-md-4 card " id="define" style="background-color:#84ac84;">
+            <div class="col-md-4 card " id="define" style="background-color:#2F4858;">
                 <h3 style="margin:0;">Set your goals!</h3>
                 <br>
                 <p style="line-height:30px;">Trying to save for that perfect vacation, latest gadget or shiny new car? Set up one or more savings goals now to stay on track and make all your dreams a reality!</p>
@@ -260,7 +262,7 @@
                                 <td>@transaction.Location</td>
                                 <td>@transaction.Type</td>
                                 <td>@transaction.DateOfTransaction.ToString("dd/MM/yyyy")</td>
-                            <td style="font-weight:600; color:#b30c00;">$@transaction.Amount.ToString("#,###.00")</td>
+                            <td style="font-weight:600;/* color:#b30c00;*/">$@transaction.Amount.ToString("#,###.00")</td>
                             </tr>
                         }
                     </tbody>
