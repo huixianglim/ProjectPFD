@@ -55,6 +55,48 @@ namespace PFD.DAL
             return transactions;
 
         }
+        public bool CreateTransactions(int UserID, string Type, double Amount, string? Location)
+        {
+            if (UserID != null && Amount != null)
+            {
+
+                //Create a SqlCommand object from connection object
+                SqlCommand cmd = conn.CreateCommand();
+                //Specify an INSERT SQL statement which will
+                //return the auto-generated StaffID after insertion
+                cmd.CommandText = @"INSERT INTO Transactions (Type,Amount,UserID,DateOfTransaction, Location) 
+                           
+                            VALUES(@type, @amount, @userid, @date,@location)";
+                //Define the parameters used in SQL statement, value for each parameter
+                //is retrieved from respective class's property.
+                cmd.Parameters.AddWithValue("@type", Type);
+                cmd.Parameters.AddWithValue("@amount", Amount);
+                cmd.Parameters.AddWithValue("@userid", UserID);
+                cmd.Parameters.AddWithValue("@date", DateTime.Now);
+                cmd.Parameters.AddWithValue("@location", Location);
+
+
+                //A connection to database must be opened before any operations made.
+                conn.Open();
+                //ExecuteScalar is used to retrieve the auto-generated
+                //StaffID after executing the INSERT SQL statement
+                cmd.ExecuteScalar();
+                //A connection should be closed after operations.
+                conn.Close();
+
+                return true;
+
+
+
+
+            }
+            return false;
+            return true;
+            
+        }
+        
+
+         
 
 
 
