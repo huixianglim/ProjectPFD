@@ -44,6 +44,7 @@ $(document).ready(() => {
     recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript;
         console.log(`Transcript: ${transcript}`);
+
         if ($(".button").data("type") == "money") {
             if (transcript.includes("$")) {
                 let amountWithoutDollarSign = transcript.replace(/\$/g, '');
@@ -59,6 +60,9 @@ $(document).ready(() => {
                 $(".testing").text("Invalid Amount")
 
             }
+            if (transcript == "confirm") {
+                $("#form-sub").trigger("click");
+            }
 
         }
         else if ($(".button").data("type") == "search") {
@@ -73,6 +77,7 @@ $(document).ready(() => {
             $("#searchQueryInput").trigger("input");
 
         }
+
        
     };
 
