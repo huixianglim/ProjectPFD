@@ -3,6 +3,36 @@
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #google_translate_element {
+            position: relative;
+            display: inline-block;
+            background-color: #ffffff;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        main{
+            padding-top:0px!important
+        }
+
+        iframe{
+            display:none!important;
+        }
+
+        /* Optional: Style the button inside the translation element */
+        .goog-te-combo {
+            font-size: 14px;
+        }
+    </style>
+</head>
 
 <nav class="navbar1">
     <div class="navbar-container1">
@@ -48,15 +78,20 @@
                 </a>
             </li>
 
+            <li id="google_translate_element"></li>
+
             @*<li class="navbar-button" id="acc-dropdown">
 
             </li>*@
-
-
-
-
         </ul>
 
     </div>
 </nav>
 
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL }, 'google_translate_element');
+    }
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>

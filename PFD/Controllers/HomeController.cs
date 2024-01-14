@@ -33,7 +33,7 @@ namespace PFD.Controllers
             // Create an instance of the model and set the property
             if (HttpContext.Session.GetString("AccountObject") != null)
             {
-                return RedirectToAction("Main", "Index");
+                return RedirectToAction("Index", "Main");
             }
 
             return View();
@@ -46,7 +46,7 @@ namespace PFD.Controllers
 
             if (HttpContext.Session.GetString("AccountObject") != null)
             {
-                return RedirectToAction("Main", "Index");
+                return RedirectToAction("Index", "Main");
             }
 
             // Set the session variable
