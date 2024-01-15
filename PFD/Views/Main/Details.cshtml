@@ -147,7 +147,7 @@
     </div>
 
 
-    <div class="button" data-type="money">
+    <div class="button" data-type="money" data-activated="false">
         <i class="fa fa-microphone"></i>
     </div>
 
@@ -216,7 +216,7 @@
         $("#form-sub").click((e)=>{
             e.preventDefault();
             var parsedValue = parseInt($("#Money").val());
-            if (!isNaN(parsedValue) && parsedValue >= 0 && parsedValue < 1000) {
+            if (!isNaN(parsedValue) && parsedValue > 0 && parsedValue < 1000) {
                 $(".lottie").show();
                 $(".error").hide();
 

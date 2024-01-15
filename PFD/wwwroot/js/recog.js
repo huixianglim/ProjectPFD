@@ -6,6 +6,9 @@ var ForRedirect = {
 
 }
 
+//$('body').removeClass('modal-open');
+
+var audio_activation = false
 
 
 let gestureRecognizer;
@@ -14,6 +17,12 @@ var currentOutput;
 var previousOutput;
 var time = 1000
 var cooldown = 0;
+
+var additional_features = {
+    "Victory": "Scrolling",
+    "Closed_Fist":"Activating Audio"
+ 
+}
 
 if (video.dataset.type == "confirmation") {
     ForRedirect = {
@@ -37,7 +46,7 @@ else if (video.dataset.type == "home") {
 }
 async function setupGestureRecognizer() {
     const vision = await FilesetResolver.forVisionTasks(
-        "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/wasm"
+        "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm"
     );
     gestureRecognizer = await GestureRecognizer.createFromOptions(vision, {
         baseOptions: {
@@ -65,57 +74,93 @@ async function initCamera() {
 function predictWebcam() {
     if (gestureRecognizer && video.readyState === video.HAVE_ENOUGH_DATA) {
         const results = gestureRecognizer.recognizeForVideo(video, Date.now());
-        var check = false
-        if (results.gestures.length > 0 && results.gestures[0][0].categoryName in ForRedirect) {
+        
+        if (results.gestures.length > 0 && (results.gestures[0][0].categoryName in ForRedirect || results.gestures[0][0].categoryName in additional_features) ) {
             var categoryName = results.gestures[0][0].categoryName;
-            currentOutput = categoryName;
-            if (currentOutput == previousOutput) {
-                time -= 10
-            }
-            else {
-                time = 1000
-
-            }
-            $(".overlay").text("Going to " + ForRedirect[categoryName][0])
-            previousOutput = categoryName
-            if (time == 0) {
-                if (categoryName != "Open_Palm") {
-                    window.location.href = "/Main/" + ForRedirect[categoryName][1];
+            if (categoryName in ForRedirect) {
+                currentOutput = categoryName;
+                if (currentOutput == previousOutput) {
+                    time -= 10
                 }
                 else {
-                    if (video.dataset.type == "confirmation") {
-                        var parsedValue = parseInt($("#Money").val());
-                        console.log(parsedValue <= 0);
-                        if (isNaN(parsedValue) || parsedValue <= 0) {
-                            $(".error").show();
+                    time = 1000
 
-
-                        }
-                        else {
-                            $("#form-sub").trigger("click");
-
-                        }
-                        time = 1000
+                }
+                $(".overlay").text("Going to " + ForRedirect[categoryName][0])
+                previousOutput = categoryName
+                if (time == 0) {
+                    if (categoryName != "Open_Palm") {
+                        window.location.href = "/Main/" + ForRedirect[categoryName][1];
                     }
                     else {
+                        if (video.dataset.type == "confirmation") {
+                            var parsedValue = parseInt($("#Money").val());
+                            console.log(parsedValue <= 0);
+                            if (isNaN(parsedValue) || parsedValue <= 0) {
+                                $(".error").show();
 
-                        if ($("#tutorial").css('display') != 'none') {
-                            $("#end-slideshow").trigger('click')
-                            delete ForRedirect["Open_Palm"]; 
+
+                            }
+                            else {
+                                $("#form-sub").trigger("click");
+
+                            }
+                            time = 1000
                         }
-                        
+                        else {
+
+                            if ($("#tutorial").css('display') != 'none') {
+                                $("#end-slideshow").trigger('click')
+                                delete ForRedirect["Open_Palm"];
+                            }
+
+
+                        }
 
                     }
+                }
+            }
+            else if (categoryName in additional_features) {
+                if (categoryName == "Victory") {
+                    let coordinates_y = results.landmarks[0][12].y
 
+                    if (coordinates_y < 0.15) {
+                        //window.scrollBy(0, 20);
+                        window.scrollBy(0, 10)
+                        $(".overlay").text("Scrolling Down")
+                    }
+                    else if (coordinates_y > 0.4) {
+                        window.scrollBy(0, -10);
+
+                        $(".overlay").text("Scrolling Up")
+
+                    }
+                }
+                else if (categoryName == "Closed_Fist") {
+                    if ($(".button").length > 0) {
+                        if (!audio_activation) {
+                            $(".button").trigger("mousedown")
+                            audio_activation = true
+                            $(".overlay").text(additional_features[categoryName])
+                        }
+                       
+
+                        
+                    }
                 }
             }
 
-        } else {
+        }
+        else {
             $(".overlay").text("Nothing")
             cooldown += 8;
             if (cooldown == 1000) {
                 time = 1000;
 
+            }
+            if (audio_activation) {
+                $(".button").trigger("mouseup")
+                audio_activation = false
             }
         }
     }

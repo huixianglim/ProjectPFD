@@ -82,7 +82,7 @@ a {
     /*image-rendering: pixelated;*/
 }
 
-.navbar-links, .navbar-links2 {
+.navbar-links, .navbar-links2, .navbar-links3 {
     /*color: #fff;*/
     color: #474747;
     text-decoration: none;
@@ -94,7 +94,7 @@ a {
     position: relative;
 }
 
-    .navbar-links p, .navbar-links2 p {
+    .navbar-links p, .navbar-links2 p, .navbar-links3 p {
         padding: 10px;
     }
 
@@ -127,6 +127,11 @@ a {
     .navbar-links:hover:after, .navbar-links2:hover:after {
         width: 80%;
         left: 10%;
+    }
+
+    .navbar-links3:hover {
+        color: #474747;
+        cursor: pointer;
     }
 
 .signin-img {
