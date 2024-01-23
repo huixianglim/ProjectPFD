@@ -8,6 +8,56 @@
 
 }
 
+<style>
+    #google_translate_element {
+        position: relative;
+        display: inline-block;
+        background-color: #ffffff;
+        padding: 10px;
+  /*      border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);*/
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+    }
+
+    .goog-logo-link {
+        display: none !important;
+    }
+
+
+
+    .goog-te-gadget {
+        color: none !important;
+    }
+
+    main {
+        padding-top: 0px !important
+    }
+
+    iframe {
+        display: none !important;
+    }
+
+    /* Optional: Style the button inside the translation element */
+    .goog-te-combo {
+        font-size: 14px;
+    }
+
+    .goog-logo-link {
+        display: none !important;
+    }
+
+    #google_translate_element span {
+        display: none !important;
+    }
+
+    .goog-te-gadget {
+        color: transparent !important;
+        font-size: 0px;
+    }
+</style>
+
 
 <nav class="navbar1">
     <div class="navbar-container1">
@@ -45,6 +95,8 @@
                 </a>
             </li>
 
+            <li id="google_translate_element"></li>
+
             <li class="navbar-button" id="acc-dropdown">
 
                 <a href="" class="navbar-links" style="pointer-events:none;" >
@@ -72,3 +124,10 @@
     </div>
 </nav>
 
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL }, 'google_translate_element');
+    }
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>

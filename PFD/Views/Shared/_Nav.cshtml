@@ -12,9 +12,9 @@
             display: inline-block;
             background-color: #ffffff;
             padding: 10px;
-            border: 1px solid #ccc;
+            /*border: 1px solid #ccc;
             border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);*/
             font-family: Arial, sans-serif;
             font-size: 14px;
         }
@@ -31,7 +31,24 @@
         .goog-te-combo {
             font-size: 14px;
         }
+
+        .goog-logo-link {
+            display: none !important;
+        }
+
+        #google_translate_element span {
+            display: none !important;
+        }
+
+        .goog-te-gadget {
+            color: transparent !important;
+            font-size: 0px;
+        }
+
+         
     </style>
+
+    
 </head>
 
 <nav class="navbar1">
@@ -70,7 +87,7 @@
                 </a>
             </li>
 
-            <li id="google_translate_element"></li>
+            <li class="navbar-button" id="google_translate_element"></li>
 
             <li class="navbar-button" id="login-btn">
                 <a asp-controller="Home" asp-action="Login" class="navbar-links2">
@@ -79,6 +96,7 @@
                     <div class="signin-img"></div>
                 </a>
             </li>
+
 
             
 
@@ -94,6 +112,8 @@
     function googleTranslateElementInit() {
         new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL }, 'google_translate_element');
     }
+
+
 </script>
 
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
