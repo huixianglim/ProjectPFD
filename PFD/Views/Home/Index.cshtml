@@ -465,7 +465,28 @@
             aos_init();
         });
 
+        /**
+        * Test simple click screen reader
+        
+        let msg = new SpeechSynthesisUtterance();
+        let tags = document.querySelectorAll('p,h2,h3'); // add more tags for you project
+        tags.forEach((tag) => {
+            tag.addEventListener('click', (e) => {
 
+                msg.text = e.target.innerText;
+                tag.style.backgroundColor = "yellow";
+                speechSynthesis.speak(msg);
+
+                let interval = setInterval(() => {
+                    if (!speechSynthesis.speaking) {
+                        tag.style.removeProperty('background-color');
+                        clearInterval(interval);
+                    }
+                }, 100);
+
+            });
+        });
+        */
     </script>
 
     <script type="module" src="~/js/recog.js"></script>

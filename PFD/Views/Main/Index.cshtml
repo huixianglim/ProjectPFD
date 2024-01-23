@@ -502,7 +502,7 @@
             <div class="col-md-7 card" id="main">
                 <div class="row no-gutters">
                     <div class="col-md-6">
-                        Main Account
+                        <p>Main Account</p>
                         <h3>OCBC Savings Account</h3>
                         <p>4524 1920 8888 8888@*<i class="fa fa-angle-double-right"></i>*@</p>
                         <br>
@@ -511,7 +511,7 @@
 @*                        <a href="" class="btn btn-light">Transfer Money</a>*@
                     </div>
                     <div class="col-md-6">
-                        Available funds
+                        <p>Available funds</p>
                         <h1>$@AccountObject.Money.ToString("#,###.00")</h1>
                     </div>
                 </div>
@@ -541,7 +541,7 @@
                     </thead>*@
                     <tbody>
 
-                        <tr style="vertical-align:middle; margin-bottom:7px;">
+                        <tr data-speech="Paynow Transfer of $ 20 to Jaden on 11/12/2022" style="vertical-align:middle; margin-bottom:7px;">
                             <td><p class="icon">@GetInitials("Jaden")</p></td>
                             <td>Jaden</td>
                             <td>PayNow Transfer</td>
@@ -551,14 +551,13 @@
 
                         @foreach (var transaction in Model)
                         {
-
-                            <tr style="vertical-align:middle; margin-bottom:7px;">
+                        <tr data-speech="{TYPE} to {LOCATION} for {AMOUNT} on {DATE}" style="vertical-align:middle; margin-bottom:7px;">
                                 <td><p class="icon">@GetInitials(@transaction.Location)</p></td>
                                 <td>@transaction.Location</td>
                                 <td>@transaction.Type</td>
                                 <td>@transaction.DateOfTransaction.ToString("dd/MM/yyyy")</td>
                             <td style="font-weight:600;/* color:#b30c00;*/">$@transaction.Amount.ToString("#,###.00")</td>
-                            </tr>
+                        </tr>
                         }
                     </tbody>
                 </table>
@@ -799,5 +798,67 @@
 
         </script>
 
- 
+    <script>
+        /**
+        * Test simple click screen reader
+        */
+        let msg = new SpeechSynthesisUtterance();
+        let tags = document.querySelectorAll('p,h2,h3,h1,h6,a,small');
+        tags.forEach((tag) => {
+            tag.addEventListener('click', (e) => {
+
+                msg.text = e.target.innerText;
+                tag.style.backgroundColor = "yellow";
+                speechSynthesis.speak(msg);
+
+                let interval = setInterval(() => {
+                    if (!speechSynthesis.speaking) {
+                        tag.style.removeProperty('background-color');
+                        clearInterval(interval);
+                    }
+                }, 100);
+
+            });
+        });
+
+
+        let rows = document.querySelectorAll('tr');
+
+        rows.forEach((row) => {
+            row.addEventListener('click', (e) => {
+                let customSpeechTemplate = row.getAttribute('data-speech');
+                let location = row.querySelector('td:nth-child(2)').innerText;
+                let type = row.querySelector('td:nth-child(3)').innerText;
+                let amount = row.querySelector('td:nth-child(5)').innerText;
+                let date = row.querySelector('td:nth-child(4)').innerText;
+
+                let customSpeech = customSpeechTemplate
+                    .replace('{LOCATION}', location)
+                    .replace('{TYPE}', type)
+                    .replace('{AMOUNT}', amount)
+                    .replace('{DATE}', date);
+
+                speakCustomSpeech(customSpeech);
+
+                row.style.backgroundColor = "yellow";
+
+                let interval = setInterval(() => {
+                    if (!speechSynthesis.speaking) {
+                        row.style.removeProperty('background-color');
+                        clearInterval(interval);
+                    }
+                }, 100);
+            });
+        });
+
+        function speakCustomSpeech(text) {
+            let msgs = new SpeechSynthesisUtterance();
+            msgs.text = text;
+
+            // Set the rate to make the speech slower
+            msgs.rate = 0.6; // Adjust this value to your desired speed
+
+            speechSynthesis.speak(msgs);
+        }
+    </script>
     }
