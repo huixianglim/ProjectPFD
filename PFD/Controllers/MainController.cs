@@ -12,6 +12,7 @@ namespace PFD.Controllers
         private ContactsDAL contactsDAL = new ContactsDAL();
         private TransactionDAL transactionDAL = new TransactionDAL();
 
+        private FeedbackDAL feedbackDAL = new FeedbackDAL();
 
         public IActionResult Index()
         {
@@ -68,9 +69,23 @@ namespace PFD.Controllers
 
         }
 
+        
+
         public IActionResult feedback()
         {
-            return View();
+            List<Feedback> feedbacks = feedbackDAL.GetFeedbacks();
+            feedbackViewModel page = new feedbackViewModel();
+            page.FeedbackList = feedbacks;
+            return View(page);
+        }
+
+        [HttpPost]
+        public IActionResult feedback(feedbackViewModel feedback)
+        {
+
+            bool check = feedbackDAL.Create(feedback.FormFeedback);
+            Console.WriteLine(check);
+            return RedirectToAction("feedback","Main");
         }
     }
 }
