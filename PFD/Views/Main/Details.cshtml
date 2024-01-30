@@ -169,18 +169,17 @@
                     Transfer to @{
                         if (Model != null)
                         {
-                                <span>@Model.Name</span>
+                            <span>@Model.Name</span>
                         }
                     }
                 </h3>
-                <form id="form">
                     <!-- Amount Input  -->
-                    
+                <form asp-action="CreatePaymentTransaction" asp-controller="Main" id="form">
                     <div class="form-outline mb-4">
                         <label class="form-label" for="form1Example13">Amount</label>
                         <div class="input-group">
                             <span class="d-flex align-items-center money-symbol">$</span>
-                            <input id="Money" type="tel" class="form-control form-control-lg" value="0.00" />
+                            <input id="Money" name="Money" type="tel" class="form-control form-control-lg" value="0.00" />
                         </div>
                     </div>
                     <p class="text-danger error mb-5">Invaid Input!</p>
@@ -190,14 +189,20 @@
                             <label>Click Confirm to move on with payment or signal an open hand for a few seconds to do so</label>
                         </div>
                     </div>
+
+                    @{
+                        if (Model != null)
+                        {
+                            <input id="location" name="location" type="hidden" value="@Model.Name" />
+
+                        }
+                    }
+
+                    <input type="hidden" id="tempData" name="tempData" value="true" />
    
                     <!-- Submit button -->
                     <button id="form-sub" type="submit" class="btn btn-danger btn-lg btn-block">Confirm</button>
 
-                </form>
-
-                <form asp-action="passTemp" id="Success" asp-controller = "Main">
-                    <input type="hidden" id="tempData" name="tempData" value="true" />
                 </form>
 
             </div>
@@ -222,7 +227,7 @@
 
                 setTimeout(() => {
                     $(".lottie").hide();
-                    $("#Success").submit()
+                    $("#form").submit()
                 }, 1000)
             }
             else{

@@ -66,7 +66,7 @@ namespace PFD.DAL
                 //return the auto-generated StaffID after insertion
                 cmd.CommandText = @"INSERT INTO Transactions (Type,Amount,UserID,DateOfTransaction, Location) 
                            
-                            VALUES(@type, @amount, @userid, @date,@location)";
+                            VALUES(@type, @amount, @userid, @date, @location)";
                 //Define the parameters used in SQL statement, value for each parameter
                 //is retrieved from respective class's property.
                 cmd.Parameters.AddWithValue("@type", Type);
@@ -90,15 +90,40 @@ namespace PFD.DAL
 
 
             }
-            return false;
-            return true;
-            
+            return false;            
         }
-        
 
-         
+        public List<Transaction>? GetTransactionsFromPreviousLogin(int UserID, DateTime PrevLogin)
+        {
+            SqlCommand cmd = conn.CreateCommand();
 
+            // Modify the SQL query to include a condition for DateOfTransaction
+            cmd.CommandText = @"SELECT * FROM Transactions WHERE UserID = @UserID AND DateOfTransaction > @PrevLogin ORDER BY DateOfTransaction DESC";
+            cmd.Parameters.AddWithValue("@UserID", UserID);
+            cmd.Parameters.AddWithValue("@PrevLogin", PrevLogin);
 
+            conn.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<Transaction> transactions = new List<Transaction>();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    transactions.Add(
+                    new Transaction
+                    {
+                        TransactionID = reader.GetInt32(0),
+                        Type = reader.GetString(1),
+                        Amount = reader.GetDecimal(2),
+                        UserID = reader.GetInt32(3),
+                        DateOfTransaction = reader.GetDateTime(4),
+                        Location = reader.GetString(5)
+                    });
+                }
+            }
+            conn.Close();
+            return transactions;
+        }
 
     }
 }

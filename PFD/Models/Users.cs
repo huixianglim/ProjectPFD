@@ -21,6 +21,7 @@ namespace PFD.Models
 
         public string Email { get; set; }
 
+        public DateTime LastLoggedIn { get; set; }
 
     }
 }
