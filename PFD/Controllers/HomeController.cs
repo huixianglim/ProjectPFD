@@ -10,13 +10,14 @@ using System.Diagnostics.Metrics;
 using System.Text.Json;
 
 
+
 namespace PFD.Controllers
 {
     public class HomeController : Controller
     {
         private UsersDAL userContext = new UsersDAL();
         private readonly ILogger<HomeController> _logger;
-        
+        private CrosscheckDAL crossCheckContext = new CrosscheckDAL();
 
 
         public HomeController(ILogger<HomeController> logger)
@@ -108,6 +109,35 @@ namespace PFD.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpPost]
+        public ActionResult FaceID(IFormCollection form)
+        {
+
+            string id = form["face-verify"];
+
+            Crosschecks? check = crossCheckContext.GetUserDetails(id);
+
+            if (check != null)
+            {
+                Users details =userContext.GetDetails(check.user_id);
+
+                Users? user = userContext.Login(details.Email, details.Password);
+                if (user == null)
+                {
+
+                    TempData["Error"] = true;
+                    return View();
+                }
+                else
+                {
+                    var jsonString = JsonSerializer.Serialize(user);
+                    HttpContext.Session.SetString("AccountObject", jsonString);
+                    //Redirect user back to the index view through an action
+                    return RedirectToAction("Index", "Main");
+                }
+            }
+            return View();
+        }
 
     }
 }

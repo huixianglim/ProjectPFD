@@ -77,6 +77,37 @@ namespace PFD.DAL
         }
 
 
+        public Users? GetDetails(int ID)
+        {
+            SqlCommand cmd = conn.CreateCommand();
+
+            cmd.CommandText = @"SELECT * FROM Users WHERE UserID = @userID";
+            cmd.Parameters.AddWithValue("@userID", ID);
+            conn.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+            Users? user = null;
+
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    user = new Users();
+                    user.Name = reader.GetString(0);
+                    user.Email = reader.GetString(1);
+                    user.UserID = reader.GetInt32(2);
+                    user.Password = reader.GetString(3);
+                    user.Money = reader.GetDecimal(4);
+
+                }
+            }
+            conn.Close();
+
+
+            return user;
+        }
+
+
 
 
 
