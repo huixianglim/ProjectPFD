@@ -21,7 +21,10 @@ if exists (select * from sysobjects
   drop table dbo.Users;
 GO
 
-
+if exists (select * from sysobjects 
+  where id = object_id('dbo.Crosscheck') and sysstat & 0xf = 3)
+  drop table dbo.Crosscheck;
+GO
 
 
 
@@ -63,6 +66,17 @@ CREATE TABLE dbo.Transactions
 
 );
 GO
+
+CREATE TABLE dbo.Crosscheck 
+(
+	check_id varchar(500) NOT NULL,
+	user_id int NOT NULL
+    Primary KEY(check_id),
+);
+GO
+INSERT INTO [dbo].[Crosscheck] ([check_id] ,[user_id]) VALUES ('HuiXiang', 2);
+INSERT INTO [dbo].[Crosscheck] ([check_id], [user_id]) VALUES ('Wesley', 1);
+INSERT INTO [dbo].[Crosscheck] ([check_id], [user_id]) VALUES ('Kenan', 3);
 
 
 SET IDENTITY_INSERT [dbo].[Users] ON

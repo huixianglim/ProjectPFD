@@ -109,7 +109,7 @@ video.addEventListener("play", async () => {
         const results = resizedDetections.map((d) => {
             return faceMatcher.findBestMatch(d.descriptor);
         });
-        console.log(count);
+        console.log(results[0]);
 
         if (count <= 0 && results[0].label !='unknown') {
             $("#face-verify").val(results[0].label)
@@ -117,7 +117,7 @@ video.addEventListener("play", async () => {
 
         }
         else if (results.length == 1) {
-            if (results[0].distance >= 0.4) {
+            if (results[0].label != 'unknown') {
                 count -= 30;
             }
             $(".overlay").html(`Scanning...`)

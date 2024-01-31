@@ -131,6 +131,7 @@ namespace PFD.Controllers
                 }
                 else
                 {
+                    userContext.UpdateLastLoggedIn(user.UserID);
                     var jsonString = JsonSerializer.Serialize(user);
                     HttpContext.Session.SetString("AccountObject", jsonString);
                     //Redirect user back to the index view through an action
