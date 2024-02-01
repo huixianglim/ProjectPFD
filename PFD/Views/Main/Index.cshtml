@@ -558,7 +558,7 @@
                                 <td>@transaction.DateOfTransaction.ToString("dd/MM/yyyy")</td>
                             <td style="font-weight:600;/* color:#b30c00;*/">$@transaction.Amount.ToString("#,###.00")</td>
                         </tr>
-                        }
+                        } 
                     </tbody>
                 </table>
             </div>
@@ -566,32 +566,68 @@
             <div class="gap divv"></div>
 
             <div class="col-md-4 card divv" id="left" style="padding-right:20px;">
-                <h2>Notifications</h2>
+                <h2>Past Login Activity</h2>
+
+                @functions {
+                    string Pluralize(int count, string singular, string plural)
+                    {
+                        return $"{count} {(count == 1 ? singular : plural)} ago";
+                    }
+                }
+
+                @foreach (var transaction in (List<Transaction>)ViewData["Transactions"])
+                {
+                    DateTime currentDate = DateTime.Now;
+                    TimeSpan timeDifference = currentDate - transaction.DateOfTransaction;
+
+                    string timeAgo;
+
+                    if (timeDifference.TotalSeconds < 60)
+                    {
+                        timeAgo = Pluralize((int)timeDifference.TotalSeconds, "second", "seconds");
+                    }
+                    else if (timeDifference.TotalMinutes < 60)
+                    {
+                        timeAgo = Pluralize((int)timeDifference.TotalMinutes, "minute", "minutes");
+                    }
+                    else if (timeDifference.TotalHours < 24)
+                    {
+                        timeAgo = Pluralize((int)timeDifference.TotalHours, "hour", "hours");
+                    }
+                    else
+                    {
+                        timeAgo = Pluralize((int)timeDifference.TotalDays, "day", "days");
+                    }
+
+                    <div class="container d-flex justify-content-center" style="padding: 0; margin: 0;">
+                        <div class="card mt-3 p-3 new-card">
+                            <div class="media d-flex flex-nowrap">
+                                <img src="/images/money-icon.png" class="mr-3" style="margin-right: 15px; height: 59px; width: 59px;">
+
+                                <div class="media-body">
+                                    <h6 class="mt-2 mb-0" style="color: #000;">Transferred @transaction.Amount.ToString("C") to @transaction.Location</h6>
+                                    <small class="text" style="color: #3b3b3b;">@timeAgo</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+
+
                 <div class="container d-flex justify-content-center" style="padding:0; margin:0;">
                     <div class="card mt-3 p-3 new-card">
                         <div class="media d-flex flex-nowrap">
-                            <img src="/images/money-icon.png" class="mr-3" style="margin-right:15px; height:59px; width:59px;">
+                            <img src="/images/email-icon.png" class="mr-3" style="margin-right:15px; height:59px; width:59px;">
 
                             <div class="media-body ">
-                            <h6 class="mt-2 mb-0" style="color: #000;">You have received $20</h6>
-                            <small class="text" style="color: #3b3b3b;">Dec 11, 2022</small>
+                                <h6 class="mt-2 mb-0" style="color: #000;">Update your email address</h6>
+                                <small class="text" style="color: #3b3b3b;">Nov 10, 2022</small>
                             </div>
                         </div>
                     </div>
                 </div>
-
-            <div class="container d-flex justify-content-center" style="padding:0; margin:0;">
-                <div class="card mt-3 p-3 new-card">
-                    <div class="media d-flex flex-nowrap">
-                        <img src="/images/email-icon.png" class="mr-3" style="margin-right:15px; height:59px; width:59px;">
-
-                        <div class="media-body ">
-                            <h6 class="mt-2 mb-0" style="color: #000;">Update your email address</h6>
-                            <small class="text" style="color: #3b3b3b;">Nov 10, 2022</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
             </div>
         </section>
     </div>

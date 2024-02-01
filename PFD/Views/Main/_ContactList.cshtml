@@ -36,15 +36,15 @@
 
     @foreach (var item in Model)
     {
-        <div class="container d-flex flex-row pay-row w-100 align-items-center list" data-name = "@item.Name">
+        <div class="container d-flex flex-row pay-row w-100 align-items-center list" data-name="@item.Name">
             <a href='~/Main/Details/@item.ContactID' class="d-flex flex-row w-100 align-items-center contacts">
-               <p class="icon">@GetInitials(@item.Name)</p>
-                    <div class="d-flex flex-column align-items-left justify-content-center">
-                    <p style="margin-bottom:4px; font-weight: 600;">@item.Name</p>
+                <p class="icon">@GetInitials(@item.Name)</p>
+                <div class="d-flex flex-column align-items-left justify-content-center">
+                    <b style="margin-bottom:4px; font-weight: 600;">@item.Name</b>
                     <p>@FormatPhoneNumber(@item.Number)</p>
-                    </div>
-                
-        
+                </div>
+
+
             </a>
         </div>
       
@@ -55,3 +55,33 @@
 </div>
 
 
+<script>
+
+    let msg = new SpeechSynthesisUtterance();
+    let contacts = document.querySelectorAll('.contacts');
+
+    contacts.forEach((contact) => {
+        contact.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent the default navigation behavior
+
+            let contactName = contact.querySelector('b:nth-child(1)').innerText;
+            //let phoneNumber = contact.querySelector('p:nth-child(2)').innerText;
+
+            // Concatenate name and phone number
+            msg.text = `Transfer to ${contactName}`;
+
+            contact.style.backgroundColor = "yellow";
+            speechSynthesis.speak(msg);
+
+            let interval = setInterval(() => {
+                if (!speechSynthesis.speaking) {
+                    contact.style.removeProperty('background-color');
+                    clearInterval(interval);
+
+                    // Manually trigger the navigation after speech synthesis
+                    window.location.href = contact.getAttribute('href');
+                }
+            }, 100);
+        });
+    });
+</script>

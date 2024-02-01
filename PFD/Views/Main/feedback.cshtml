@@ -322,6 +322,96 @@
             margin-right: 10px;
         }
 
+            .comment{
+                width:80%;
+                border-radius:20px;
+                background: #E7E5E5;
+            }
+            
+            span.ratings{
+                font-size:20px;
+                color : yellow;
+            }
+
+              .button {
+            background-color: black;
+            border-radius: 20%;
+            z-index: 100000;
+            position: fixed;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            bottom: 10%;
+            left: 5%;
+            width: 90px;
+            height: 90px;
+            transition: all 0.2s ease-out;
+            color: white;
+        }
+
+            .button:hover {
+                cursor: pointer;
+            }
+
+            .button > i {
+                color: inherit;
+                font-size: 2.3vw;
+            }
+
+            .button.active {
+                transform: scale(1.05);
+                color: greenyellow;
+            }
+            
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            color: black;
+            background-color: white;
+            padding: 5px 20px;
+            z-index: 1;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        video {
+            /*        position: fixed;
+                                    top: 0;
+                                    left: 0;*/
+            display: inline-block;
+            width: 300px;
+            z-index: -1;
+        }
+
+        .video-placeholder {
+            display: inline-block;
+            width: 300px;
+            height: 225px;
+            background-color: #fff;
+        }
+
+        .container-vid {
+            position: fixed;
+            padding-left: 0;
+            top: 100px;
+            left: 0;
+            margin-bottom: 50px; /* Adjust the margin-bottom value as needed to create space between the text and the button */
+            z-index: 2;
+            width: 300px;
+            height: 225px;
+        }
+
+        .container-vid2 {
+            position: fixed;
+            padding-left: 0;
+            top: 100px;
+            left: 0;
+            margin-bottom: 50px; /* Adjust the margin-bottom value as needed to create space between the text and the button */
+            z-index: 1;
+        }
+
         .ratings {
             font-size: 18px;
             color: #ffc107;
@@ -414,15 +504,36 @@
 
 
 
+
 </div>
+
+    <div class="container-vid">
+        <video id="video" autoplay ></video>
+
+        <p class="overlay"></p>
+    </div>
+
+    <div class="container-vid2">
+        <div class="video-placeholder d-flex align-content-center justify-content-center">
+            <div class="placeholder-text d-flex align-content-center justify-content-center"> <dotlottie-player src="https://lottie.host/99563d16-720f-484d-8140-e2a05fddb155/XURw73cbCQ.json" background="transparent" speed="1" style="width: 150px; height: 225px;" loop autoplay></dotlottie-player></div>
+        </div>
+
+    </div>
+
+    <div class="button" data-type="feedback" data-activated="false" data-page = "1">
+        <i class="fa fa-microphone"></i>
+    </div>
+
 
 
 <partial name="/Views/Main/_allfeedbacks.cshtml" model="@Model.FeedbackList" />
 
 
 @section Scripts{
+    <script src="~/js/audio.js" asp-append-version="true"></script>
+    <script type="module" src="~/js/recog.js" asp-append-version="true"></script>
 
-    <script>
+    <script asp-append-version="true">
         var tabs = $(".tab")
         var current = 0
         tabs[current].style.display = 'grid'
@@ -444,15 +555,12 @@
                 current += n
                
             }
-            console.log(current)
             if (current == 3){
-                console.log("LOL")
-                console.log($("#regForm"))
+
                 $("#regForm").submit()
             }
             else{
                 tabs[current].style.display = 'grid'
-                console.log(current)
             }
            
             if (current == 0) {
@@ -463,7 +571,7 @@
             }
 
 
-
+            $(".button").data("page",current+1);
 
 
         }
