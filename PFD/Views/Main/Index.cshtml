@@ -839,7 +839,7 @@
         * Test simple click screen reader
         */
         let msg = new SpeechSynthesisUtterance();
-        let tags = document.querySelectorAll('p,h2,h3,h1,h6,a,small');
+        let tags = document.querySelectorAll('p,h2,h3,h1,h6,small');
         tags.forEach((tag) => {
             tag.addEventListener('click', (e) => {
 
