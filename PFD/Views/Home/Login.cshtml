@@ -129,8 +129,8 @@
                         <button class="btn btn-primary btn-block" type="submit">Log In</button>
                     </form>
 
-                    <form asp-action="faceId" class="faceSubmit">
-                        <input type="hidden" name="face-verify" id="face-verify" value="" />
+                    <form asp-action="FaceID" method="post" class="faceSubmit" enctype="multipart/form-data">
+                        <input type="hidden" name="face_verify" id="face_verify" value="" />
                     </form>
                     <button id="faceRecog" onclick="start()">
                         Face ID

@@ -1,38 +1,38 @@
 ﻿@model IEnumerable<PFD.Models.Feedback>
 
 
-<div id="comments">
-    <h3 class="text-center mt-3">Comments</h3>
+<div class="card">
+    <h3 class="mid">Reviews</h3>
+    <div id="comments" class="scrollable">
+        @foreach (var item in Model)
+        {
+            <div class="comment">
+                <div class="review-section">
+                    <div class="review-type">
+                        <span class="nimby">ChatBot:</span>
+                        <span class="ratings">@item.ChatBotScore <i class="fa fa-star" aria-hidden="true"></i></span>
+                    </div>
+                    <p class="feedback">@item.ChatBotFeedback</p>
+                </div>
 
-    @foreach(var item in Model){
-        <div class="d-flex m-3 comment justify-content-between  ">
-            <div class="m-3">
-                <h5>ChatBot</h5>
-                <p>@item.ChatBotScore  <i class="fa fa-star" aria-hidden="true"></i></p>
-                <p>@item.ChatBotFeedback</p>
+                <div class="review-section">
+                    <div class="review-type">
+                        <span class="nimby">Voice Recognition:</span>
+                        <span class="ratings">@item.VoiceScore <i class="fa fa-star" aria-hidden="true"></i></span>
+                    </div>
+                    <p class="feedback">@item.VoiceFeedback</p>
+                </div>
+
+                <div class="review-section">
+                    <div class="review-type">
+                        <span class="nimby">Gesture Recognition:</span>
+                        <span class="ratings">@item.GestureScore <i class="fa fa-star" aria-hidden="true"></i></span>
+                    </div>
+                    <p class="feedback">@item.GestureFeedback</p>
+                </div>
             </div>
-
-            <div class="m-3">
-                <h5>Voice Recognition </h5>
-                <p>@item.VoiceScore <i class="fa fa-star" aria-hidden="true"></i></p>
-
-                <p>@item.VoiceFeedback</p>
-            </div>
-
-            <div class="m-3">
-                <h5>Gesture Recognition</h5>
-                <p>@item.GestureScore  <i class="fa fa-star" aria-hidden="true"></i></p>
-
-                <p>@item.GestureFeedback</p>
-            </div>
-            
-    
-
-        </div>
-
-
-    }
-
+        }
+    </div>
 </div>
 
 

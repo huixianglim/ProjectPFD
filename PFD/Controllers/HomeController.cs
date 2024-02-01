@@ -114,7 +114,7 @@ namespace PFD.Controllers
         public ActionResult FaceID(IFormCollection form)
         {
 
-            string id = form["face-verify"];
+            string id = form["face_verify"];
 
             Crosschecks? check = crossCheckContext.GetUserDetails(id);
 
