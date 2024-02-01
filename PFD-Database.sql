@@ -83,9 +83,9 @@ SET IDENTITY_INSERT [dbo].[Users] ON
 INSERT [dbo].[Users] ([Name], [Password], [Money], [LastLoggedIn], [UserID], [Email]) VALUES 
 ('Wesley Khalifa', 'pass123', 1234, '2024-01-28T12:00:00', 1, '123@gmail.com');
 INSERT [dbo].[Users] ([Name], [Password], [Money], [LastLoggedIn], [UserID], [Email]) VALUES 
-('Johnny', 'pass124', 2345, '2024-01-27T08:30:00', 2, '124@gmail.com');
+('Hui Xiang', 'pass124', 2345, '2024-01-27T08:30:00', 2, '124@gmail.com');
 INSERT [dbo].[Users] ([Name], [Password], [Money], [LastLoggedIn], [UserID], [Email]) VALUES 
-('Cannon', 'pass125', 234, '2024-01-26T18:45:00', 3, '125@gmail.com');
+('Kenan', 'pass125', 234, '2024-01-26T18:45:00', 3, '125@gmail.com');
 INSERT [dbo].[Users] ([Name], [Password], [Money], [LastLoggedIn], [UserID], [Email]) VALUES 
 ('Garthic Phone', 'pass125', 0, '2024-01-25T10:15:00', 4, '126@gmail.com');
 INSERT [dbo].[Users] ([Name], [Password], [Money], [LastLoggedIn], [UserID], [Email]) VALUES 
