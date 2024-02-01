@@ -10,3 +10,9 @@
         width: 80% !important;
     }
 }
+
+@media only screen and (max-width: 400px) {
+    .icon{
+        margin-right:40px!important;
+    }
+}
