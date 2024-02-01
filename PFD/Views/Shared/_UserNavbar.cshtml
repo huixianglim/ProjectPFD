@@ -64,6 +64,54 @@
         .goog-te-combo {
             border: 0px;
         }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        .btn-close {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 10px;
+        }
+
+        img {
+            /* Add styles for the profile picture */
+            width: 100px; /* Adjust as needed */
+            height: 100px; /* Adjust as needed */
+            border-radius: 50%; /* Make it round */
+        }
+
+        form {
+            /* Add styles for the form if needed */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            /* Add styles for the button if needed */
+        }
+
     </style>
 
 
@@ -113,6 +161,9 @@
                     </a>
                     <ul>
                         <li>
+                            <a class="navbar-links2" id="logout-btn" style="padding-top:0" onclick="showPopup()">UPDATE EMAIL</a>
+                        </li>
+                        <li>
                             <a asp-controller="Home" asp-action="LogOut"  class="navbar-links2" id="logout-btn" style="padding-top:0">LOG OUT</a>
 
                         </li>
@@ -132,6 +183,28 @@
         </div>
     </nav>
 
+    <!-- Profile Picture and Update Email Form inside Popup -->
+    <div id="popup" class="popup">
+        <button type="button" class="btn-close" aria-label="Close" onclick="hidePopup()"></button>
+        <img src="/Images/profile-pic.jpg" alt="Profile Picture">
+
+        <!-- Update Email Form -->
+        <form>
+            <label for="currentEmail">Current Email:</label>
+            <input type="email" id="currentEmail" name="currentEmail" readonly>
+
+            <label for="newEmail">New Email:</label>
+            <input type="email" id="newEmail" name="newEmail" required>
+
+            <label for="confirmEmail">Confirm Email:</label>
+            <input type="email" id="confirmEmail" name="confirmEmail" required>
+
+            <button type="submit">Update Email</button>
+        </form>
+    </div>
+
+
+
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL }, 'google_translate_element');
@@ -139,3 +212,14 @@
     </script>
 
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script>
+        // JavaScript functions to show and hide the pop-up
+        function showPopup() {
+            document.getElementById('popup').style.display = 'block';
+        }
+
+        function hidePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+    </script>
