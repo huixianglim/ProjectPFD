@@ -34,6 +34,7 @@ function stopWebcam() {
         // Reset the video element's source to stop displaying the webcam feed
         video.srcObject = null;
         $(".container-vid").hide()
+        $(".overlay").hide()
 
     }
     $(".face-error").show();
@@ -51,6 +52,8 @@ function startWebcam() {
             video.srcObject = stream;
             webcamStream = stream;
             $(".container-vid").show()
+            $(".overlay").show()
+
 
             $(".container-vid2").hide()
         })
@@ -111,9 +114,9 @@ video.addEventListener("play", async () => {
         });
         console.log(results[0]);
 
-        if (count <= 0 && results[0].label !='unknown') {
-            $("#face-verify").val(results[0].label)
-            $(".faceSubmit").submit()
+        if (count <= 0 && results[0].label !='unknown' && results.length != 0) {
+           await  $("#face-verify").val(results[0].label)
+           $(".faceSubmit").submit()
 
         }
         else if (results.length == 1) {
