@@ -430,6 +430,78 @@
             text-align: center;
             padding-top: 20px;
         }
+        @@media only screen and (max-width: 600px) {
+        #regForm {
+            padding: 20px; 
+        }
+
+        .card {
+            width: 100%; 
+        }
+
+        .comment {
+            flex-direction: column; 
+        }
+
+        .review-section {
+            margin-bottom: 10px;
+        }
+
+        
+        .step {
+            margin: 5px; 
+        }
+
+        
+        .container-vid,
+        .container-vid2 {
+            display: none;
+        }
+
+        
+        .button {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+    @@media only screen and (max-width: 767px) {
+        .card {
+            width: 90%;
+        }
+
+        .comment {
+            flex-direction: column;
+        }
+
+        .review-section {
+            margin-bottom: 10px;
+        }
+
+    
+
+        .step {
+            margin: 5px;
+        }
+
+
+
+        .container-vid,
+        .container-vid2 {
+            display: none;
+        }
+
+        .button {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+    @@media only screen and (max-width: 1199px) and (min-width: 768px) {
+        .card {
+            width: 70%;
+        }
+
+    
+    }
     </style>
 }
 <!-- Fontawesome CDN Link -->
