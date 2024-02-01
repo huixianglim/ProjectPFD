@@ -110,38 +110,43 @@ namespace PFD.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult FaceID(IFormCollection form)
+        public ActionResult FaceID(IFormCollection? form, string? face_verify)
         {
             if (form == null)
             {
                 Console.WriteLine("Hello");
             }
-
-            string id = form["face_verify"];
-
-            Crosschecks? check = crossCheckContext.GetUserDetails(id);
-
-            if (check != null)
+            else
             {
-                Users details =userContext.GetDetails(check.user_id);
+                string id = form["face_verify"];
 
-                Users? user = userContext.Login(details.Email, details.Password);
-                if (user == null)
-                {
+                Crosschecks? check = crossCheckContext.GetUserDetails(id);
 
-                    TempData["Error"] = true;
-                    return View();
-                }
-                else
+                if (check != null)
                 {
-                    userContext.UpdateLastLoggedIn(user.UserID);
-                    var jsonString = JsonSerializer.Serialize(user);
-                    HttpContext.Session.SetString("AccountObject", jsonString);
-                    //Redirect user back to the index view through an action
-                    return RedirectToAction("Index", "Main");
+                    Users details = userContext.GetDetails(check.user_id);
+
+                    Users? user = userContext.Login(details.Email, details.Password);
+                    if (user == null)
+                    {
+
+                        TempData["Error"] = true;
+                        return View();
+                    }
+                    else
+                    {
+                        userContext.UpdateLastLoggedIn(user.UserID);
+                        var jsonString = JsonSerializer.Serialize(user);
+                        HttpContext.Session.SetString("AccountObject", jsonString);
+                        //Redirect user back to the index view through an action
+                        return RedirectToAction("Index", "Main");
+                    }
                 }
             }
+
+           
             return View();
         }
 
