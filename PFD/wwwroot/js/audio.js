@@ -53,7 +53,7 @@ $(document).ready(() => {
     var previousTranscript = "";
 
 
-    recognition.onresult = (event) => {
+    recognition.onresult = async (event) => {
         const transcript = event.results[0][0].transcript;
 
         if ($("#popupNavContainer").css("display") != "none") {
@@ -63,20 +63,27 @@ $(document).ready(() => {
                 //console.log("test")
                 //console.log($(".popupNavResult")[numbers[transcript] - 1])
                 //$(".popupNavResult")[numbers[transcript] - 1].trigger("click");
-       
-                var targetElement = $(".popupActivated")[numbers[transcript] - 1];
-                targetElement.click(); // or targetElement[0].click();
+                var popupActivatedElements = $(".popupActivated");
+                if (popupActivatedElements.length > numbers[transcript] - 1) {
+                    var targetElement = $(".popupActivated")[numbers[transcript] - 1];
+                    targetElement.click();
+                }
+             // or targetElement[0].click();
             }
             else {
                 if (!(transcript.includes("nav") || transcript.includes("close"))) {
                     if (transcript == "empty") {
-                        $("#searchQueryInput2").val("");
+                       $("#searchQueryInput2").val("");
 
                     }
                     else {
-                        $("#searchQueryInput2").val(transcript);
+                       $("#searchQueryInput2").val(transcript);
                     }
-                    $("#searchQueryInput2").trigger("input");
+
+                    document.getElementById('searchQueryInput2').dispatchEvent(new Event('input', {
+                        bubbles: true
+                    }))
+                    console.log("Test")
                 }
                 
             }
@@ -94,6 +101,7 @@ $(document).ready(() => {
             }
             else {
                 if ($(".button").data("type") == "money") {
+                    console.log(transcript)
                     if (transcript.includes("$")) {
                         let amountWithoutDollarSign = transcript.replace(/\$/g, '');
                         let value = parseFloat(amountWithoutDollarSign)
@@ -186,6 +194,10 @@ $(document).ready(() => {
                         }
                         else {
                             let input = $(".tab input[type = text]")
+
+                            if (transcript.includes("empty")) {
+                                input.eq(current_page - 1).val()
+                            }
                             //console.log(input)
                             input.eq(current_page -1).val(transcript)
 
