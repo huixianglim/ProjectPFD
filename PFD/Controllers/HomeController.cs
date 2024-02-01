@@ -113,6 +113,10 @@ namespace PFD.Controllers
         [HttpPost]
         public ActionResult FaceID(IFormCollection form)
         {
+            if (form == null)
+            {
+                Console.WriteLine("Hello");
+            }
 
             string id = form["face_verify"];
 
