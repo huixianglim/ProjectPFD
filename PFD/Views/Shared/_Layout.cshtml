@@ -240,7 +240,7 @@
     </header>
 
 
-    <main role="main" style="padding-top: 70px;">
+    <main role="main" style="padding-top: 70px !important;">
 
         @RenderBody()
         <!-- Your main content goes here -->
@@ -378,6 +378,18 @@
     <script src="https://unpkg.com/@@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
     <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
     <script type="text/javascript" asp-append-version="true">
+        $(document).ready(() => {
+            console.log('foo');
+            const menu = document.querySelector('#mobile-menu');
+            const menuLinks = document.querySelector('.navbar-menu');
+
+            menu.addEventListener('click', function () {
+                console.log("navbbutton");
+                menu.classList.toggle('is-active');
+                menuLinks.classList.toggle('active');
+            });
+        });
+
         (function (d, t) {
             var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
             v.onload = function () {
@@ -449,9 +461,10 @@
                 }
             }
 
-
-
+          
         })
+
+        
     </script>
     
     <script src="~/js/site.js" asp-append-version="true"></script>
@@ -473,7 +486,7 @@
         });
 
 
-
+        
     </script>
 </body>
 </html>
