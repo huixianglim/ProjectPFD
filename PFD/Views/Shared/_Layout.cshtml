@@ -229,11 +229,11 @@
         @{
             var AccountString = Context.Session.GetString("AccountObject");
             if (AccountString == null){
-                                           @await Html.PartialAsync("_Nav.cshtml")
+                                               @await Html.PartialAsync("_Nav.cshtml")
 
             }
             else{
-                                            @await Html.PartialAsync("_UserNavbar.cshtml")
+                                                @await Html.PartialAsync("_UserNavbar.cshtml")
 
             }
         }
@@ -286,6 +286,14 @@
                         <p class="icon2">2</p>
                         <div class="d-flex flex-column align-items-left justify-content-center">
                             <p style="margin-bottom:4px; font-weight: 600;">PayNow</p>
+                        </div>
+
+                    </a>
+
+                    <a asp-action="Feedback" data-name="Feedback" class="d-flex flex-row align-items-center popupNavResult popupActivated" style="display:none!important;">
+                        <p class="icon2">4</p>
+                        <div class="d-flex flex-column align-items-left justify-content-center">
+                            <p style="margin-bottom:4px; font-weight: 600;">Feedback</p>
                         </div>
 
                     </a>
@@ -431,6 +439,7 @@
         $("#searchQueryInput2").on("input", (e) => {
             var options = document.getElementsByClassName("popupNavResult");
             searchcounter = 0 
+            console.log(e.target.value)
             for (let i = 0; i < options.length; i++) {
                 let name = (options[i].dataset.name).toLowerCase()
                 if (!name.includes(e.target.value.toLowerCase())) {

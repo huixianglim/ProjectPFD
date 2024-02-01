@@ -2,10 +2,8 @@
     ViewData["Title"] = "Login";
     
 }
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Gathering Log In form Responsive Widget Template :: W3layouts</title>
+@*<head>
+    <title>Gathering Log In form Responsive Widget Template</title>
     <!-- Meta tag Keywords -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8" />
@@ -15,9 +13,92 @@
     <link rel="stylesheet" href="~/css/style.css" type="text/css" media="all"  asp-append-version="true"/>
     <!--//Style-CSS -->
     <link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css" media="all">
+</head>*@
 
-</head>
-<body>
+
+@section head{
+    <link href="//fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/css/style.css" type="text/css" media="all" asp-append-version="true" />
+
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css" media="all">
+
+}
+@section style{
+    <style>
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            color: black;
+            background-color: white;
+            padding: 5px 20px;
+            z-index: 1;
+            font-size: 1rem;
+            font-weight: 700;
+            display:none;
+        }
+
+        #video {
+            /*        position: fixed;
+                    top: 0;
+                    left: 0;*/
+            display: inline-block;
+            width: 300px;
+            z-index: -1;
+            height:225px;
+        }
+
+        .video-placeholder {
+            display: inline-block;
+            width: 300px;
+            height: 225px;
+            background-color:#fff;
+        }
+
+        .container-vid {
+            position: fixed;
+            padding-left: 0;
+            top: 100px;
+            left: 0;
+            margin-bottom: 50px; /* Adjust the margin-bottom value as needed to create space between the text and the button */
+            z-index:2;
+            width:300px;
+            height:225px;
+            display:none;
+
+        }
+
+        .container-vid2 {
+            position: fixed;
+            padding-left: 0;
+            top: 100px;
+            left: 0;
+            margin-bottom: 50px; /* Adjust the margin-bottom value as needed to create space between the text and the button */
+            z-index: 1;
+            display:none;
+        }
+
+        #faceRecog{
+            margin-top:20px;
+            border-radius:5px;
+            border:none;
+            background:blue;
+            color:white;
+            font-weight:bold;
+            padding: 15px 15px;
+        }
+
+        .face-error{
+            display:none;
+            margin-top:10px;
+            font-weight:bold;
+            color:#F57474;
+        }
+    </style>
+}
+
+    
     <div class="signinform">
         <!-- container -->
         <div class="wrapper">
@@ -35,6 +116,8 @@
                             <span><i class="fa fa-key" aria-hidden="true"></i></span>
                             <input name="memberpassword" type="Password" id="memberpassword" placeholder="Password" required="">
                         </div>
+                        <p class="face-error">Invalid Scan!</p>
+
                         <div class="form-row bottom">
                             <div class="form-check">
                                 <input type="checkbox" id="remenber" name="remenber" value="remenber">
@@ -42,16 +125,41 @@
                             </div>
                             <a href="#url" class="forgot">Forgot password?</a>
                         </div>
+
                         <button class="btn btn-primary btn-block" type="submit">Log In</button>
                     </form>
 
+                    <form asp-action="FaceID" method="post" class="faceSubmit">
+                        <input type="hidden" name="face_verify" id="face_verify" value="" />
+                    </form>
+                    <button id="faceRecog" onclick="start()">
+                        Face ID
+                    </button>
                     <p class="account">Don't have an account? <a href="#register">Register</a></p>
                 </div>
             </div>
-            <!-- //main content -->
         </div>
-        <!-- //container -->
-        
     </div>
-</body>
-</html>
+
+    <div class="container-vid">
+        <video id="video" autoplay data-type="home"></video>
+
+        <p class="overlay"></p>
+    </div>
+
+    <div class="container-vid2">
+        <div class="video-placeholder d-flex align-content-center justify-content-center">
+            <div class="placeholder-text d-flex align-content-center justify-content-center"> <dotlottie-player src="https://lottie.host/99563d16-720f-484d-8140-e2a05fddb155/XURw73cbCQ.json" background="transparent" speed="1" style="width: 150px; height: 225px;" loop autoplay></dotlottie-player></div>
+
+        </div>
+
+    </div>
+
+@section Scripts{
+    <script src="~/js/face-api.min.js" asp-append-version="true"></script>
+    <script>
+        const basePath = '@Url.Content("~/js")';
+    </script>
+    <script src="~/js/faceRecog.js" asp-append-version="true" type="text/javascript"></script>
+
+}

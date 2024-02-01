@@ -2,11 +2,10 @@
 
 $(document).ready(() => {
     const recognition = new webkitSpeechRecognition();
-    recognition.continuous = true;
-    recognition.interimResults = true;
+    //recognition.continuous = true;
+    //recognition.interimResults = true;
 
     var webkitstarted = false
-    console.log($(".popupNavResult"))
 
     numbers = {
         "start": 1,
@@ -24,12 +23,12 @@ $(document).ready(() => {
     
 
     $(".button").on("mousedown", () => {
-        console.log(webkitstarted)
         if (!webkitstarted) {
 
             recognition.start()
             $(".button").data("record", true)
             $(".button").addClass("active")
+
         }
 
 
@@ -41,40 +40,50 @@ $(document).ready(() => {
        $(".button").removeClass("active")
 
         $(".button").data("record", false)
-        webkitstarted = false
 
     })
     recognition.onstart = () => {
         webkitstarted = true
     }
+    recognition.onend = () => {
+        webkitstarted = false
 
-    recognition.onresult = (event) => {
+    }
+
+    var previousTranscript = "";
+
+
+    recognition.onresult = async (event) => {
         const transcript = event.results[0][0].transcript;
-        console.log(`Transcript: ${transcript}`);
-        console.log(transcript in numbers)
-        console.log($(".button").data("activated"))
-        if ($("#popupNavContainer").css("display") !== "none") {
+
+        if ($("#popupNavContainer").css("display") != "none") {
 
             if (Object.keys(numbers).includes(transcript)) {
 
                 //console.log("test")
                 //console.log($(".popupNavResult")[numbers[transcript] - 1])
                 //$(".popupNavResult")[numbers[transcript] - 1].trigger("click");
-                console.log(numbers[transcript])
-                console.log($(".popupActivated"))
-                var targetElement = $(".popupActivated")[numbers[transcript] - 1];
-                targetElement.click(); // or targetElement[0].click();
+                var popupActivatedElements = $(".popupActivated");
+                if (popupActivatedElements.length > numbers[transcript] - 1) {
+                    var targetElement = $(".popupActivated")[numbers[transcript] - 1];
+                    targetElement.click();
+                }
+             // or targetElement[0].click();
             }
             else {
                 if (!(transcript.includes("nav") || transcript.includes("close"))) {
                     if (transcript == "empty") {
-                        $("#searchQueryInput2").val("");
+                       $("#searchQueryInput2").val("");
 
                     }
                     else {
-                        $("#searchQueryInput2").val(transcript);
+                       $("#searchQueryInput2").val(transcript);
                     }
-                    $("#searchQueryInput2").trigger("input");
+
+                    document.getElementById('searchQueryInput2').dispatchEvent(new Event('input', {
+                        bubbles: true
+                    }))
+                    console.log("Test")
                 }
                 
             }
@@ -92,6 +101,7 @@ $(document).ready(() => {
             }
             else {
                 if ($(".button").data("type") == "money") {
+                    console.log(transcript)
                     if (transcript.includes("$")) {
                         let amountWithoutDollarSign = transcript.replace(/\$/g, '');
                         let value = parseFloat(amountWithoutDollarSign)
@@ -112,6 +122,7 @@ $(document).ready(() => {
 
                 }
                 else if ($(".button").data("type") == "search") {
+
                     const transcript = event.results[0][0].transcript;
                     if (!transcript.includes("close")) {
                         if (transcript == "empty") {
@@ -123,8 +134,79 @@ $(document).ready(() => {
                         }
                         $("#searchQueryInput").trigger("input");
                     }
-  
 
+
+                } else if ($(".button").data("type") == "feedback") {
+              
+                    console.log(transcript)
+                    current_page = $(".button").data("page")
+                    current_page = parseInt(current_page)
+                    page = {
+                        1: 3,
+                        2: "",
+                        3: 2
+
+                    }
+                    stars = {
+                        "five": 0,
+                        "four": 1,
+                        "three": 2,
+                        "two": 3,
+                        "one": 4
+                    }
+
+
+                    if (transcript.includes("continue")) {
+
+                        $("#nextBtn").trigger("click")
+         
+                    }
+                    else if (transcript.includes("back")) {
+
+                        if (current_page != 1) {
+                                $("#prevBtn").trigger("click")
+
+                        }
+
+                    }
+                    else {
+                        const foundWord = Object.keys(stars).find(word => transcript.includes(word));
+
+                        if (foundWord) {
+                            rate_input = ".rate" + page[current_page]
+
+                            if (transcript.includes("stars")) {
+                                let stringWithoutStars = transcript.replace(" stars", "");
+
+
+                                let value = stars[stringWithoutStars]
+                                let starinput = $(rate_input+ " input")
+                                starinput.eq(value).trigger("click")
+
+                            }
+                            else if (transcript.includes("star")) {
+                                let stringWithoutStars = transcript.replace(" star", "");
+
+                                let value = stars[stringWithoutStars]
+                                let starinput = $(rate_input + " input")
+                                starinput.eq(value).trigger("click")
+                            }
+                        }
+                        else {
+                            let input = $(".tab input[type = text]")
+
+                            if (transcript.includes("empty")) {
+                                input.eq(current_page - 1).val()
+                            }
+                            //console.log(input)
+                            input.eq(current_page -1).val(transcript)
+
+                        }
+                    }
+
+
+                    
+                   
                 }
             }
 

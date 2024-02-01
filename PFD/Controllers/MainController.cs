@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 
 using PFD.Models;
 using System.Text.Json;
+using System.Collections.Generic;
 
 namespace PFD.Controllers
 {
@@ -12,15 +13,22 @@ namespace PFD.Controllers
         private ContactsDAL contactsDAL = new ContactsDAL();
         private TransactionDAL transactionDAL = new TransactionDAL();
 
+        private FeedbackDAL feedbackDAL = new FeedbackDAL();
 
         public IActionResult Index()
         {
             var AccountString = HttpContext.Session.GetString("AccountObject");
             var AccountObject = JsonSerializer.Deserialize<Users>(AccountString);
             int userID = AccountObject.UserID;
+            DateTime prevLogin = AccountObject.LastLoggedIn;
+
+            Console.WriteLine(prevLogin);
 
             List<Transaction> transactions = transactionDAL.GetTransactions(userID);
 
+            List<Transaction> transactionFromPrevLogin = transactionDAL.GetTransactionsFromPreviousLogin(userID, prevLogin);
+
+            ViewData["Transactions"] = transactionFromPrevLogin;
 
             return View(transactions);
         }
@@ -34,10 +42,16 @@ namespace PFD.Controllers
         }
 
         [HttpPost]
-        public IActionResult passTemp(IFormCollection? form)
+        public IActionResult CreatePaymentTransaction(IFormCollection? form, double Money, string location)
         {
             if (form != null)
             {
+                var AccountString = HttpContext.Session.GetString("AccountObject");
+                var AccountObject = JsonSerializer.Deserialize<Users>(AccountString);
+                int userID = AccountObject.UserID;
+
+                transactionDAL.CreateTransactions(userID, "PayNow Transfer", Money, location);
+
                 TempData["Success"] = form["tempData"].ToString();
             }
             return RedirectToAction("Index", "Main");
@@ -68,9 +82,23 @@ namespace PFD.Controllers
 
         }
 
+        
+
         public IActionResult feedback()
         {
-            return View();
+            List<Feedback> feedbacks = feedbackDAL.GetFeedbacks();
+            feedbackViewModel page = new feedbackViewModel();
+            page.FeedbackList = feedbacks;
+            return View(page);
+        }
+
+        [HttpPost]
+        public IActionResult feedback(feedbackViewModel feedback)
+        {
+
+            bool check = feedbackDAL.Create(feedback.FormFeedback);
+            Console.WriteLine(check);
+            return RedirectToAction("feedback","Main");
         }
     }
 }
