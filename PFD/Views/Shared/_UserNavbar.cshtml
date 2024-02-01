@@ -1,133 +1,141 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿    @*
+        For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+    *@
 
-@{
-    var AccountString = Context.Session.GetString("AccountObject");
-    var AccountObject = JsonSerializer.Deserialize<Users>(AccountString);
+    @{
+        var AccountString = Context.Session.GetString("AccountObject");
+        var AccountObject = JsonSerializer.Deserialize<Users>(AccountString);
 
-}
-
-<style>
-    #google_translate_element {
-        position: relative;
-        display: inline-block;
-        background-color: #ffffff;
-        padding: 10px;
-  /*      border: 1px solid #ccc;
-        border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);*/
-        font-family: Arial, sans-serif;
-        font-size: 14px;
     }
 
-    .goog-logo-link {
-        display: none !important;
-    }
+    <style>
+        #google_translate_element {
+            position: relative;
+            display: inline-block;
+            background-color: #ffffff;
+            padding: 10px;
+      /*      border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);*/
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        .goog-logo-link {
+            display: none !important;
+        }
 
 
 
-    .goog-te-gadget {
-        color: none !important;
-    }
+        .goog-te-gadget {
+            color: none !important;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
 
- /*   main {
-        padding-top: 0px !important
-    }*/
+        main {
+            padding-top: 0px !important
+        }
 
-    iframe {
-        display: none !important;
-    }
+        iframe {
+            display: none !important;
+        }
 
-    /* Optional: Style the button inside the translation element */
-    .goog-te-combo {
-        font-size: 14px;
-    }
+        /* Optional: Style the button inside the translation element */
+        .goog-te-combo {
+            font-size: 14px;
+        }
 
-    .goog-logo-link {
-        display: none !important;
-    }
+        .goog-logo-link {
+            display: none !important;
+        }
 
-    #google_translate_element span {
-        display: none !important;
-    }
+        #google_translate_element span {
+            display: none !important;
+        }
 
-    .goog-te-gadget {
-        color: transparent !important;
-        font-size: 0px;
-    }
-</style>
+        .goog-te-gadget {
+            color: transparent !important;
+            font-size: 0px;
+        
+        }
+
+        .goog-te-combo {
+            border: 0px;
+        }
+    </style>
 
 
-<nav class="navbar1">
-    <div class="navbar-container1">
+    <nav class="navbar1">
+        <div class="navbar-container1">
 
-        <a href="~/Main/Index" id="navbar-logo">
+            <a href="~/Main/Index" id="navbar-logo">
 
-        </a>
+            </a>
 
-        <div class="navbar-toggle" id="mobile-menu">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
+            <div class="navbar-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
 
-        <ul class="navbar-menu">
-            <li class="navbar-button">
+            <ul class="navbar-menu">
+                <li class="navbar-button">
 
-                <a asp-action="PayNow" class="navbar-links">
-                    @*<div class="alien-img"></div>*@
-                    <p>PayNow</p>
-                </a>
-            </li>
+                    <a asp-action="PayNow" class="navbar-links">
+                        @*<div class="alien-img"></div>*@
+                        <p>PayNow</p>
+                    </a>
+                </li>
 
-            <li class="navbar-button">
+                <li class="navbar-button">
 
-                <a href="" class="navbar-links">
-                    @*<div class="store-img"></div>*@
-                    <p>Savings Goals</p>
-                </a>
-            </li>
+                    <a href="" class="navbar-links">
+                        @*<div class="store-img"></div>*@
+                        <p>Savings Goals</p>
+                    </a>
+                </li>
 
-            <li class="navbar-button">
-                <a onclick="togglePopup('popupNavContainer')" class="navbar-links3" style="border:0px; font-size:15px; background:none;">
-                    <i class="fa fa-search" aria-hidden="true"></i>
-                </a>
-            </li>
+                <li class="navbar-button">
+                    <a onclick="togglePopup('popupNavContainer')" class="navbar-links3" style="border:0px; font-size:15px; background:none;">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </a>
+                </li>
 
-            <li id="google_translate_element"></li>
+                <li id="google_translate_element"></li>
 
-            <li class="navbar-button" id="acc-dropdown">
+                <li class="navbar-button" id="acc-dropdown">
 
-                <a href="" class="navbar-links" style="pointer-events:none;" >
-                    <div class="login-img"></div>
-                    <p>@AccountObject.Name</p>
-                </a>
-                <ul>
-                    <li>
-                        <a asp-controller="Home" asp-action="LogOut"  class="navbar-links2" id="logout-btn" style="padding-top:0">LOG OUT</a>
+                    <a href="" class="navbar-links" style="pointer-events:none;" >
+                        <div class="login-img"></div>
+                        <p>@AccountObject.Name</p>
+                    </a>
+                    <ul>
+                        <li>
+                            <a asp-controller="Home" asp-action="LogOut"  class="navbar-links2" id="logout-btn" style="padding-top:0">LOG OUT</a>
 
-                    </li>
-                </ul>
-            </li>
+                        </li>
+                    </ul>
+                </li>
 
      
-           @*<li class="navbar-button" id="acc-dropdown">
+               @*<li class="navbar-button" id="acc-dropdown">
 
-            </li>*@
-
-
+                </li>*@
 
 
-        </ul>
 
-    </div>
-</nav>
 
-<script type="text/javascript">
-    function googleTranslateElementInit() {
-        new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL }, 'google_translate_element');
-    }
-</script>
+            </ul>
 
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        </div>
+    </nav>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL }, 'google_translate_element');
+        }
+    </script>
+
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
