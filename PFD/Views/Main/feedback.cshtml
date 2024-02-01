@@ -19,17 +19,28 @@
         body {
             background: #eee
         }
+       
 
         #regForm {
             background-color: #ffffff;
             margin: 0px auto;
-            font-family: Raleway;
+            font-family: 'Open Sans';
             padding: 40px;
             border-radius: 10px;
+            animation: fadeIn 2s ease-in-out forwards;
         }
+        @@keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
 
         #register {
-            color: #6A1B9A;
+            color: black;
+            font-family: 'Open Sans';
         }
 
         h1 {
@@ -46,7 +57,9 @@
             margin-bottom: 1rem;
         }
 
-
+        .col-md-8{
+            padding-top: 50px;
+        }
 
         .tab input:focus {
             border: 1px solid #6a1b9a !important;
@@ -62,13 +75,13 @@
         }
 
         button {
-            background-color: #6a1b9a;
+            background-color: black;
             color: #ffffff;
             border: none;
-            border-radius: 50%;
+            border-radius: 10%;
             padding: 10px 20px;
             font-size: 17px;
-            font-family: Raleway;
+            font-family: 'Open Sans';
             cursor: pointer;
             text-align: center;
         }
@@ -155,7 +168,7 @@
             }
 
                 .rate:not(:checked) > label:before {
-                    content: '★ ';
+                    content: '★ ';F
                 }
 
             .rate > input:checked ~ label {
@@ -261,15 +274,53 @@
                 font-size:30px;
             }
 
-            #comments{
-                display:flex;
-                flex-flow:column;
-                width:80%;
-                background:white;
-                border-radius:10px;
-                min-height:10vh;
-                align-items:center;
+        .card {
+            width: 60%;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        #comments {
+            padding: 20px;
+        }
+
+        .scrollable {
+            max-height: 400px; /* Adjust the max height as needed */
+            overflow-y: auto;
+        }
+
+        .comment {
+            background: #f7f7f7;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+            .comment:hover {
+                transform: scale(1.02);
             }
+
+        .review-section {
+            flex: 1;
+        }
+
+        .review-type {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .nimby {
+            font-weight: bold;
+            margin-right: 10px;
+        }
 
             .comment{
                 width:80%;
@@ -361,6 +412,19 @@
             z-index: 1;
         }
 
+        .ratings {
+            font-size: 18px;
+            color: #ffc107;
+            margin-right: 5px;
+        }
+
+        .feedback {
+            line-height: 1.6;
+        }
+        .mid{
+            text-align: center;
+            padding-top: 20px;
+        }
     </style>
 }
 <!-- Fontawesome CDN Link -->
@@ -430,8 +494,8 @@
                 
                 <div style="overflow:auto;" id="nextprevious">
                     <div style="float:right;">
-                        <button type="button" id="prevBtn" onclick="nextPrev(-1)"><i class="fa fa-angle-double-left"></i></button>
-                        <button type="button" id="nextBtn" onclick="nextPrev(1)"><i class="fa fa-angle-double-right"></i></button>
+                        <button type="button" id="prevBtn" onclick="nextPrev(-1)">Prev</button>
+                        <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
                     </div>
                 </div>
             </form>
