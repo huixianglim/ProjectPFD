@@ -26,7 +26,25 @@ if exists (select * from sysobjects
   drop table dbo.Crosscheck;
 GO
 
+if exists (select * from sysobjects 
+  where id = object_id('dbo.Feedback') and sysstat & 0xf = 3)
+  drop table dbo.Feedback;
+GO
 
+
+CREATE TABLE dbo.Feedback 
+(
+  GestureFeedback     varchar(500)     NOT NULL,
+  ChatBotFeedback     varchar(500)     NOT NULL,
+  VoiceFeedback     varchar(500)     NOT NULL,
+  FeedbackID        INT IDENTITY(1,1),
+  GestureScore    INT NOT NULL,
+  VoiceScore    INT NOT NULL,
+  ChatBotScore    INT NOT NULL,
+
+  Primary KEY(FeedbackID),
+);
+GO
 
 CREATE TABLE dbo.Users 
 (
