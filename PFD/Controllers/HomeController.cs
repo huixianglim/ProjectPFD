@@ -85,7 +85,7 @@ namespace PFD.Controllers
                     HttpContext.Session.SetString("AccountObject", jsonString);
                     string Email = emailDAL.GetEmail(user.UserID);
                     HttpContext.Session.SetString("Email", Email);
-                    //Redirect user back to the index view through an action
+
                     return RedirectToAction("Index", "Main");
                 }
             }
