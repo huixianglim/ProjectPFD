@@ -19,7 +19,7 @@ namespace PFD.Models
         [Display(Name = "Monetary Amount")]
         public Decimal Money { get; set; }
 
-        public string Email { get; set; }
+        public string AccessCode { get; set; }
 
         public DateTime LastLoggedIn { get; set; }
 

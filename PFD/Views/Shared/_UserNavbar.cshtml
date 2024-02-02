@@ -2,11 +2,12 @@
         For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
     *@
 
-    @{
-        var AccountString = Context.Session.GetString("AccountObject");
-        var AccountObject = JsonSerializer.Deserialize<Users>(AccountString);
+@{
+    var AccountString = Context.Session.GetString("AccountObject");
+    var AccountObject = JsonSerializer.Deserialize<Users>(AccountString);
 
-    }
+    var Email = Context.Session.GetString("Email");
+}
 
     <style>
         #google_translate_element {
@@ -194,11 +195,10 @@
     
     </div>
 
-
-                <!-- Update Email Form -->
-                <form id="email_update">
-                    <label for="currentEmail">Current Email:</label>
-                    <input type="email" id="currentEmail" name="currentEmail" readonly>
+        <!-- Update Email Form -->
+        <form asp-action="UpdateEmail" asp-controller="Main" id="email_update" >
+            <label for="currentEmail">Current Email:</label>
+            <input type="email" id="currentEmail" name="currentEmail" value="@Email" readonly>
 
                     <label for="newEmail">New Email:</label>
                     <input type="email" id="newEmail" name="newEmail" required>
@@ -230,4 +230,28 @@
         function hidePopup() {
         document.getElementById('email_container').style.display = 'none';
         }
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const newEmailInput = document.getElementById("newEmail");
+            const confirmEmailInput = document.getElementById("confirmEmail");
+
+            function validateEmails() {
+                const newEmailValue = newEmailInput.value.trim();
+                const confirmEmailValue = confirmEmailInput.value.trim();
+
+                if (newEmailValue === confirmEmailValue) {
+                    // Emails match, no error
+                    confirmEmailInput.setCustomValidity("");
+                } else {
+                    // Emails don't match, set custom error message
+                    confirmEmailInput.setCustomValidity("Emails do not match");
+                }
+            }
+
+            // Add event listeners to both input fields
+            newEmailInput.addEventListener("input", validateEmails);
+            confirmEmailInput.addEventListener("input", validateEmails);
+        });
     </script>
