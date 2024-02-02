@@ -36,15 +36,37 @@ namespace PFD.DAL
             conn.Open();
             SqlDataReader reader = cmd.ExecuteReader();
 
-            string email = "K@gmail.com";
+            string email = "";
 
             while (reader.Read())
             {
                 email = reader.GetString(0);
-                Console.WriteLine(email);
             }
 
             return email;
+        }
+
+        public DateTime GetLastUpdatedEmail(int userID)
+        {
+            SqlCommand cmd = conn.CreateCommand();
+
+            cmd.CommandText = @"
+                SELECT LastUpdatedEmail
+                FROM Emails
+                WHERE UserID = @UserID";
+
+            cmd.Parameters.AddWithValue("@UserID", userID);
+            conn.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            DateTime LastUpdatedEmail = DateTime.MinValue;
+
+            while (reader.Read())
+            {
+                LastUpdatedEmail = reader.GetDateTime(0);
+            }
+
+            return LastUpdatedEmail;
         }
 
         public bool UpdateEmail(int UserID, string NewEmail)
