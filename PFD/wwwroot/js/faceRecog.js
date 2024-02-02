@@ -1,11 +1,6 @@
 ﻿
 const video = document.getElementById("video");
 
-//Promise.all([
-//    faceapi.nets.ssdMobilenetv1.loadFromUri(`/models`),
-//    faceapi.nets.faceRecognitionNet.loadFromUri(`/models`),
-//    faceapi.nets.faceLandmark68Net.loadFromUri(`/models`),
-//]).then(startWebcam);
 
 var count = 500;
 var webcamStream;
@@ -114,11 +109,10 @@ video.addEventListener("play", async () => {
         });
         console.log(results[0]);
 
-        if (count <= 0 && results[0].label !='unknown' && results.length != 0) {
+        if (count <= 0 && results.length != 0 && results[0].label != 'unknown') {
             await $("#face_verify").val(results[0].label)
             setTimeout(() => {
-                $(".faceSubmit").submit()
-
+                $("#faceID_submitForm").click()
             },1500)
 
         }

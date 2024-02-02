@@ -113,17 +113,23 @@ namespace PFD.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult FaceID(IFormCollection form)
+        public ActionResult FaceID(IFormCollection? form, string? face_verify)
         {
-
-            string id = form["face_verify"];
-
-            Crosschecks? check = crossCheckContext.GetUserDetails(id);
-
-            if (check != null)
+            if (form == null)
             {
-                Users details =userContext.GetDetails(check.user_id);
+                Console.WriteLine("Hello");
+            }
+            else
+            {
+                string id = form["face_verify"];
+
+                Crosschecks? check = crossCheckContext.GetUserDetails(id);
+
+                if (check != null)
+                {
+                    Users details = userContext.GetDetails(check.user_id);
 
                 Users? user = userContext.Login(details.AccessCode, details.Password);
                 if (user == null)

@@ -162,7 +162,7 @@
                     </a>
                     <ul>
                         <li>
-                            <a class="navbar-links2" id="logout-btn" style="padding-top:0" onclick="showPopup()">UPDATE EMAIL</a>
+                            <a class="navbar-links2" id="updateEmail" style="padding-top:0" onclick="showPopup()">UPDATE EMAIL</a>
                         </li>
                         <li>
                             <a asp-controller="Home" asp-action="LogOut"  class="navbar-links2" id="logout-btn" style="padding-top:0">LOG OUT</a>
@@ -185,23 +185,30 @@
     </nav>
 
     <!-- Profile Picture and Update Email Form inside Popup -->
-    <div id="popup" class="popup">
+<div class="justify-content-center" id="email_container">
+
+    <div id="popup" class="popup email">
         <button type="button" class="btn-close" aria-label="Close" onclick="hidePopup()"></button>
+    <div id="profilepic">
         <img src="/Images/profile-pic.jpg" alt="Profile Picture">
+        <p class="text-center">@AccountObject.Name</p>
+    
+    </div>
 
         <!-- Update Email Form -->
-        <form asp-action="UpdateEmail" asp-controller="Main">
+        <form asp-action="UpdateEmail" asp-controller="Main" id="email_update" >
             <label for="currentEmail">Current Email:</label>
             <input type="email" id="currentEmail" name="currentEmail" value="@Email" readonly>
 
-            <label for="newEmail">New Email:</label>
-            <input type="email" id="newEmail" name="newEmail" required>
+                    <label for="newEmail">New Email:</label>
+                    <input type="email" id="newEmail" name="newEmail" required>
 
-            <label for="confirmEmail">Confirm Email:</label>
-            <input type="email" id="confirmEmail" name="confirmEmail" required>
+                    <label for="confirmEmail">Confirm Email:</label>
+                    <input type="email" id="confirmEmail" name="confirmEmail" required>
 
-            <button type="submit">Update Email</button>
-        </form>
+                    <button type="submit">Update Email</button>
+                </form>
+            </div>
     </div>
 
 
@@ -217,11 +224,11 @@
     <script>
         // JavaScript functions to show and hide the pop-up
         function showPopup() {
-            document.getElementById('popup').style.display = 'block';
+        document.getElementById('email_container').style.display = 'flex';
         }
 
         function hidePopup() {
-            document.getElementById('popup').style.display = 'none';
+        document.getElementById('email_container').style.display = 'none';
         }
     </script>
 

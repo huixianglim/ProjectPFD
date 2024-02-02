@@ -163,6 +163,7 @@ a {
 #acc-dropdown {
     display: inline-block;
     position: relative;
+    min-width: 200px;
 }
 
     #acc-dropdown:hover {
