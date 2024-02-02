@@ -325,6 +325,7 @@ a.forgot {
     color: red;
     margin-top: 2px;
     opacity: 0.8;
+    font-weight:bold;
 }
 
 a.forgot:hover {
