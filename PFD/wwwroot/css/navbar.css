@@ -256,8 +256,12 @@ a {
     border: 0px;
 }
 
-#updateEmail:hover{
+.goog-te-combo:hover{
     cursor:pointer;
+}
+
+#updateEmail:hover {
+    cursor: pointer;
 }
 
 
