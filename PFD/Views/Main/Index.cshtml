@@ -456,7 +456,9 @@
                                     <img src="/images/money-icon.png" class="mr-3" style="margin-right: 15px; height: 59px; width: 59px;">
                                     <div class="media-body">
                                         <h6 class="mt-2 mb-0" style="color: #000;">Transferred @update.Amount.ToString("C") to @update.Location</h6>
-                                        <small class="text" style="color: #3b3b3b;">@GetTimeAgo(@update.DateOfTransaction) ago</small>
+                                        <small class="text relative-time" data-timestamp="@update.DateOfTransaction.ToString("o")">
+                                            @GetTimeAgo(@update.DateOfTransaction) ago
+                                        </small>
                                     </div>
                                 }
                                 else
@@ -464,7 +466,9 @@
                                     <img src="/images/email-icon.png" class="mr-3" style="margin-right:15px; height:59px; width:59px;">
                                     <div class="media-body ">
                                         <h6 class="mt-2 mb-0" style="color: #000;">Updated your email address</h6>
-                                        <small class="text" style="color: #3b3b3b;">@GetTimeAgo(@update.LastUpdatedEmail) ago</small>
+                                    <small class="text relative-time" data-timestamp="@update.LastUpdatedEmail.ToString("o")">
+                                            @GetTimeAgo(@update.LastUpdatedEmail) ago
+                                        </small>
                                     </div>
                                 }
                             </div>
@@ -743,3 +747,57 @@
         return count == 1 ? $"{count} {singular}" : $"{count} {plural}";
     }
 }
+
+<script>
+    function updateRelativeTimes() {
+        // Select all elements with the class 'relative-time' (adjust this class based on your HTML structure)
+        var timeElements = document.querySelectorAll('.relative-time');
+
+        // Loop through each element and initialize its timer
+        timeElements.forEach(function (element) {
+            var timestamp = new Date(element.getAttribute('data-timestamp'));
+            updateRelativeTime(element, timestamp);
+        });
+    }
+
+    function updateRelativeTime(element, timestamp) {
+        // Your existing logic to update the time ago content
+        function updateTimeAgo() {
+            var timeAgo = calculateTimeAgo(timestamp);
+            element.textContent = timeAgo;
+
+            // Adjust the update interval based on timeDifference
+            var timeDifference = new Date() - timestamp;
+            var updateInterval = timeDifference < 60000 ? 1000 : 30000; // Update every second if less than 1 minute, every 30 seconds if 1 minute or more
+
+            setTimeout(updateTimeAgo, updateInterval);
+        }
+
+        updateTimeAgo();
+    }
+
+    function calculateTimeAgo(timestamp) {
+        var currentDate = new Date();
+        var timeDifference = currentDate - timestamp;
+        var seconds = Math.floor(timeDifference / 1000);
+        var minutes = Math.floor(seconds / 60);
+        var hours = Math.floor(minutes / 60);
+        var days = Math.floor(hours / 24);
+
+        if (days > 0) {
+            return days === 1 ? '1 day ago' : days + ' days ago';
+        } else if (hours > 0) {
+            return hours === 1 ? '1 hour ago' : hours + ' hours ago';
+        } else if (minutes > 0) {
+            return minutes === 1 ? '1 minute ago' : minutes + ' minutes ago';
+        } else {
+            return seconds <= 5 ? 'just now' : seconds + ' seconds ago';
+        }
+    }
+
+    // Initial call to updateRelativeTimes
+    updateRelativeTimes();
+</script>
+
+
+
