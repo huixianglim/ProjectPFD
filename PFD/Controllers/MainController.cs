@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using PFD.Models;
 using System.Text.Json;
 using System.Collections.Generic;
+using Microsoft.CognitiveServices.Speech.Transcription;
 
 namespace PFD.Controllers
 {
@@ -14,6 +15,8 @@ namespace PFD.Controllers
         private TransactionDAL transactionDAL = new TransactionDAL();
 
         private FeedbackDAL feedbackDAL = new FeedbackDAL();
+
+        private EmailDAL emailDAL = new EmailDAL();
 
         public IActionResult Index()
         {
@@ -100,5 +103,22 @@ namespace PFD.Controllers
             Console.WriteLine(check);
             return RedirectToAction("feedback","Main");
         }
+
+
+        [HttpPost]
+        public IActionResult UpdateEmail(IFormCollection? form, string newEmail)
+        {
+            if (form != null)
+            {
+                var AccountString = HttpContext.Session.GetString("AccountObject");
+                var AccountObject = JsonSerializer.Deserialize<Users>(AccountString);
+                int userID = AccountObject.UserID;
+                emailDAL.UpdateEmail(userID, newEmail);
+
+                HttpContext.Session.SetString("Email", newEmail);
+            }
+            return RedirectToAction("Index", "Main");
+        }
+
     }
 }
