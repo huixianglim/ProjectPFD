@@ -386,13 +386,13 @@
                                     top: 0;
                                     left: 0;*/
             display: inline-block;
-            width: 300px;
+            width: 250px;
             z-index: -1;
         }
 
         .video-placeholder {
             display: inline-block;
-            width: 300px;
+            width: 250px;
             height: 225px;
             background-color: #fff;
         }
@@ -404,7 +404,7 @@
             left: 0;
             margin-bottom: 50px; /* Adjust the margin-bottom value as needed to create space between the text and the button */
             z-index: 2;
-            width: 300px;
+            width: 250px;
             height: 225px;
         }
 
@@ -430,41 +430,17 @@
             text-align: center;
             padding-top: 20px;
         }
-        @@media only screen and (max-width: 600px) {
-        #regForm {
-            padding: 20px; 
-        }
+        
 
+    @@media (max-width: 1199px){
         .card {
-            width: 100%; 
+            width: 70%;
         }
 
-        .comment {
-            flex-direction: column; 
-        }
-
-        .review-section {
-            margin-bottom: 10px;
-        }
-
-        
-        .step {
-            margin: 5px; 
-        }
-
-        
-        .container-vid,
-        .container-vid2 {
-            display: none;
-        }
-
-        
-        .button {
-            left: 50%;
-            transform: translateX(-50%);
-        }
+    
     }
-    @@media only screen and (max-width: 767px) {
+
+    @@media (max-width: 767px) {
         .card {
             width: 90%;
         }
@@ -485,23 +461,67 @@
 
 
 
-        .container-vid,
-        .container-vid2 {
-            display: none;
-        }
 
-        .button {
-            left: 50%;
-            transform: translateX(-50%);
-        }
+
     }
-    @@media only screen and (max-width: 1199px) and (min-width: 768px) {
-        .card {
-            width: 70%;
-        }
-
     
+
+    @@media (max-width:620px) {
+    video {
+        width: 0px !important;
     }
+
+    .video-placeholder {
+        width: 0px !important;
+        height: 0px !important;
+        display: none !important;
+    }
+
+    .container-vid {
+        width: 100% !important;
+        height: 50px !important;
+        top: 70px !important;
+        left: auto !important;
+    }
+
+    .dashboard-container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .overlay {
+        top: 0 !important;
+        bottom: auto !important;
+        color: white !important;
+        background-color: black !important;
+    }
+
+            @@media only screen and (max-width: 600px) {
+                #regForm {
+                    padding: 20px;
+                }
+
+                .card {
+                    width: 100%;
+                }
+
+                .comment {
+                    flex-direction: column;
+                }
+
+                .review-section {
+                    margin-bottom: 10px;
+                }
+
+
+                .step {
+                    margin: 5px;
+                }
+
+
+             
+            }
+}
     </style>
 }
 <!-- Fontawesome CDN Link -->

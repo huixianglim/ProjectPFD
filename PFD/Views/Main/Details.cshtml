@@ -267,6 +267,42 @@
             }
 
         })
+
+        let msg = new SpeechSynthesisUtterance();
+        let tags = document.querySelectorAll('p,h2,h3,h1,label,a,small');
+        tags.forEach((tag) => {
+            tag.addEventListener('click', (e) => {
+
+                msg.text = e.target.innerText;
+                tag.style.backgroundColor = "yellow";
+                speechSynthesis.speak(msg);
+
+                let interval = setInterval(() => {
+                    if (!speechSynthesis.speaking) {
+                        tag.style.removeProperty('background-color');
+                        clearInterval(interval);
+                    }
+                }, 100);
+
+            });
+        });
+
+        document.getElementById('form-sub').addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent the form from submitting immediately
+
+            let formInput = document.getElementById('Money').value; // Get the value of the input field
+
+            msg.text = "You are confirming the payment of " + formInput + " dollars."; // Customize the message based on the input
+            speechSynthesis.speak(msg);
+
+            let interval = setInterval(() => {
+                if (!speechSynthesis.speaking) {
+                    clearInterval(interval);
+                    // Now you can submit the form or navigate to the next page
+                    document.getElementById('form').submit();
+                }
+            }, 100);
+        });
     </script>
 }
     
