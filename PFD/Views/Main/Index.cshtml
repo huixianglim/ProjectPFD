@@ -427,14 +427,6 @@
                     </thead>*@
                     <tbody>
 
-                        <tr data-speech="Paynow Transfer of $ 20 to Jaden on 11/12/2022" style="vertical-align:middle; margin-bottom:7px;">
-                            <td><p class="icon">@GetInitials("Jaden")</p></td>
-                            <td>Jaden</td>
-                            <td>PayNow Transfer</td>
-                            <td>11/12/2022</td>
-                            <td style="font-weight:600; color:#028000;">$20.00</td>
-                        </tr>
-
                         @foreach (var transaction in Model)
                         {
                         <tr data-speech="{TYPE} to {LOCATION} for {AMOUNT} on {DATE}" style="vertical-align:middle; margin-bottom:7px;">
