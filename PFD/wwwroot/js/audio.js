@@ -98,11 +98,11 @@ $(document).ready(() => {
 
 
             if (transcript.includes("update")) {
-                email_selected_element = "#newEmail"
-                $(email_selected_element).focus()
+                email_selected_element = "newEmail"
+                $("#" + email_selected_element).focus()
             } else if (transcript.includes("confirm")){
-                email_selected_element = "#confirmEmail"
-                $(email_selected_element).focus()
+                email_selected_element = "confirmEmail"
+                $("#" + email_selected_element).focus()
 
             }
             else if (transcript.includes("close")) {
@@ -111,17 +111,25 @@ $(document).ready(() => {
                 close.click();
 
             }
+            else if (transcript.includes("submit")) {
+                $("#email_update > button").click()
+            }
 
             else if (email_selected_element != null) {
                 console.log(transcript.includes("at"))
                 if (transcript.includes("at")) {
                     email_with_space = transcript.replace("at", "@");
                     final_email = email_with_space.replace(/ /g, '');
-                    $(email_selected_element).val(final_email)
+                    $("#"+email_selected_element).val(final_email)
+                    element = document.getElementById(email_selected_element)
+                    element.dispatchEvent(new Event('input'));
+
                 }
                 else if (transcript == "empty") {
-                    $(email_selected_element).val("")
-
+                    $("#" + email_selected_element).val("")
+                    //$(email_selected_element).trigger("input")
+                    element = document.getElementById(email_selected_element)
+                    element.dispatchEvent(new Event('input'));
 
                 }
             }

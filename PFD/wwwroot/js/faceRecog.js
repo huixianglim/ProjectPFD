@@ -111,10 +111,8 @@ video.addEventListener("play", async () => {
 
         if (count <= 0 && results.length != 0 && results[0].label != 'unknown') {
             await $("#face_verify").val(results[0].label)
-            setTimeout(() => {
-                $("#faceID_submitForm").click()
-            },1500)
-
+            $("#faceID_submitForm").click()
+    
         }
         else if (results.length == 1) {
             if (results[0].label != 'unknown') {
