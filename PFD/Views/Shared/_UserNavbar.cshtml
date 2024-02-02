@@ -92,17 +92,26 @@
             border-radius: 50%;
         }
 
-        label {
+        #Email {
             display: block;
             margin-bottom: 5px;
         }
 
-        input {
+        .existingEmail {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            background-color: #f0f0f0;
+        }
+
+        .Input {
             width: 100%;
             padding: 8px;
             margin-bottom: 10px;
             box-sizing: border-box;
         }
+
 
         #updateEmail{
             cursor: pointer;
@@ -192,14 +201,14 @@
 
         <!-- Update Email Form -->
         <form asp-action="UpdateEmail" asp-controller="Main" id="email_update" >
-            <label for="currentEmail">Current Email:</label>
-            <input type="email" id="currentEmail" name="currentEmail" value="@Email" readonly>
+            <label for="currentEmail" id="Email">Current Email:</label>
+            <input type="email" class="existingEmail" id="currentEmail" name="currentEmail" value="@Email" readonly>
 
-                    <label for="newEmail">New Email:</label>
-                    <input type="email" id="newEmail" name="newEmail" required>
+                    <label for="newEmail" id="Email">New Email:</label>
+                    <input type="email" class="Input" id="newEmail" name="newEmail" required>
 
-                    <label for="confirmEmail">Confirm Email:</label>
-                    <input type="email" id="confirmEmail" name="confirmEmail" required>
+            <label for="confirmEmail" id="Email">Confirm Email:</label>
+            <input type="email" class="Input" id="confirmEmail" name="confirmEmail" required>
 
                     <button type="submit">Update Email</button>
                 </form>
