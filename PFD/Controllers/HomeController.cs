@@ -131,25 +131,28 @@ namespace PFD.Controllers
                 {
                     Users details = userContext.GetDetails(check.user_id);
 
-                Users? user = userContext.Login(details.AccessCode, details.Password);
-                if (user == null)
-                {
+                    Users? user = userContext.Login(details.AccessCode, details.Password);
+                    if (user == null)
+                    {
 
-                    TempData["Error"] = true;
-                    return View();
-                }
-                else
-                {
-                    userContext.UpdateLastLoggedIn(user.UserID);
-                    var jsonString = JsonSerializer.Serialize(user);
-                    HttpContext.Session.SetString("AccountObject", jsonString);
-                    string Email = emailDAL.GetEmail(user.UserID);
-                    HttpContext.Session.SetString("Email", Email);
-                    //Redirect user back to the index view through an action
-                    return RedirectToAction("Index", "Main");
+                        TempData["Error"] = true;
+                        return View();
+                    }
+                    else
+                    {
+                        userContext.UpdateLastLoggedIn(user.UserID);
+                        var jsonString = JsonSerializer.Serialize(user);
+                        HttpContext.Session.SetString("AccountObject", jsonString);
+                        string Email = emailDAL.GetEmail(user.UserID);
+                        HttpContext.Session.SetString("Email", Email);
+                        //Redirect user back to the index view through an action
+                        return RedirectToAction("Index", "Main");
+                    }
                 }
             }
+
             return View();
+
         }
 
     }
