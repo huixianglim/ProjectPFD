@@ -54,21 +54,25 @@ namespace PFD.DAL
             return user;
         }
 
-        public void UpdateLastLoggedIn(int userId)
+        public DateTime UpdateLastLoggedIn(int userId)
         {
+            DateTime lastLoggedIn;
+
             using (conn)
             {
                 conn.Open();
 
                 // Create a SQL command with the update query
-                using (SqlCommand command = new SqlCommand($"UPDATE Users SET LastLoggedIn = GETDATE() WHERE UserID = {userId}", conn))
+                using (SqlCommand command = new SqlCommand($"UPDATE Users SET LastLoggedIn = GETDATE() OUTPUT INSERTED.LastLoggedIn WHERE UserID = {userId}", conn))
                 {
-                    // Execute the query
-                    command.ExecuteNonQuery();
+                    // Execute the query and retrieve the updated LastLoggedIn value
+                    lastLoggedIn = (DateTime)command.ExecuteScalar();
                 }
             }
 
             conn.Close();
+
+            return lastLoggedIn;
         }
 
         public bool Logger(string Email, string Password)

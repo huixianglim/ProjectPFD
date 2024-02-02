@@ -80,7 +80,8 @@ namespace PFD.Controllers
                 }
                 else
                 {
-                    userContext.UpdateLastLoggedIn(user.UserID);
+                    DateTime LastLoggedIn = userContext.UpdateLastLoggedIn(user.UserID);
+                    user.LastLoggedIn = LastLoggedIn;
                     var jsonString = JsonSerializer.Serialize(user);
                     HttpContext.Session.SetString("AccountObject", jsonString);
                     string Email = emailDAL.GetEmail(user.UserID);
@@ -140,7 +141,8 @@ namespace PFD.Controllers
                     }
                     else
                     {
-                        userContext.UpdateLastLoggedIn(user.UserID);
+                        DateTime LastLoggedIn = userContext.UpdateLastLoggedIn(user.UserID);
+                        user.LastLoggedIn = LastLoggedIn;
                         var jsonString = JsonSerializer.Serialize(user);
                         HttpContext.Session.SetString("AccountObject", jsonString);
                         string Email = emailDAL.GetEmail(user.UserID);

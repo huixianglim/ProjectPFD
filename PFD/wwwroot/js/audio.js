@@ -82,7 +82,6 @@ $(document).ready(() => {
                     document.getElementById('searchQueryInput2').dispatchEvent(new Event('input', {
                         bubbles: true
                     }))
-                    console.log("Test")
                 }
                 
             }
@@ -127,7 +126,6 @@ $(document).ready(() => {
                 }
                 else if (transcript == "empty") {
                     $("#" + email_selected_element).val("")
-                    //$(email_selected_element).trigger("input")
                     element = document.getElementById(email_selected_element)
                     element.dispatchEvent(new Event('input'));
 
@@ -150,6 +148,7 @@ $(document).ready(() => {
                 if ($(".button").data("type") == "money") {
                     console.log(transcript)
                     if (transcript.includes("$")) {
+                        console.log("Hello")
                         let amountWithoutDollarSign = transcript.replace(/\$/g, '');
                         let value = parseFloat(amountWithoutDollarSign)
                         if (!isNaN(value)) {
@@ -179,7 +178,9 @@ $(document).ready(() => {
                         else {
                             $("#searchQueryInput").val(transcript);
                         }
-                        $("#searchQueryInput").trigger("input");
+                        document.getElementById('searchQueryInput').dispatchEvent(new Event('input', {
+                            bubbles: true
+                        }))
                     }
 
 
