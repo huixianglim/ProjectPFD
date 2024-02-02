@@ -117,6 +117,7 @@
             background: rgba(0,0,0,0.2);
             align-items:center;
             z-index: 100000;
+
         }
 
         .swiper-container{
@@ -181,8 +182,8 @@
             margin:0;
             padding:0;
             height: 50px;
-            width: 350px;
-            height:90px;
+            width: 100%;
+            height:auto;
             border: none;
             border-radius: 20px;
             background-color: #f5f5f5;
@@ -382,11 +383,11 @@
     </style>
  }
 
-    <div class="dashboard-container" style="padding-left: 25%; overflow:hidden; margin-bottom:17px;">
+    <div class="dashboard-container" >
         <section id="top" class="row no-wraps">
             <div class="col-md-7 card" id="main">
-                <div class="row no-gutters">
-                    <div class="col-md-6">
+                <div class="row no-gutters d-flex flex-nowrap">
+                    <div style="width:50%;">
                         <p>Main Account</p>
                         <h3>OCBC Savings Account</h3>
                         <p>4524 1920 8888 8888@*<i class="fa fa-angle-double-right"></i>*@</p>
@@ -395,7 +396,7 @@
                         <a href="" class="btn btn-success" style="background-color:#E30613; border:0px; padding: 7px 15px;">Transfer Money</a>
 @*                        <a href="" class="btn btn-light">Transfer Money</a>*@
                     </div>
-                    <div class="col-md-6">
+                    <div  style="width:50%;">
                         <p>Available funds</p>
                         <h1>$@AccountObject.Money.ToString("#,###.00")</h1>
                     </div>
@@ -406,7 +407,7 @@
             <div class="col-md-4 card " id="define" style="background-color:#2F4858;">
                 <h3 style="margin:0;">Set your goals!</h3>
                 <br>
-                <p style="line-height:30px;">Trying to save for that perfect vacation, latest gadget or shiny new car? Set up one or more savings goals now to stay on track and make all your dreams a reality!</p>
+                <p >Trying to save for that perfect vacation, latest gadget or shiny new car? Set up one or more savings goals now to stay on track and make all your dreams a reality!</p>
                 <br>
                 <a href="" class="btn btn-light">Set goals</a>
             </div>

@@ -23,21 +23,26 @@ namespace PFD.DAL
             conn = new SqlConnection(strConn);
         }
 
-        public List<Transaction>? GetTransactions(int UserID)
+        public List<Transaction>? GetTransactions(int userID)
         {
             SqlCommand cmd = conn.CreateCommand();
 
-            cmd.CommandText = @"SELECT * FROM Transactions WHERE UserID = @UserID ORDER BY DateOfTransaction DESC";
-            cmd.Parameters.AddWithValue("@UserID", UserID);
+            cmd.CommandText = @"
+            SELECT TOP 8 *
+            FROM Transactions
+            WHERE UserID = @UserID
+            ORDER BY DateOfTransaction DESC";
+
+            cmd.Parameters.AddWithValue("@UserID", userID);
             conn.Open();
             SqlDataReader reader = cmd.ExecuteReader();
             List<Transaction> transactions = new List<Transaction>();
+
             if (reader.HasRows)
             {
                 while (reader.Read())
                 {
-                    transactions.Add(
-                    new Transaction
+                    transactions.Add(new Transaction
                     {
                         TransactionID = reader.GetInt32(0),
                         Type = reader.GetString(1),
@@ -45,16 +50,14 @@ namespace PFD.DAL
                         UserID = reader.GetInt32(3),
                         DateOfTransaction = reader.GetDateTime(4),
                         Location = reader.GetString(5)
-
-
                     });
                 }
-
             }
+
             conn.Close();
             return transactions;
-
         }
+
         public bool CreateTransactions(int UserID, string Type, double Amount, string? Location)
         {
             if (UserID != null && Amount != null)

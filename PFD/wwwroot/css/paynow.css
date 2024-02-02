@@ -1,0 +1,18 @@
+﻿
+@media (max-width: 992px) {
+    #contacts_container {
+        width: 70%!important;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #contacts_container {
+        width: 95% !important;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .icon{
+        margin-right:40px!important;
+    }
+}
