@@ -18,6 +18,7 @@ namespace PFD.Controllers
         private UsersDAL userContext = new UsersDAL();
         private readonly ILogger<HomeController> _logger;
         private CrosscheckDAL crossCheckContext = new CrosscheckDAL();
+        private EmailDAL emailDAL = new EmailDAL();
 
 
         public HomeController(ILogger<HomeController> logger)
@@ -82,6 +83,8 @@ namespace PFD.Controllers
                     userContext.UpdateLastLoggedIn(user.UserID);
                     var jsonString = JsonSerializer.Serialize(user);
                     HttpContext.Session.SetString("AccountObject", jsonString);
+                    string Email = emailDAL.GetEmail(user.UserID);
+                    HttpContext.Session.SetString("Email", Email);
                     //Redirect user back to the index view through an action
                     return RedirectToAction("Index", "Main");
                 }
@@ -128,7 +131,7 @@ namespace PFD.Controllers
                 {
                     Users details = userContext.GetDetails(check.user_id);
 
-                    Users? user = userContext.Login(details.Email, details.Password);
+                    Users? user = userContext.Login(details.AccessCode, details.Password);
                     if (user == null)
                     {
 
@@ -140,14 +143,16 @@ namespace PFD.Controllers
                         userContext.UpdateLastLoggedIn(user.UserID);
                         var jsonString = JsonSerializer.Serialize(user);
                         HttpContext.Session.SetString("AccountObject", jsonString);
+                        string Email = emailDAL.GetEmail(user.UserID);
+                        HttpContext.Session.SetString("Email", Email);
                         //Redirect user back to the index view through an action
                         return RedirectToAction("Index", "Main");
                     }
                 }
             }
 
-           
             return View();
+
         }
 
     }

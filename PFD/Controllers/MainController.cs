@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using PFD.Models;
 using System.Text.Json;
 using System.Collections.Generic;
+using Microsoft.CognitiveServices.Speech.Transcription;
 
 namespace PFD.Controllers
 {
@@ -14,6 +15,8 @@ namespace PFD.Controllers
         private TransactionDAL transactionDAL = new TransactionDAL();
 
         private FeedbackDAL feedbackDAL = new FeedbackDAL();
+
+        private EmailDAL emailDAL = new EmailDAL();
 
         public IActionResult Index()
         {
@@ -26,9 +29,28 @@ namespace PFD.Controllers
 
             List<Transaction> transactions = transactionDAL.GetTransactions(userID);
 
-            List<Transaction> transactionFromPrevLogin = transactionDAL.GetTransactionsFromPreviousLogin(userID, prevLogin);
+            List<Transaction> firstThreeTransactions = transactions.Take(3).ToList();
 
-            ViewData["Transactions"] = transactionFromPrevLogin;
+            DateTime LastUpdatedEmail = emailDAL.GetLastUpdatedEmail(userID);
+
+            // Create the update list
+            var updateList = new List<Update>();
+
+            // Add the first three transactions
+            foreach (var transaction in firstThreeTransactions)
+            {
+                updateList.Add(new Update(transaction));
+            }
+
+            // Add the email update
+            updateList.Add(new Update(LastUpdatedEmail));
+
+            // Only keep the latest 3 updates based on DateOfTransaction and LastUpdatedEmail
+            updateList = updateList.OrderByDescending(u => u.DateOfTransaction == default ? u.LastUpdatedEmail : u.DateOfTransaction)
+                                   .Take(3)
+                                   .ToList();
+
+            ViewData["Updates"] = updateList;
 
             return View(transactions);
         }
@@ -100,5 +122,22 @@ namespace PFD.Controllers
             Console.WriteLine(check);
             return RedirectToAction("feedback","Main");
         }
+
+
+        [HttpPost]
+        public IActionResult UpdateEmail(IFormCollection? form, string newEmail)
+        {
+            if (form != null)
+            {
+                var AccountString = HttpContext.Session.GetString("AccountObject");
+                var AccountObject = JsonSerializer.Deserialize<Users>(AccountString);
+                int userID = AccountObject.UserID;
+                emailDAL.UpdateEmail(userID, newEmail);
+
+                HttpContext.Session.SetString("Email", newEmail);
+            }
+            return RedirectToAction("Index", "Main");
+        }
+
     }
 }

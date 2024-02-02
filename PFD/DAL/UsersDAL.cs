@@ -22,12 +22,12 @@ namespace PFD.DAL
             conn = new SqlConnection(strConn);
         }
 
-        public Users? Login(string Email, string Password)
+        public Users? Login(string AccessCode, string Password)
         {
             SqlCommand cmd = conn.CreateCommand();
             
-            cmd.CommandText = @"SELECT * FROM Users WHERE Email = @Email";
-            cmd.Parameters.AddWithValue("@Email", Email);
+            cmd.CommandText = @"SELECT * FROM Users WHERE AccessCode = @AccessCode";
+            cmd.Parameters.AddWithValue("@AccessCode", AccessCode);
             conn.Open();
             SqlDataReader reader = cmd.ExecuteReader();
             Users? user = null;
@@ -39,7 +39,7 @@ namespace PFD.DAL
                 {
                     user = new Users();
                     user.Name = reader.GetString(0);
-                    user.Email = reader.GetString(1);
+                    user.AccessCode = reader.GetString(1);
                     user.UserID = reader.GetInt32(2);
                     user.Password = reader.GetString(3);
                     user.Money = reader.GetDecimal(4);
@@ -119,7 +119,7 @@ namespace PFD.DAL
                 {
                     user = new Users();
                     user.Name = reader.GetString(0);
-                    user.Email = reader.GetString(1);
+                    user.AccessCode = reader.GetString(1);
                     user.UserID = reader.GetInt32(2);
                     user.Password = reader.GetString(3);
                     user.Money = reader.GetDecimal(4);
