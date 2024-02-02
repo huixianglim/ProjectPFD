@@ -204,7 +204,7 @@
             z-index: 100000;
             border-radius: 4px;
             overflow: hidden;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         }
         .navigation.active
         {
@@ -308,6 +308,7 @@
                 margin: 0 5%;
             }
         }
+       
 
         @@media (max-width:600px) {
             .popupNav {
@@ -686,6 +687,27 @@
         $( function() {
         $( ".navigation" ).draggable();
         } );
+    </script>
+    <script>
+    // Function to update styles based on screen width
+    function updateStyles() {
+            var navigationElement = document.querySelector('.navigation');
+
+            // Check screen width and update styles accordingly
+            if (window.innerWidth <= 600) {
+                navigationElement.style.left = '274px';
+                navigationElement.style.top = '303px';
+            } else {
+                navigationElement.style.left = '1125px';
+                navigationElement.style.top = '304px';
+            }
+        }
+
+        // Call the function on page load
+        updateStyles();
+
+        // Attach the function to the window resize event
+        window.addEventListener('resize', updateStyles);
     </script>
 </body>
 </html>
