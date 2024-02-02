@@ -14,6 +14,7 @@
 
     var AccountString = Context.Session.GetString("AccountObject");
     var AccountObject = JsonSerializer.Deserialize<Users>(AccountString);
+    var LastLoggedIn = AccountObject.LastLoggedIn;
 
     string? complete = null;
     if (Context.Session.GetString("Completed") != null)
@@ -429,14 +430,40 @@
 
                         @foreach (var transaction in Model)
                         {
-                        <tr data-speech="{TYPE} to {LOCATION} for {AMOUNT} on {DATE}" style="vertical-align:middle; margin-bottom:7px;">
-                                <td><p class="icon">@GetInitials(@transaction.Location)</p></td>
+                            <tr data-speech="@($"{transaction.Type} to {transaction.Location} for {transaction.Amount} on {transaction.DateOfTransaction}")"
+                                style="vertical-align: middle; margin-bottom: 7px;">
+                                <td>
+                                <p class="icon" style="@(transaction.DateOfTransaction > LastLoggedIn ? "background-color: #E30613;" : "")">
+                                        @GetInitials(transaction.Location)
+                                    </p>
+                                </td>
+                                <td style="@(transaction.DateOfTransaction > LastLoggedIn ? "color: #E30613;" : "")">@transaction.Location</td>
+                                <td style="@(transaction.DateOfTransaction > LastLoggedIn ? "color: #E30613;" : "")">@transaction.Type</td>
+                                <td style="@(transaction.DateOfTransaction > LastLoggedIn ? "color: #E30613;" : "")">@transaction.DateOfTransaction.ToString("dd/MM/yyyy")</td>
+                                <td style="font-weight: 600; @(transaction.DateOfTransaction > LastLoggedIn ? "color: #E30613;" : "")">$@transaction.Amount.ToString("#,###.00")</td>
+                            </tr>
+                            break;
+                        }
+
+                        @for (var i = 1; i < Model.Count; i++)
+                        {
+                            var transaction = Model[i];
+                            <tr data-speech="@($"{transaction.Type} to {transaction.Location} for {transaction.Amount} on {transaction.DateOfTransaction}")"
+                                style="vertical-align: middle; margin-bottom: 7px;">
+                                <td>
+                                    <p class="icon">
+                                        @GetInitials(transaction.Location)
+                                    </p>
+                                </td>
                                 <td>@transaction.Location</td>
                                 <td>@transaction.Type</td>
                                 <td>@transaction.DateOfTransaction.ToString("dd/MM/yyyy")</td>
-                            <td style="font-weight:600;/* color:#b30c00;*/">$@transaction.Amount.ToString("#,###.00")</td>
-                        </tr>
-                        } 
+                                <td style="font-weight: 600;">$@transaction.Amount.ToString("#,###.00")</td>
+                            </tr>
+                        }
+
+
+
                     </tbody>
                 </table>
             </div>
