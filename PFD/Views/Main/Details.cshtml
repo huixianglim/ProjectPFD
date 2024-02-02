@@ -86,7 +86,7 @@
 
             .button > i {
                 color: inherit;
-                font-size: 2.3vw;
+                font-size: 20px;
             }
 
             .button.active {
@@ -129,6 +129,37 @@
         .message{
             padding: 0;
             margin-bottom: 1rem;
+        }
+
+        @@media (max-width:620px) {
+            video {
+                width: 0px !important;
+            }
+
+            .video-placeholder {
+                width: 0px !important;
+                height: 0px !important;
+                display: none !important;
+            }
+
+            .container-vid {
+                width: 100% !important;
+                height: 50px !important;
+                top: 70px !important;
+                left: auto !important;
+            }
+
+            .dashboard-container {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            .overlay {
+                top: 0 !important;
+                bottom: auto !important;
+                color: white !important;
+                background-color: black !important;
+            }
         }
     </style>
 }

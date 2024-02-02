@@ -17,6 +17,11 @@ if exists (select * from sysobjects
 GO
 
 if exists (select * from sysobjects 
+  where id = object_id('dbo.Emails') and sysstat & 0xf = 3)
+  drop table dbo.Emails;
+GO
+
+if exists (select * from sysobjects 
   where id = object_id('dbo.Users') and sysstat & 0xf = 3)
   drop table dbo.Users;
 GO
@@ -26,12 +31,30 @@ if exists (select * from sysobjects
   drop table dbo.Crosscheck;
 GO
 
+if exists (select * from sysobjects 
+  where id = object_id('dbo.Feedback') and sysstat & 0xf = 3)
+  drop table dbo.Feedback;
+GO
 
+
+CREATE TABLE dbo.Feedback 
+(
+  GestureFeedback     varchar(500)     NOT NULL,
+  ChatBotFeedback     varchar(500)     NOT NULL,
+  VoiceFeedback     varchar(500)     NOT NULL,
+  FeedbackID        INT IDENTITY(1,1),
+  GestureScore    INT NOT NULL,
+  VoiceScore    INT NOT NULL,
+  ChatBotScore    INT NOT NULL,
+
+  Primary KEY(FeedbackID),
+);
+GO
 
 CREATE TABLE dbo.Users 
 (
   Name          varchar(20)     NOT NULL,
-  Email         varchar(50)     NOT NULL UNIQUE,
+  AccessCode    varchar(50)     NOT NULL UNIQUE,
   UserID        INT IDENTITY(1,1),
   Password      varchar(30)     NOT NULL,
   Money         Decimal,
@@ -74,22 +97,32 @@ CREATE TABLE dbo.Crosscheck
     Primary KEY(check_id),
 );
 GO
+
+CREATE TABLE dbo.Emails
+(
+  EmailID            INT IDENTITY(1,1) PRIMARY KEY,
+  UserID             INT,
+  Email              VARCHAR(50) NOT NULL UNIQUE,
+  LastUpdatedEmail   DATETIME NOT NULL,
+  CONSTRAINT FK_Users_Emails FOREIGN KEY (UserID) REFERENCES dbo.Users(UserID)
+);
+GO
+
 INSERT INTO [dbo].[Crosscheck] ([check_id] ,[user_id]) VALUES ('HuiXiang', 2);
 INSERT INTO [dbo].[Crosscheck] ([check_id], [user_id]) VALUES ('Wesley', 1);
 INSERT INTO [dbo].[Crosscheck] ([check_id], [user_id]) VALUES ('Kenan', 3);
 
-
 SET IDENTITY_INSERT [dbo].[Users] ON
-INSERT [dbo].[Users] ([Name], [Password], [Money], [LastLoggedIn], [UserID], [Email]) VALUES 
-('Wesley Khalifa', 'pass123', 1234, '2024-01-28T12:00:00', 1, '123@gmail.com');
-INSERT [dbo].[Users] ([Name], [Password], [Money], [LastLoggedIn], [UserID], [Email]) VALUES 
-('Hui Xiang', 'pass124', 2345, '2024-01-27T08:30:00', 2, '124@gmail.com');
-INSERT [dbo].[Users] ([Name], [Password], [Money], [LastLoggedIn], [UserID], [Email]) VALUES 
-('Kenan', 'pass125', 234, '2024-01-26T18:45:00', 3, '125@gmail.com');
-INSERT [dbo].[Users] ([Name], [Password], [Money], [LastLoggedIn], [UserID], [Email]) VALUES 
-('Garthic Phone', 'pass125', 0, '2024-01-25T10:15:00', 4, '126@gmail.com');
-INSERT [dbo].[Users] ([Name], [Password], [Money], [LastLoggedIn], [UserID], [Email]) VALUES 
-('Jaygen', 'pass124', 346, '2024-01-24T15:20:00', 5, '127@gmail.com');
+INSERT [dbo].[Users] ([Name], [Password], [Money], [LastLoggedIn], [UserID], [AccessCode]) VALUES 
+('Wesley Khalifa', 'pass123', 1234, '2024-01-28T12:00:00', 1, '123');
+INSERT [dbo].[Users] ([Name], [Password], [Money], [LastLoggedIn], [UserID], [AccessCode]) VALUES 
+('Hui Xiang', 'pass124', 2345, '2024-01-27T08:30:00', 2, '124');
+INSERT [dbo].[Users] ([Name], [Password], [Money], [LastLoggedIn], [UserID], [AccessCode]) VALUES 
+('Kenan', 'pass125', 234, '2024-01-26T18:45:00', 3, '125');
+INSERT [dbo].[Users] ([Name], [Password], [Money], [LastLoggedIn], [UserID], [AccessCode]) VALUES 
+('Garthic Phone', 'pass125', 0, '2024-01-25T10:15:00', 4, '126');
+INSERT [dbo].[Users] ([Name], [Password], [Money], [LastLoggedIn], [UserID], [AccessCode]) VALUES 
+('Jaygen', 'pass124', 346, '2024-01-24T15:20:00', 5, '127');
 SET IDENTITY_INSERT [dbo].[Users] OFF
 
 INSERT [dbo].[Contacts] ([Name], [Number],[UserID]) VALUES ('Wesley', '+6512345678',1)
@@ -149,4 +182,9 @@ VALUES('Debit Transfer',12,3,'2022-12-11T12:45:00','Macdonalds');
 INSERT [dbo].[Transactions] ([Type],[Amount],[UserID],[DateOfTransaction],[Location]) 
 VALUES('Debit Transfer',21,3,'2022-11-11T14:30:00','KFC');
 
-
+INSERT INTO dbo.emails (UserID, Email, LastUpdatedEmail) VALUES
+(1, '123@gmail.com', '2021-12-15T08:00:00'),
+(2, '124@gmail.com', '2021-11-20T15:30:00'),
+(3, '125@gmail.com', '2021-10-05T12:45:00'),
+(4, '126@gmail.com', '2021-09-10T09:15:00'),
+(5, '127@gmail.com', '2021-08-25T18:20:00');

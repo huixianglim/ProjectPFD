@@ -20,7 +20,8 @@ $(document).ready(() => {
     var audioChunks = [];
     var audioRecorder;
 
-    
+    var email_selected_element = null;
+
 
     $(".button").on("mousedown", () => {
         if (!webkitstarted) {
@@ -49,8 +50,6 @@ $(document).ready(() => {
         webkitstarted = false
 
     }
-
-    var previousTranscript = "";
 
 
     recognition.onresult = async (event) => {
@@ -94,9 +93,57 @@ $(document).ready(() => {
 
 
         }
+        else if ($("#email_container").css("display") != "none") {
+            console.log(transcript)
+
+
+            if (transcript.includes("update")) {
+                email_selected_element = "newEmail"
+                $("#" + email_selected_element).focus()
+            } else if (transcript.includes("confirm")){
+                email_selected_element = "confirmEmail"
+                $("#" + email_selected_element).focus()
+
+            }
+            else if (transcript.includes("close")) {
+                let popup = $(".popup.email");
+                let close = popup.find(".btn-close");  // Use .find() to get the element with the class "btn-close"
+                close.click();
+
+            }
+            else if (transcript.includes("submit")) {
+                $("#email_update > button").click()
+            }
+
+            else if (email_selected_element != null) {
+                console.log(transcript.includes("at"))
+                if (transcript.includes("at")) {
+                    email_with_space = transcript.replace("at", "@");
+                    final_email = email_with_space.replace(/ /g, '');
+                    $("#"+email_selected_element).val(final_email)
+                    element = document.getElementById(email_selected_element)
+                    element.dispatchEvent(new Event('input'));
+
+                }
+                else if (transcript == "empty") {
+                    $("#" + email_selected_element).val("")
+                    //$(email_selected_element).trigger("input")
+                    element = document.getElementById(email_selected_element)
+                    element.dispatchEvent(new Event('input'));
+
+                }
+            }
+
+
+        }
         else {
+            console.log(transcript)
             if (transcript.includes("nav")) {
                 $(".navbar-links3").trigger("click")
+
+            }
+            else if (transcript.includes("email")) {
+                $("#updateEmail").trigger("click")
 
             }
             else {
@@ -195,8 +242,8 @@ $(document).ready(() => {
                         else {
                             let input = $(".tab input[type = text]")
 
-                            if (transcript.includes("empty")) {
-                                input.eq(current_page - 1).val()
+                            if (transcript == "empty") {
+                                input.eq(current_page - 1).val("")
                             }
                             //console.log(input)
                             input.eq(current_page -1).val(transcript)

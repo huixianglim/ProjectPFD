@@ -2,11 +2,12 @@
         For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
     *@
 
-    @{
-        var AccountString = Context.Session.GetString("AccountObject");
-        var AccountObject = JsonSerializer.Deserialize<Users>(AccountString);
+@{
+    var AccountString = Context.Session.GetString("AccountObject");
+    var AccountObject = JsonSerializer.Deserialize<Users>(AccountString);
 
-    }
+    var Email = Context.Session.GetString("Email");
+}
 
     <style>
         #google_translate_element {
@@ -64,6 +65,58 @@
         .goog-te-combo {
             border: 0px;
         }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        .btn-close {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 10px;
+        }
+
+        #profile {
+            width: 100px; 
+            height: 100px; 
+            border-radius: 50%;
+        }
+
+        #Email {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .existingEmail {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            background-color: #f0f0f0;
+        }
+
+        .Input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+
+        #updateEmail{
+            cursor: pointer;
+        }
+
     </style>
 
 
@@ -113,6 +166,9 @@
                     </a>
                     <ul>
                         <li>
+                            <a class="navbar-links2" id="updateEmail" style="padding-top:0" onclick="showPopup()">UPDATE EMAIL</a>
+                        </li>
+                        <li>
                             <a asp-controller="Home" asp-action="LogOut"  class="navbar-links2" id="logout-btn" style="padding-top:0">LOG OUT</a>
 
                         </li>
@@ -132,6 +188,35 @@
         </div>
     </nav>
 
+    <!-- Profile Picture and Update Email Form inside Popup -->
+<div class="justify-content-center" id="email_container">
+
+    <div id="popup" class="popup email">
+        <button type="button" class="btn-close" aria-label="Close" onclick="hidePopup()"></button>
+    <div id="profilepic">
+        <img src="/Images/profile-pic.jpg" id="profile" alt="Profile Picture">
+        <p class="text-center">@AccountObject.Name</p>
+    
+    </div>
+
+        <!-- Update Email Form -->
+        <form asp-action="UpdateEmail" asp-controller="Main" id="email_update" >
+            <label for="currentEmail" id="Email">Current Email:</label>
+            <input type="email" class="existingEmail" id="currentEmail" name="currentEmail" value="@Email" readonly>
+
+                    <label for="newEmail" id="Email">New Email:</label>
+                    <input type="email" class="Input" id="newEmail" name="newEmail" required>
+
+            <label for="confirmEmail" id="Email">Confirm Email:</label>
+            <input type="email" class="Input" id="confirmEmail" name="confirmEmail" required>
+
+                    <button type="submit">Update Email</button>
+                </form>
+            </div>
+    </div>
+
+
+
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({ pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL }, 'google_translate_element');
@@ -139,3 +224,39 @@
     </script>
 
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script>
+        // JavaScript functions to show and hide the pop-up
+        function showPopup() {
+        document.getElementById('email_container').style.display = 'flex';
+        }
+
+        function hidePopup() {
+        document.getElementById('email_container').style.display = 'none';
+        }
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const newEmailInput = document.getElementById("newEmail");
+            const confirmEmailInput = document.getElementById("confirmEmail");
+
+            function validateEmails() {
+                const newEmailValue = newEmailInput.value.trim();
+                const confirmEmailValue = confirmEmailInput.value.trim();
+
+                if (newEmailValue === confirmEmailValue) {
+           
+                    // Emails match, no error
+                    confirmEmailInput.setCustomValidity("");
+                } else {
+                    // Emails don't match, set custom error message
+                    confirmEmailInput.setCustomValidity("Emails do not match");
+                }
+            }
+
+            // Add event listeners to both input fields
+            newEmailInput.addEventListener("input", validateEmails);
+            confirmEmailInput.addEventListener("input", validateEmails);
+        });
+    </script>

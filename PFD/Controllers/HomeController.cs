@@ -18,6 +18,7 @@ namespace PFD.Controllers
         private UsersDAL userContext = new UsersDAL();
         private readonly ILogger<HomeController> _logger;
         private CrosscheckDAL crossCheckContext = new CrosscheckDAL();
+        private EmailDAL emailDAL = new EmailDAL();
 
 
         public HomeController(ILogger<HomeController> logger)
@@ -82,7 +83,9 @@ namespace PFD.Controllers
                     userContext.UpdateLastLoggedIn(user.UserID);
                     var jsonString = JsonSerializer.Serialize(user);
                     HttpContext.Session.SetString("AccountObject", jsonString);
-                    //Redirect user back to the index view through an action
+                    string Email = emailDAL.GetEmail(user.UserID);
+                    HttpContext.Session.SetString("Email", Email);
+
                     return RedirectToAction("Index", "Main");
                 }
             }
@@ -110,35 +113,46 @@ namespace PFD.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult FaceID(IFormCollection form)
+        public ActionResult FaceID(IFormCollection? form, string? face_verify)
         {
-
-            string id = form["face_verify"];
-
-            Crosschecks? check = crossCheckContext.GetUserDetails(id);
-
-            if (check != null)
+            if (form == null)
             {
-                Users details =userContext.GetDetails(check.user_id);
+                Console.WriteLine("Hello");
+            }
+            else
+            {
+                string id = form["face_verify"];
 
-                Users? user = userContext.Login(details.Email, details.Password);
-                if (user == null)
-                {
+                Crosschecks? check = crossCheckContext.GetUserDetails(id);
 
-                    TempData["Error"] = true;
-                    return View();
-                }
-                else
+                if (check != null)
                 {
-                    userContext.UpdateLastLoggedIn(user.UserID);
-                    var jsonString = JsonSerializer.Serialize(user);
-                    HttpContext.Session.SetString("AccountObject", jsonString);
-                    //Redirect user back to the index view through an action
-                    return RedirectToAction("Index", "Main");
+                    Users details = userContext.GetDetails(check.user_id);
+
+                    Users? user = userContext.Login(details.AccessCode, details.Password);
+                    if (user == null)
+                    {
+
+                        TempData["Error"] = true;
+                        return View();
+                    }
+                    else
+                    {
+                        userContext.UpdateLastLoggedIn(user.UserID);
+                        var jsonString = JsonSerializer.Serialize(user);
+                        HttpContext.Session.SetString("AccountObject", jsonString);
+                        string Email = emailDAL.GetEmail(user.UserID);
+                        HttpContext.Session.SetString("Email", Email);
+                        //Redirect user back to the index view through an action
+                        return RedirectToAction("Index", "Main");
+                    }
                 }
             }
+
             return View();
+
         }
 
     }
