@@ -103,7 +103,7 @@
 
 ![image](https://github.com/huixianglim/ProjectPFD/assets/116724250/24632afc-c8d3-42d0-a146-5b1e78bd994a)
 
-### Feedback Page
+### (Member) Feedback Page
 
 #### Laptop View
 
@@ -113,11 +113,11 @@
 
 ![image](https://github.com/huixianglim/ProjectPFD/assets/116724250/917c1351-72ba-48b4-8ae1-1d8f46c4d246)
 
-### Navigation Search
+### (Member) Navigation Search
 
 ![image](https://github.com/huixianglim/ProjectPFD/assets/116724250/613b7191-e763-4aaf-b10d-bd4bba9f78d4)
 
-### Update Email
+### (Member) Update Email
 
 ![image](https://github.com/huixianglim/ProjectPFD/assets/116724250/409078a8-30b7-4bd3-b2e8-4dd1d3de04c8)
 
