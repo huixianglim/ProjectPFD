@@ -46,6 +46,24 @@
 
 - Section within the homepage for logged in users that contains reminders for their latest actions
 
+7. Screen Reader -> Reads out content on the pages
+-  Selected content on pages would be read out
+
+8. Command list -> Draggable command list
+-  Draggable popup that displays the list of commands the gesture recognition can carry out
+
+9. Multilingual Edit -> Updates the page to a certain language
+-  Select a language and afterwards, the website's content will be updated accordingly
+
+10. Feedback
+-  Allow users to upload and view feedbacks
+
+11. Media Queries
+-  Interface to cater for mobile views
+
+12. Searchable nav-bar popup
+- Allow users to search for pages in an easily accessible popup 
+
 ## Dependencies
 
 > - Mediapipe
