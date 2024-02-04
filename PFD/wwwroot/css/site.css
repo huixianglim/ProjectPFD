@@ -64,6 +64,11 @@ html {
     }
 
 
+@media (max-width:720px){
+    .popup.email{
+        width:80%;
+    }
+}
 /*body {
     box-sizing: content-box;
     height: 100%;

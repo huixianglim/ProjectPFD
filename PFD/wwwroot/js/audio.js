@@ -2,9 +2,15 @@
 
 $(document).ready(() => {
     const recognition = new webkitSpeechRecognition();
-    //recognition.continuous = true;
-    //recognition.interimResults = true;
 
+    if ($(".button").data("type") === "money") {
+        recognition.continuous = true;
+        recognition.interimResults = true;
+    } else {
+        recognition.continuous = false;
+        recognition.interimResults = false;
+    }
+   
     var webkitstarted = false
 
     numbers = {
@@ -112,6 +118,9 @@ $(document).ready(() => {
             }
             else if (transcript.includes("submit")) {
                 $("#email_update > button").click()
+            }
+            else if (transcript.includes("close")) {
+                $(".popup.email > .btn-close").click()
             }
 
             else if (email_selected_element != null) {
