@@ -102,7 +102,7 @@ CREATE TABLE dbo.Emails
 (
   EmailID            INT IDENTITY(1,1) PRIMARY KEY,
   UserID             INT,
-  Email              VARCHAR(50) NOT NULL UNIQUE,
+  Email              VARCHAR(50) NOT NULL,
   LastUpdatedEmail   DATETIME NOT NULL,
   CONSTRAINT FK_Users_Emails FOREIGN KEY (UserID) REFERENCES dbo.Users(UserID)
 );
